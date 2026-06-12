@@ -1,0 +1,4476 @@
+﻿<!DOCTYPE html>
+<!-- v10.1: 健身打卡表+饮食表移到"健身"标签下方 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的人生库</title>
+<style>
+/* ========= RESET & BASE ========= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --c-bg: #F0FAEC;
+  --c-surface: #F0FAEC;
+  --c-surface-solid: #F0FAEC;
+  --c-card: #FFFFFF;
+  --c-ink: #2A3328;
+  --c-ink2: #4A5A45;
+  --c-ink3: #6A7A65;
+  --c-line: rgba(140,184,138,0.12);
+  --c-line-med: rgba(140,184,138,0.18);
+  --c-accent-w: #8CB88A;
+  --c-accent-w-lt: rgba(140,184,138,0.08);
+  --c-accent-l: #8CB88A;
+  --c-accent-l-lt: rgba(140,184,138,0.08);
+  --c-accent-baidu: #3B6CB0;
+  --c-accent-video: #3B6CB0;
+  --c-accent-admin: #3B6CB0;
+  --font: 'Inter', 'SF Pro Display', 'PingFang SC', -apple-system, 'Helvetica Neue', sans-serif;
+  --r: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --tr: 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ===== THEME OVERRIDES ===== */
+/* Pink - 春莓序曲 (Work/WeChat) */
+body[data-theme="pink"] {
+  --c-bg: #FFF5F3;
+  --c-surface: #FFF5F3;
+  --c-surface-solid: #FFF5F3;
+  --c-line: rgba(231,145,145,0.12);
+  --c-line-med: rgba(231,145,145,0.18);
+  --c-accent-w: #E79191;
+  --c-accent-w-lt: rgba(231,145,145,0.08);
+  --c-accent-l: #E79191;
+  --c-accent-l-lt: rgba(231,145,145,0.08);
+}
+/* Purple - 紫薯奶方 (Life) */
+body[data-theme="purple"] {
+  --c-bg: #F8F5FC;
+  --c-surface: #F8F5FC;
+  --c-surface-solid: #F8F5FC;
+  --c-line: rgba(181,164,203,0.12);
+  --c-line-med: rgba(181,164,203,0.18);
+  --c-accent-w: #B5A4CB;
+  --c-accent-w-lt: rgba(181,164,203,0.08);
+  --c-accent-l: #B5A4CB;
+  --c-accent-l-lt: rgba(181,164,203,0.08);
+}
+/* Blue - 鲸落于海 (Baidu/Video/Admin) */
+body[data-theme="blue"] {
+  --c-bg: #F0F5FA;
+  --c-surface: #F0F5FA;
+  --c-surface-solid: #F0F5FA;
+  --c-line: rgba(59,108,176,0.12);
+  --c-line-med: rgba(59,108,176,0.18);
+  --c-accent-w: #3B6CB0;
+  --c-accent-w-lt: rgba(59,108,176,0.08);
+  --c-accent-l: #3B6CB0;
+  --c-accent-l-lt: rgba(59,108,176,0.08);
+}
+/* Warm - 海岛暖风 (Santorini Mediterranean) */
+body[data-theme="warm"] {
+  --c-bg: #EEF3F7;
+  --c-surface: #EAF0F5;
+  --c-surface-solid: #EEF3F7;
+  --c-line: rgba(160,185,205,0.12);
+  --c-line-med: rgba(160,185,205,0.18);
+  --c-accent-w: #E8A090;
+  --c-accent-w-lt: rgba(232,160,144,0.08);
+  --c-accent-l: #E8A090;
+  --c-accent-l-lt: rgba(232,160,144,0.08);
+  --c-accent-baidu: #5A8FB8;
+  --c-accent-video: #5A8FB8;
+  --c-accent-admin: #5A8FB8;
+}
+
+/* ===== THEME-SPECIFIC COMPONENT OVERRIDES ===== */
+/* Pink theme components */
+body[data-theme="pink"] .tab-btn.active {
+  background: linear-gradient(135deg, #E79191, #F0A8A8);
+  box-shadow: 0 3px 12px rgba(231,145,145,0.25);
+}
+body[data-theme="pink"] .btn-primary,
+body[data-theme="pink"] .he-btn-save {
+  background: linear-gradient(135deg, #E79191, #F0A8A8);
+  box-shadow: 0 3px 12px rgba(231,145,145,0.25);
+}
+body[data-theme="pink"] .btn-primary:hover,
+body[data-theme="pink"] .he-btn-save:hover {
+  box-shadow: 0 5px 18px rgba(231,145,145,0.35);
+}
+body[data-theme="pink"] .nav-add:hover {
+  background: linear-gradient(135deg, #E79191, #F0A8A8);
+  box-shadow: 0 3px 12px rgba(231,145,145,0.2);
+}
+body[data-theme="pink"] .work-subnav-btn.active {
+  background: linear-gradient(135deg, rgba(231,145,145,0.1), rgba(240,168,168,0.08));
+  color: #E79191;
+  border-color: rgba(231,145,145,0.25);
+}
+body[data-theme="pink"] .entry-tag {
+  background: rgba(231,145,145,0.06);
+  border-color: rgba(231,145,145,0.12);
+  color: #E79191;
+}
+body[data-theme="pink"] .splash-char.gold {
+  color: #E79191;
+  text-shadow: 0 0 30px rgba(231,145,145,0.6);
+}
+
+/* Purple theme components */
+body[data-theme="purple"] .tab-btn.active {
+  background: linear-gradient(135deg, #B5A4CB, #C8BBDA);
+  box-shadow: 0 3px 12px rgba(181,164,203,0.25);
+}
+body[data-theme="purple"] .btn-primary,
+body[data-theme="purple"] .he-btn-save {
+  background: linear-gradient(135deg, #B5A4CB, #C8BBDA);
+  box-shadow: 0 3px 12px rgba(181,164,203,0.25);
+}
+body[data-theme="purple"] .btn-primary:hover,
+body[data-theme="purple"] .he-btn-save:hover {
+  box-shadow: 0 5px 18px rgba(181,164,203,0.35);
+}
+body[data-theme="purple"] .nav-add:hover {
+  background: linear-gradient(135deg, #B5A4CB, #C8BBDA);
+  box-shadow: 0 3px 12px rgba(181,164,203,0.2);
+}
+body[data-theme="purple"] .work-subnav-btn.active {
+  background: linear-gradient(135deg, rgba(181,164,203,0.1), rgba(200,187,218,0.08));
+  color: #B5A4CB;
+  border-color: rgba(181,164,203,0.25);
+}
+body[data-theme="purple"] .entry-tag {
+  background: rgba(181,164,203,0.06);
+  border-color: rgba(181,164,203,0.12);
+  color: #B5A4CB;
+}
+body[data-theme="purple"] .splash-char.gold {
+  color: #B5A4CB;
+  text-shadow: 0 0 30px rgba(181,164,203,0.6);
+}
+
+/* Blue theme components */
+body[data-theme="blue"] .tab-btn.active {
+  background: linear-gradient(135deg, #3B6CB0, #5A8FD4);
+  box-shadow: 0 3px 12px rgba(59,108,176,0.25);
+}
+body[data-theme="blue"] .btn-primary,
+body[data-theme="blue"] .he-btn-save {
+  background: linear-gradient(135deg, #3B6CB0, #5A8FD4);
+  box-shadow: 0 3px 12px rgba(59,108,176,0.25);
+}
+body[data-theme="blue"] .btn-primary:hover,
+body[data-theme="blue"] .he-btn-save:hover {
+  box-shadow: 0 5px 18px rgba(59,108,176,0.35);
+}
+body[data-theme="blue"] .nav-add:hover {
+  background: linear-gradient(135deg, #3B6CB0, #5A8FD4);
+  box-shadow: 0 3px 12px rgba(59,108,176,0.2);
+}
+body[data-theme="blue"] .work-subnav-btn.active {
+  background: linear-gradient(135deg, rgba(59,108,176,0.1), rgba(90,143,212,0.08));
+  color: #3B6CB0;
+  border-color: rgba(59,108,176,0.25);
+}
+body[data-theme="blue"] .entry-tag {
+  background: rgba(59,108,176,0.06);
+  border-color: rgba(59,108,176,0.12);
+  color: #3B6CB0;
+}
+body[data-theme="blue"] .splash-char.gold {
+  color: #3B6CB0;
+  text-shadow: 0 0 30px rgba(59,108,176,0.6);
+}
+
+/* Warm theme components */
+body[data-theme="warm"] .tab-btn.active {
+  background: linear-gradient(135deg, #E8A090, #F0B8A8);
+  box-shadow: 0 3px 12px rgba(232,160,144,0.25);
+}
+body[data-theme="warm"] .btn-primary,
+body[data-theme="warm"] .he-btn-save {
+  background: linear-gradient(135deg, #E8A090, #F0B8A8);
+  box-shadow: 0 3px 12px rgba(232,160,144,0.25);
+}
+body[data-theme="warm"] .btn-primary:hover,
+body[data-theme="warm"] .he-btn-save:hover {
+  box-shadow: 0 5px 18px rgba(232,160,144,0.35);
+}
+body[data-theme="warm"] .nav-add:hover {
+  background: linear-gradient(135deg, #E8A090, #F0B8A8);
+  box-shadow: 0 3px 12px rgba(232,160,144,0.2);
+}
+body[data-theme="warm"] .work-subnav-btn.active {
+  background: linear-gradient(135deg, rgba(232,160,144,0.1), rgba(240,184,168,0.08));
+  color: #E8A090;
+  border-color: rgba(232,160,144,0.25);
+}
+body[data-theme="warm"] .entry-tag {
+  background: rgba(232,160,144,0.06);
+  border-color: rgba(232,160,144,0.12);
+  color: #E8A090;
+}
+body[data-theme="warm"] .splash-char.gold {
+  color: #E8A090;
+  text-shadow: 0 0 30px rgba(232,160,144,0.6);
+}
+/* Warm theme - adjust nav-dot */
+body[data-theme="warm"] .nav-logo .nav-dot {
+  background: #E8A090;
+}
+/* Warm theme - hero gradient */
+body[data-theme="warm"] .hero {
+  background: linear-gradient(180deg, rgba(238,243,247,0) 0%, rgba(180,210,228,0.2) 35%, rgba(160,200,220,0.25) 65%, rgba(238,243,247,0) 100%);
+}
+body[data-theme="warm"] .hero-deco-num {
+  color: rgba(90,143,184,0.04);
+}
+body[data-theme="warm"] .hero-bg {
+  background:
+    radial-gradient(circle 260px at 20% 18%, rgba(90,143,184,0.06) 0%, transparent 60%),
+    radial-gradient(circle 200px at 75% 20%, rgba(232,160,144,0.05) 0%, transparent 55%),
+    radial-gradient(circle 180px at 50% 50%, rgba(140,190,215,0.04) 0%, transparent 50%),
+    radial-gradient(circle 150px at 30% 70%, rgba(100,160,200,0.05) 0%, transparent 55%);
+}
+body[data-theme="warm"] .hero-bg-grid {
+  background:
+    radial-gradient(circle 12px at 18% 22%, rgba(140,190,215,0.2) 0%, transparent 70%),
+    radial-gradient(circle 8px at 72% 15%, rgba(232,160,144,0.12) 0%, transparent 65%),
+    radial-gradient(circle 14px at 45% 38%, rgba(100,160,200,0.1) 0%, transparent 60%),
+    radial-gradient(circle 10px at 85% 42%, rgba(140,190,215,0.12) 0%, transparent 65%),
+    radial-gradient(circle 16px at 15% 58%, rgba(120,170,210,0.08) 0%, transparent 55%),
+    radial-gradient(circle 8px at 55% 65%, rgba(160,200,225,0.1) 0%, transparent 60%),
+    radial-gradient(circle 11px at 78% 72%, rgba(130,180,210,0.09) 0%, transparent 60%);
+}
+body[data-theme="warm"] .hero-glow {
+  background:
+    radial-gradient(circle at 40% 35%, rgba(90,143,184,0.07) 0%, transparent 35%),
+    radial-gradient(circle at 55% 45%, rgba(232,160,144,0.05) 0%, transparent 40%),
+    radial-gradient(circle at 30% 50%, rgba(140,190,215,0.04) 0%, transparent 50%);
+}
+/* Warm theme - warm background blob overrides */
+body[data-theme="warm"]::before {
+  background:
+    radial-gradient(circle 180px at 15% 12%, rgba(90,143,184,0.05) 0%, transparent 70%),
+    radial-gradient(circle 140px at 78% 18%, rgba(232,160,144,0.05) 0%, transparent 65%),
+    radial-gradient(circle 200px at 50% 35%, rgba(140,190,215,0.04) 0%, transparent 60%),
+    radial-gradient(circle 160px at 22% 55%, rgba(180,200,220,0.05) 0%, transparent 65%),
+    radial-gradient(circle 120px at 85% 48%, rgba(232,160,144,0.04) 0%, transparent 60%),
+    radial-gradient(circle 220px at 65% 72%, rgba(160,195,215,0.05) 0%, transparent 70%),
+    radial-gradient(circle 150px at 10% 80%, rgba(180,200,220,0.04) 0%, transparent 60%),
+    radial-gradient(circle 180px at 40% 90%, rgba(200,215,230,0.05) 0%, transparent 65%);
+}
+html { scroll-behavior: smooth; background: var(--c-bg); }
+body {
+  font-family: var(--font);
+  background: var(--c-bg);
+  color: var(--c-ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+/* Lively Warm Healing — peachy cream + coral accents + playful blobs */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(circle 180px at 15% 12%, rgba(168,208,166,0.06) 0%, transparent 70%),
+    radial-gradient(circle 140px at 78% 18%, rgba(190,220,188,0.07) 0%, transparent 65%),
+    radial-gradient(circle 200px at 50% 35%, rgba(140,184,138,0.04) 0%, transparent 60%),
+    radial-gradient(circle 160px at 22% 55%, rgba(180,210,178,0.05) 0%, transparent 65%),
+    radial-gradient(circle 120px at 85% 48%, rgba(175,200,173,0.06) 0%, transparent 60%),
+    radial-gradient(circle 220px at 65% 72%, rgba(190,220,188,0.05) 0%, transparent 70%),
+    radial-gradient(circle 150px at 10% 80%, rgba(170,205,168,0.04) 0%, transparent 60%),
+    radial-gradient(circle 180px at 40% 90%, rgba(180,210,178,0.05) 0%, transparent 65%);
+}
+body::after { display: none; }
+button { font-family: var(--font); cursor: pointer; border: none; }
+input, select, textarea { font-family: var(--font); color: var(--c-ink); }
+
+/* ========= NAV ========= */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+  height: 56px;
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border-bottom: 1px solid var(--c-line);
+  display: flex; align-items: center; padding: 0 40px;
+  gap: 12px;
+}
+.nav-logo {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.02em;
+  color: var(--c-ink); text-decoration: none;
+  margin-right: auto;
+  display: flex; align-items: center; gap: 6px;
+}
+.nav-logo .nav-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #8CB88A;
+}
+.nav-add {
+  padding: 8px 20px; border-radius: 10px;
+  border: 1px solid var(--c-line);
+  background: rgba(140,184,138,0.04);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.01em;
+  color: var(--c-ink2);
+  transition: all var(--tr);
+}
+.nav-add:hover {
+  background: linear-gradient(135deg, #8CB88A, #A5C8A3);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 3px 12px rgba(140,184,138,0.2);
+}
+
+/* ========= HERO ========= */
+.hero {
+  position: relative; min-height: 72vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 100px 48px 80px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(240,250,236,0) 0%, rgba(220,240,215,0.25) 35%, rgba(200,230,190,0.3) 65%, rgba(240,250,236,0) 100%);
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(circle 260px at 20% 18%, rgba(168,208,166,0.08) 0%, transparent 60%),
+    radial-gradient(circle 200px at 75% 20%, rgba(190,220,188,0.06) 0%, transparent 55%),
+    radial-gradient(circle 180px at 50% 50%, rgba(140,184,138,0.04) 0%, transparent 50%),
+    radial-gradient(circle 150px at 30% 70%, rgba(180,210,178,0.05) 0%, transparent 55%);
+}
+.hero-bg-grid {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.06;
+  background:
+    radial-gradient(circle 12px at 18% 22%, rgba(190,220,188,0.2) 0%, transparent 70%),
+    radial-gradient(circle 8px at 72% 15%, rgba(168,208,166,0.15) 0%, transparent 65%),
+    radial-gradient(circle 14px at 45% 38%, rgba(140,184,138,0.1) 0%, transparent 60%),
+    radial-gradient(circle 10px at 85% 42%, rgba(180,210,178,0.12) 0%, transparent 65%),
+    radial-gradient(circle 16px at 15% 58%, rgba(160,200,158,0.08) 0%, transparent 55%),
+    radial-gradient(circle 8px at 55% 65%, rgba(190,220,188,0.1) 0%, transparent 60%),
+    radial-gradient(circle 11px at 78% 72%, rgba(170,205,168,0.09) 0%, transparent 60%);
+}
+.hero-glow {
+  position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  background:
+    radial-gradient(circle at 40% 35%, rgba(168,208,166,0.08) 0%, transparent 35%),
+    radial-gradient(circle at 55% 45%, rgba(190,220,188,0.06) 0%, transparent 40%),
+    radial-gradient(circle at 30% 50%, rgba(200,230,190,0.04) 0%, transparent 50%);
+  top: 50%; left: 50%; transform: translate(-50%, -55%);
+  z-index: 0; animation: heroPulse 6s ease-in-out infinite;
+  filter: blur(50px);
+}
+@keyframes heroPulse {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -55%) scale(1); }
+  50% { opacity: 0.7; transform: translate(-50%, -55%) scale(1.08); }
+}
+.hero-deco-num {
+  position: absolute; z-index: 0;
+  font-size: 420px; font-weight: 900; line-height: 1;
+  color: rgba(168,208,166,0.04);
+  top: 50%; left: 50%; transform: translate(-50%, -58%);
+  font-family: 'Inter', system-ui, sans-serif;
+  pointer-events: none;
+  letter-spacing: -0.05em;
+}
+.hero-content { position: relative; z-index: 2; text-align: center; max-width: 720px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 16px; border-radius: 20px;
+  border: 1px solid rgba(140,184,138,0.2);
+  background: rgba(140,184,138,0.05);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--c-ink);
+  margin-bottom: 28px;
+}
+.hero-badge .badge-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #8CB88A;
+  animation: badgeBlink 3s ease-in-out infinite;
+}
+@keyframes badgeBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero-h1 {
+  font-size: clamp(38px, 6vw, 64px); font-weight: 700; line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #2A3328;
+  margin-bottom: 16px;
+}
+.hero-h1 em {
+  font-style: normal;
+  color: #6A9A68;
+  text-shadow: 0 0 40px rgba(140,184,138,0.5);
+}
+.hero-sub {
+  font-size: 15px; color: var(--c-ink2); line-height: 1.7;
+  max-width: 520px; margin: 0 auto 0;
+  letter-spacing: 0;
+}
+.hero-stats {
+  display: flex; gap: 24px; justify-content: center;
+  margin-top: 36px; flex-wrap: wrap;
+}
+.hero-stat {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px;
+  padding: 16px 30px; border-radius: 14px;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  box-shadow: 0 2px 8px rgba(140,184,138,0.04);
+}
+.hero-stat-val {
+  font-size: 34px; font-weight: 800; letter-spacing: -0.02em;
+  color: #8CB88A;
+}
+.hero-stat-label {
+  font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--c-ink3);
+}
+.hero-edit-trigger {
+  position: absolute; bottom: 18px; right: 20px;
+  font-size: 11px; color: var(--c-ink3);
+  opacity: 0.35; cursor: pointer;
+  transition: opacity 0.3s ease;
+  letter-spacing: 0.03em;
+}
+.hero-edit-trigger:hover { opacity: 0.75; }
+
+/* Theme Switcher */
+.theme-switcher {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--c-ink3);
+  letter-spacing: 0.02em;
+  cursor: pointer; user-select: none;
+  padding: 5px 12px; border-radius: 8px;
+  border: 1px solid var(--c-line);
+  background: rgba(255,255,255,0.4);
+  transition: all var(--tr);
+}
+.theme-switcher:hover { border-color: var(--c-line-med); background: rgba(255,255,255,0.7); }
+.theme-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 1.5px solid var(--c-line-med);
+  transition: all var(--tr);
+  flex-shrink: 0;
+}
+.theme-dot[data-dot="pink"] { background: #E79191; }
+.theme-dot[data-dot="purple"] { background: #B5A4CB; }
+.theme-dot[data-dot="blue"] { background: #3B6CB0; }
+.theme-dot[data-dot="warm"] { background: #E8A090; }
+.theme-dot[data-dot="green"] { background: #8CB88A; }
+.theme-dot[data-dot="auto"] { background: transparent; border-style: dashed; border-color: var(--c-ink3); opacity: 0.5; }
+.theme-label {
+  font-size: 10px;
+  color: var(--c-ink3);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ========= TAB BAR ========= */
+.tab-bar {
+  display: flex; justify-content: center;
+  padding: 0 48px 0;
+  position: relative; z-index: 5;
+}
+.tab-group {
+  display: flex; gap: 2px;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: 14px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(140,184,138,0.04);
+}
+.tab-btn {
+  padding: 10px 28px; border-radius: 12px;
+  background: transparent;
+  font-size: 13px; font-weight: 600;
+  color: var(--c-ink3);
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+  letter-spacing: 0.01em;
+  position: relative;
+}
+.tab-btn:hover { color: var(--c-ink2); }
+.tab-btn.active {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #8CB88A, #A5C8A3);
+  box-shadow: 0 3px 12px rgba(140,184,138,0.25);
+}
+.tab-count {
+  font-size: 11px; font-weight: 400; opacity: 0.55;
+  margin-left: 6px;
+}
+.tab-btn.active .tab-count { opacity: 0.85; color: #FFFFFF; }
+.tab-btn.active.life-btn .tab-count { color: #FFFFFF; }
+
+/* ========= YEAR SELECTOR ========= */
+.year-bar {
+  display: flex; justify-content: center; align-items: center;
+  padding: 20px 48px 8px; gap: 16px;
+  position: relative; z-index: 50;
+}
+.year-dropdown {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--c-line);
+  background: var(--c-card);
+  cursor: pointer;
+  font-size: 13px; font-weight: 600;
+  color: var(--c-ink);
+  letter-spacing: 0.01em;
+  transition: all var(--tr);
+  user-select: none;
+  box-shadow: 0 1px 2px rgba(140,184,138,0.02);
+}
+.year-dropdown:hover { border-color: rgba(140,184,138,0.2); background: var(--c-accent-w-lt); }
+.year-dropdown .caret { font-size: 10px; color: var(--c-ink3); transition: transform 0.2s; }
+.year-dropdown.open .caret { transform: rotate(180deg); }
+.year-dropdown-menu {
+  position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  min-width: 130px;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  padding: 6px;
+  z-index: 100;
+  opacity: 0; visibility: hidden;
+  transition: all 0.18s ease;
+}
+.year-dropdown.open .year-dropdown-menu { opacity: 1; visibility: visible; }
+.year-dd-option {
+  display: block; width: 100%;
+  padding: 8px 16px; border: none; border-radius: 8px;
+  background: transparent;
+  font-size: 13px; font-weight: 600;
+  color: var(--c-ink2);
+  cursor: pointer; text-align: center;
+  transition: all 0.15s;
+}
+.year-dd-option:hover { background: var(--c-accent-w-lt); color: var(--c-ink); }
+.year-dd-option.current { background: var(--c-accent-w-lt); color: var(--c-ink); font-weight: 700; }
+.year-dd-add {
+  display: block; width: 100%;
+  padding: 8px 16px; border: none; border-radius: 8px;
+  border-top: 1px solid var(--c-line);
+  margin-top: 4px; padding-top: 10px;
+  background: transparent;
+  font-size: 12px; font-weight: 600;
+  color: var(--c-ink3);
+  cursor: pointer; text-align: center;
+  transition: all 0.15s;
+}
+.year-dd-add:hover { color: var(--c-ink); background: var(--c-accent-w-lt); }
+
+/* ========= WORK SUB-NAV ========= */
+.work-subnav {
+  display: flex; justify-content: center; align-items: center;
+  padding: 12px 48px 0;
+  gap: 6px; flex-wrap: wrap;
+  position: relative; z-index: 5;
+}
+.work-subnav-btn {
+  padding: 7px 16px; border-radius: 10px;
+  border: 1px solid var(--c-line);
+  background: transparent;
+  font-size: 12px; font-weight: 600;
+  color: var(--c-ink3);
+  cursor: pointer;
+  transition: all var(--tr);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.work-subnav-btn:hover { border-color: rgba(140,184,138,0.25); color: var(--c-ink2); background: rgba(140,184,138,0.04); }
+.work-subnav-btn.active { background: linear-gradient(135deg, rgba(140,184,138,0.1), rgba(168,208,166,0.08)); color: #8CB88A; border-color: rgba(140,184,138,0.25); font-weight: 700; }
+.work-subnav-count { font-size: 10px; opacity: 0.5; margin-left: 4px; }
+.work-subnav-btn.active .work-subnav-count { opacity: 0.8; }
+
+/* ========= CONTENT AREA ========= */
+.content-area { padding: 0 48px 100px; position: relative; z-index: 2; min-height: 300px; }
+.section-wrap { padding: 24px 0 60px; }
+
+/* ========= WORK TREE ========= */
+.work-tree-wrap {
+  padding: 40px 0 80px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.work-tree-trunk { display: flex; flex-direction: column; align-items: center; position: relative; }
+.work-tree-root {
+  padding: 22px 36px;
+  background: linear-gradient(135deg, rgba(140,184,138,0.08), rgba(168,208,166,0.05));
+  border: 1px solid rgba(140,184,138,0.15);
+  color: var(--c-ink);
+  border-radius: 16px;
+  text-align: center;
+  font-size: 17px; font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: default;
+  position: relative; z-index: 2;
+}
+.work-tree-root .tree-root-sub {
+  display: block; font-size: 11px; font-weight: 400;
+  opacity: 0.5; margin-top: 4px; letter-spacing: 0.02em;
+}
+.work-tree-branches {
+  display: flex; justify-content: center;
+  gap: 20px; flex-wrap: wrap;
+  margin-top: 52px; position: relative;
+}
+.work-tree-branch {
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer;
+  padding: 22px 28px; border-radius: 16px;
+  border: 1px solid var(--c-line);
+  background: var(--c-card);
+  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  min-width: 150px;
+  position: relative; z-index: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.work-tree-branch:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(140,184,138,0.3);
+  box-shadow: 0 12px 32px rgba(140,184,138,0.12);
+}
+.work-tree-branch-dot {
+  width: 48px; height: 48px; border-radius: 50%;
+  margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 3px 10px rgba(140,184,138,0.12);
+}
+.work-tree-branch-name { font-size: 14px; font-weight: 600; color: var(--c-ink); letter-spacing: 0; margin-bottom: 4px; }
+.work-tree-branch-count { font-size: 12px; color: var(--c-ink3); letter-spacing: 0.01em; }
+.work-tree-branch-hint { font-size: 10px; color: var(--c-ink3); opacity: 0; transition: opacity 0.2s; margin-top: 8px; }
+.work-tree-branch:hover .work-tree-branch-hint { opacity: 0.6; }
+.work-tree-summary {
+  margin-top: 40px; display: flex; gap: 12px;
+  flex-wrap: wrap; justify-content: center;
+}
+.work-tree-stat {
+  padding: 8px 18px; border-radius: 10px;
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  font-size: 12px; color: var(--c-ink3);
+  letter-spacing: 0;
+}
+.work-tree-stat strong { color: var(--c-ink); font-size: 15px; margin: 0 3px; font-weight: 700; }
+
+/* ========= GRID & CARDS ========= */
+.cat-section { margin-bottom: 56px; }
+.cat-label {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--c-line);
+}
+.cat-label-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.cat-label-name { font-size: 13px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; }
+.cat-label-count { font-size: 11px; color: var(--c-ink3); margin-left: auto; font-weight: 400; }
+.cat-add-small {
+  background: transparent; border: 1px dashed rgba(140,184,138,0.18);
+  color: var(--c-ink3); font-size: 11px; padding: 4px 14px;
+  border-radius: 7px; transition: all var(--tr);
+}
+.cat-add-small:hover { border-color: rgba(140,184,138,0.35); color: var(--c-ink); }
+.cat-edit-btn {
+  background: none; border: none;
+  color: var(--c-ink3); font-size: 11px;
+  padding: 2px 6px; cursor: pointer;
+  opacity: 0; transition: opacity 0.15s;
+}
+.cat-label:hover .cat-edit-btn { opacity: 1; }
+.cat-edit-btn:hover { color: var(--c-ink); }
+.cat-cal-btn {
+  background: rgba(175,200,173,0.08); border: 1px solid rgba(175,200,173,0.2);
+  color: var(--c-ink); font-size: 11px; padding: 4px 14px;
+  border-radius: 7px; font-weight: 600;
+  transition: all var(--tr);
+}
+.cat-cal-btn:hover { background: rgba(175,200,173,0.14); border-color: rgba(175,200,173,0.35); }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 18px;
+}
+
+/* Card */
+.entry-card {
+  background: var(--c-card);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: all var(--tr);
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(140,184,138,0.03);
+}
+.entry-card:hover {
+  border-color: rgba(140,184,138,0.25);
+  box-shadow: 0 8px 28px rgba(140,184,138,0.1);
+  transform: translateY(-3px);
+}
+.entry-card-img {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+  display: block; background: rgba(0,0,0,0.02);
+}
+.entry-card-img-placeholder {
+  width: 100%; aspect-ratio: 16/9;
+  background: rgba(0,0,0,0.015);
+  display: flex; align-items: center; justify-content: center;
+}
+.entry-card-body { padding: 18px 20px 20px; }
+.entry-card-date { font-size: 11px; color: var(--c-ink3); margin-bottom: 8px; letter-spacing: 0.01em; }
+.entry-card-title { font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--c-ink); }
+.entry-card-excerpt {
+  font-size: 13px; color: var(--c-ink2); margin-top: 8px;
+  line-height: 1.7; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.entry-card-tags { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+.entry-tag {
+  font-size: 10px; padding: 4px 12px; border-radius: 20px;
+  background: rgba(140,184,138,0.06);
+  border: 1px solid rgba(140,184,138,0.12);
+  color: #8CB88A;
+  font-weight: 600; letter-spacing: 0;
+}
+.entry-card-del {
+  position: absolute; top: 12px; right: 12px;
+  width: 30px; height: 30px; border-radius: 8px;
+  background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.08);
+  font-size: 13px; color: var(--c-ink3);
+  display: none; align-items: center; justify-content: center;
+  transition: all var(--tr); z-index: 2;
+}
+.entry-card:hover .entry-card-del { display: flex; }
+.entry-card-del:hover { background: rgba(220,80,70,0.1); color: #DC5046; border-color: rgba(220,80,70,0.3); }
+
+.entry-card-link {
+  position: absolute; top: 12px; right: 48px;
+  width: 30px; height: 30px; border-radius: 8px;
+  background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.08);
+  font-size: 14px; color: var(--c-ink3);
+  display: none; align-items: center; justify-content: center;
+  transition: all var(--tr); z-index: 2;
+  text-decoration: none; cursor: pointer;
+}
+.entry-card:hover .entry-card-link { display: flex; }
+.entry-card-link:hover { background: rgba(140,184,138,0.1); color: var(--c-ink); border-color: rgba(140,184,138,0.25); }
+
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 56px 24px; text-align: center;
+  border: 1.5px dashed rgba(140,184,138,0.15); border-radius: var(--r-lg);
+  color: var(--c-ink3);
+}
+.empty-state p { font-size: 13px; margin-top: 10px; }
+
+/* ========= MODALS ========= */
+.overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(30,20,15,0.3);
+  backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.overlay.open { display: flex; }
+
+.sheet {
+  background: var(--c-card); border-radius: 20px;
+  padding: 32px 34px 28px;
+  width: 520px; max-width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  max-height: 88vh; overflow-y: auto;
+  border: 1px solid var(--c-line);
+  animation: sheetIn 0.26s cubic-bezier(0.34,1.4,0.64,1);
+}
+@keyframes sheetIn {
+  from { opacity:0; transform: translateY(24px) scale(0.97); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+.sheet-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.02em; }
+.frow { margin-bottom: 16px; }
+.frow label {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--c-ink3); margin-bottom: 6px;
+}
+.frow input, .frow select, .frow textarea {
+  width: 100%; padding: 10px 14px;
+  border: 1px solid var(--c-line); border-radius: var(--r);
+  background: rgba(0,0,0,0.015); font-size: 14px; color: var(--c-ink);
+  outline: none; transition: border-color var(--tr);
+}
+.frow input:focus, .frow select:focus, .frow textarea:focus {
+  border-color: var(--c-ink);
+}
+.frow textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+.img-upload-area {
+  width: 100%; border: 1.5px dashed rgba(140,184,138,0.12); border-radius: var(--r);
+  background: rgba(140,184,138,0.02); padding: 24px 16px;
+  text-align: center; cursor: pointer; transition: all var(--tr);
+  position: relative;
+}
+.img-upload-area:hover { border-color: var(--c-ink); background: var(--c-accent-w-lt); }
+.img-upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.img-upload-icon { font-size: 22px; margin-bottom: 6px; }
+.img-upload-label { font-size: 12px; color: var(--c-ink3); }
+.img-preview {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+  border-radius: var(--r); display: none; margin-top: 10px;
+}
+/* 图片位置调节器 */
+.img-pos-wrap {
+  display: none; margin-top: 10px;
+  background: rgba(140,184,138,0.04); border: 1px solid var(--c-line-med);
+  border-radius: var(--r); padding: 12px 14px; gap: 10px; flex-direction: column;
+}
+.img-pos-wrap.show { display: flex; }
+.img-pos-label { font-size: 11px; color: var(--c-ink3); letter-spacing: 0.03em; }
+.img-pos-row { display: flex; align-items: center; gap: 10px; }
+.img-pos-row span { font-size: 11px; color: var(--c-ink3); width: 32px; flex-shrink: 0; }
+.img-pos-row input[type=range] {
+  flex: 1; -webkit-appearance: none; height: 3px;
+  background: var(--c-line-med); border-radius: 99px; outline: none;
+  cursor: pointer;
+}
+.img-pos-row input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--c-accent-w); border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15); cursor: pointer;
+}
+.img-pos-tip { font-size: 10px; color: var(--c-ink3); opacity: 0.6; margin-top: 2px; }
+
+.sheet-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; }
+.btn-ghost {
+  padding: 9px 22px; border-radius: 10px;
+  border: 1px solid var(--c-line-med); background: transparent;
+  font-size: 13px; font-weight: 600; color: var(--c-ink2);
+  transition: all var(--tr);
+}
+.btn-ghost:hover { border-color: rgba(0,0,0,0.15); color: var(--c-ink); }
+.btn-primary {
+  padding: 9px 24px; border-radius: 10px; border: none;
+  background: linear-gradient(135deg, #8CB88A, #A5C8A3);
+  color: #FFFFFF; font-size: 13px; font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 3px 12px rgba(140,184,138,0.25);
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 5px 18px rgba(140,184,138,0.35); }
+
+/* ========= DETAIL SHEET ========= */
+.detail-sheet {
+  background: var(--c-card); border-radius: 20px;
+  width: 680px; max-width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  max-height: 88vh; overflow-y: auto;
+  border: 1px solid var(--c-line);
+  animation: sheetIn 0.26s cubic-bezier(0.34,1.4,0.64,1);
+}
+.detail-cover { width: 100%; aspect-ratio: 16/8; object-fit: cover; display: none; }
+.detail-cover.show { display: block; }
+.detail-cover-art {
+  width: 100%; height: 200px; display: block;
+}
+.detail-body { padding: 30px 34px 36px; }
+.detail-eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-ink3); margin-bottom: 10px; }
+.detail-title { font-size: 26px; font-weight: 700; line-height: 1.2; letter-spacing: -0.025em; }
+.detail-meta { font-size: 12px; color: var(--c-ink3); margin-top: 8px; }
+.detail-divider { height: 1px; background: var(--c-line); margin: 22px 0; }
+.detail-content { font-size: 15px; line-height: 1.85; color: var(--c-ink2); white-space: pre-wrap; }
+.detail-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; }
+.detail-close {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: rgba(0,0,0,0.03); border: 1px solid var(--c-line);
+  font-size: 14px; color: var(--c-ink3);
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--tr); position: absolute; top: 18px; right: 18px;
+}
+.detail-close:hover { background: rgba(0,0,0,0.06); color: var(--c-ink); }
+.detail-link-row { margin-top: 14px; }
+.detail-link-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: 8px;
+  border: 1px solid rgba(140,184,138,0.18); background: var(--c-accent-w-lt);
+  color: var(--c-ink); font-size: 13px; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: all 0.2s;
+}
+.detail-link-btn:hover { background: rgba(140,184,138,0.12); border-color: rgba(140,184,138,0.3); }
+.detail-link-btn span { color: var(--c-ink2); font-weight: 400; }
+
+/* ========= HERO EDIT ========= */
+.hero-edit-overlay {
+  position: fixed; inset: 0; z-index: 1100;
+  background: rgba(30,20,15,0.3);
+  opacity: 0; visibility: hidden;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s;
+  backdrop-filter: blur(4px);
+}
+.hero-edit-overlay.on { opacity: 1; visibility: visible; }
+.hero-edit-sheet {
+  background: var(--c-card);
+  border-radius: 16px; border: 1px solid var(--c-line);
+  max-width: 520px; width: 92vw;
+  padding: 28px 28px 24px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+  transform: translateY(24px);
+  transition: transform 0.3s cubic-bezier(0.23,1,0.32,1);
+}
+.hero-edit-overlay.on .hero-edit-sheet { transform: translateY(0); }
+.hero-edit-sheet h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--c-ink); letter-spacing: 0.01em; }
+.hero-edit-sheet .he-subtitle { font-size: 12px; color: var(--c-ink3); margin-bottom: 20px; }
+.hero-edit-sheet label { display: block; font-size: 12px; font-weight: 600; color: var(--c-ink2); margin-bottom: 5px; letter-spacing: 0.01em; }
+.hero-edit-sheet input, .hero-edit-sheet textarea {
+  width: 100%; padding: 10px 14px;
+  border: 1px solid var(--c-line); border-radius: 10px;
+  font-size: 14px; color: var(--c-ink);
+  background: rgba(0,0,0,0.015); outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 16px; resize: vertical;
+}
+.hero-edit-sheet input:focus, .hero-edit-sheet textarea:focus { border-color: var(--c-ink); }
+.hero-edit-sheet .he-color-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.hero-edit-sheet .he-color-swatch {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer; transition: all 0.2s;
+}
+.hero-edit-sheet .he-color-swatch:hover { transform: scale(1.15); }
+.hero-edit-sheet .he-color-swatch.selected { border-color: var(--c-ink); box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--c-accent-w); }
+.hero-edit-sheet .he-color-custom { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--c-ink3); cursor: pointer; }
+.hero-edit-sheet .he-color-custom input { width: 28px; height: 28px; padding: 0; border: none; cursor: pointer; margin: 0; }
+.hero-edit-sheet .he-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
+.hero-edit-sheet .he-actions button { padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; letter-spacing: 0.01em; transition: all 0.2s; }
+.he-btn-cancel { border: 1px solid var(--c-line-med); background: transparent; color: var(--c-ink2); }
+.he-btn-cancel:hover { border-color: rgba(140,184,138,0.2); color: var(--c-ink); }
+.he-btn-save { border: none; background: linear-gradient(135deg, #8CB88A, #A5C8A3); color: #FFFFFF; box-shadow: 0 3px 12px rgba(140,184,138,0.2); }
+.he-btn-save:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 5px 18px rgba(140,184,138,0.3); }
+.he-btn-reset { border: none; background: transparent; color: var(--c-ink3); font-size: 11px; margin-right: auto; cursor: pointer; text-decoration: underline; }
+
+/* ========= CALENDAR ========= */
+.cal-modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(30,20,15,0.3);
+  opacity: 0; visibility: hidden;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s;
+  backdrop-filter: blur(4px);
+}
+.cal-modal-overlay.on { opacity: 1; visibility: visible; }
+.cal-modal {
+  background: var(--c-card);
+  border-radius: 16px; border: 1px solid var(--c-line);
+  max-width: 940px; width: 94vw; max-height: 86vh;
+  overflow-y: auto; overflow-x: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+  transform: translateY(24px);
+  transition: transform 0.3s cubic-bezier(0.23,1,0.32,1);
+}
+.cal-modal-overlay.on .cal-modal { transform: translateY(0); }
+.cal-modal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 32px 16px;
+  border-bottom: 1px solid var(--c-line);
+  position: sticky; top: 0; background: var(--c-card);
+  border-radius: 16px 16px 0 0; z-index: 2;
+}
+.cal-modal-head h3 { font-size: 18px; font-weight: 700; letter-spacing: 0.01em; color: var(--c-ink); }
+.cal-close {
+  width: 36px; height: 36px; border-radius: 10px;
+  border: 1px solid var(--c-line); background: rgba(0,0,0,0.02);
+  font-size: 16px; color: var(--c-ink3); cursor: pointer;
+  transition: all 0.15s;
+}
+.cal-close:hover { background: rgba(0,0,0,0.05); color: var(--c-ink); }
+.cal-month-block { padding: 20px 32px; border-bottom: 1px solid var(--c-line); }
+.cal-month-block:last-child { border-bottom: none; }
+.cal-month-title { font-size: 16px; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--c-ink); }
+.cal-month-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.cal-festival-row {
+  display: flex; gap: 8px; margin-bottom: 6px;
+  font-size: 13px; color: #8CB88A; padding: 4px 8px;
+  background: rgba(175,200,173,0.08); border-radius: 6px;
+}
+.cal-festival-row span:first-child { min-width: 56px; font-weight: 600; color: var(--c-ink); }
+.cal-article-row {
+  display: flex; gap: 12px; align-items: center;
+  padding: 5px 8px; font-size: 13px; color: var(--c-ink2);
+  border-radius: 6px;
+}
+.cal-article-row:nth-child(even) { background: rgba(0,0,0,0.02); }
+.cal-article-num { min-width: 44px; font-size: 11px; font-weight: 600; color: var(--c-ink3); text-align: center; }
+.cal-article-week { min-width: 56px; font-size: 11px; color: var(--c-ink3); }
+.cal-stat-row {
+  display: flex; gap: 16px; justify-content: center;
+  padding: 20px 32px; background: rgba(0,0,0,0.02);
+  border-radius: 0 0 16px 16px; border-top: 1px solid var(--c-line);
+}
+.cal-stat-chip { padding: 6px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; }
+.cal-stat-chip.dark { background: rgba(0,0,0,0.04); color: var(--c-ink2); }
+.cal-stat-chip.green { background: rgba(140,184,138,0.1); color: #8CB88A; }
+
+/* ========= TOAST ========= */
+.toast {
+  position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+  background: var(--c-ink); color: #FFFFFF;
+  padding: 11px 24px; border-radius: 12px; font-size: 13px; font-weight: 600;
+  z-index: 999; opacity: 0; pointer-events: none;
+  transition: opacity 0.25s; letter-spacing: 0.02em;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.toast.on { opacity: 1; }
+
+/* ========= CUSTOM PROMPT ========= */
+.prompt-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,0.3);
+  display: flex; align-items: center; justify-content: center;
+  animation: promptFadeIn 0.15s ease;
+}
+@keyframes promptFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.prompt-dialog {
+  background: #fff; border-radius: 16px; padding: 24px;
+  min-width: 320px; max-width: 90vw;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  animation: promptSlideUp 0.2s ease;
+}
+@keyframes promptSlideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.prompt-dialog h3 {
+  font-size: 15px; font-weight: 600; color: var(--c-ink);
+  margin: 0 0 16px 0; letter-spacing: 0.01em;
+}
+.prompt-dialog input {
+  width: 100%; padding: 10px 14px; border: 1.5px solid var(--c-line-med);
+  border-radius: 10px; font-size: 14px; outline: none;
+  font-family: var(--font); color: var(--c-ink);
+  background: var(--c-bg); transition: border-color 0.2s;
+}
+.prompt-dialog input:focus { border-color: var(--c-accent-w); }
+.prompt-dialog .prompt-btns {
+  display: flex; gap: 10px; margin-top: 18px; justify-content: flex-end;
+}
+.prompt-dialog .prompt-btns button {
+  padding: 8px 22px; border-radius: 10px; font-size: 13px; font-weight: 600;
+  cursor: pointer; border: none; font-family: var(--font);
+  transition: all 0.2s; letter-spacing: 0.01em;
+}
+.prompt-btn-ok {
+  background: linear-gradient(135deg, var(--c-accent-w), var(--c-accent-w-lt) 180%);
+  color: #fff; box-shadow: 0 2px 8px rgba(140,184,138,0.2);
+}
+.prompt-btn-ok:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(140,184,138,0.3); }
+.prompt-btn-cancel {
+  background: rgba(0,0,0,0.05); color: var(--c-ink3);
+}
+.prompt-btn-cancel:hover { background: rgba(0,0,0,0.1); }
+
+/* ========= SPLASH SCREEN ========= */
+.splash {
+  position: fixed; inset: 0; z-index: 999;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  pointer-events: none; opacity: 0;
+  transition: opacity 0.35s;
+  background:
+    radial-gradient(ellipse 65% 45% at 40% 25%, var(--c-accent-w-lt) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 65% 55%, var(--c-accent-l-lt) 0%, transparent 50%),
+    linear-gradient(180deg, var(--c-surface-solid) 0%, var(--c-bg) 50%, var(--c-surface-solid) 100%);
+}
+.splash.on { opacity: 1; pointer-events: auto; }
+.splash-illust {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.splash.on .splash-illust.active { opacity: 1; }
+.splash-text-wrap {
+  position: relative; z-index: 2;
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 0.1em;
+}
+.splash-char {
+  display: inline-block;
+  font-size: 56px; font-weight: 700;
+  font-family: "PingFang SC","Hiragino Sans GB","STHeiti","Microsoft YaHei",sans-serif;
+  letter-spacing: 0;
+  color: var(--c-ink);
+  opacity: 0;
+  transform: translateY(60px) rotateX(60deg);
+  filter: blur(6px);
+  transition: none;
+}
+.splash-char.reveal {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+  filter: blur(0);
+  transition: all 0.65s cubic-bezier(0.23,1,0.32,1);
+}
+.splash-char.gold {
+  color: #8CB88A;
+  text-shadow: 0 0 30px rgba(168,208,166,0.6);
+}
+.splash-sub {
+  position: relative; z-index: 2;
+  font-size: 14px; font-weight: 400;
+  color: var(--c-ink3);
+  margin-top: 24px;
+  letter-spacing: 0.25em;
+  opacity: 0; transform: translateY(12px);
+  transition: all 0.5s ease 0.8s;
+}
+  .splash.on .splash-sub { opacity: 1; transform: translateY(0); }
+
+/* ===== BAIDU DATA TABLE ===== */
+.baidu-table-wrap {
+  padding: 16px 0 0;
+}
+.baidu-table-card {
+  background: linear-gradient(160deg, #F5F0F5 0%, #F0F2F8 50%, #F5F0F5 100%);
+  border: 1px solid rgba(140,140,180,0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(100,100,150,0.06);
+}
+.baidu-table-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 20px 0;
+  margin-bottom: 2px;
+}
+.baidu-table-header-title {
+  font-size: 15px; font-weight: 700; color: #6B6BA0;
+}
+.baidu-table-header-year {
+  font-size: 12px; color: rgba(107,107,160,0.5);
+}
+.baidu-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px; font-variant-numeric: tabular-nums;
+}
+.baidu-table thead th {
+  text-align: left; padding: 10px 12px 8px;
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.04em; color: rgba(130,130,170,0.6);
+  border-bottom: 1px solid rgba(140,140,180,0.12);
+}
+.baidu-table thead th:first-child { width: 50px; text-align: center; }
+.baidu-table tbody td {
+  padding: 5px 12px;
+  transition: background 0.15s;
+}
+.baidu-table tbody td:first-child {
+  text-align: center; font-weight: 600; color: #D48181; font-size: 12px;
+  width: 50px;
+}
+/* Alternating pink & blue rows */
+.baidu-table tbody tr:nth-child(odd)  td { background: rgba(231,145,145,0.10); }
+.baidu-table tbody tr:nth-child(even) td { background: rgba(59,108,176,0.08);  }
+.baidu-table tbody tr:hover td {
+  background: rgba(100,100,150,0.12) !important;
+}
+.baidu-table td input {
+  width: 100%; padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 13px; font-variant-numeric: tabular-nums;
+  color: var(--c-ink);
+  transition: all 0.15s;
+  outline: none;
+  text-align: right;
+}
+.baidu-table td input:hover {
+  border-color: rgba(120,120,170,0.2);
+  background: rgba(255,255,255,0.55);
+}
+.baidu-table td input:focus {
+  border-color: #7B7BB5;
+  background: rgba(255,255,255,0.75);
+  box-shadow: 0 0 0 3px rgba(107,107,160,0.08);
+}
+.baidu-table-total td {
+  border-top: 2px solid rgba(140,140,180,0.16);
+  background: rgba(100,100,160,0.08) !important;
+  font-weight: 700;
+}
+.baidu-table-total td:first-child {
+  color: #6B6BA0; font-weight: 700;
+}
+.baidu-table-total td input {
+  font-weight: 700;
+  color: #5A5A8A;
+}
+
+/* ========= VIDEO PRICE TABLE ========= */
+.video-price-wrap {
+  padding: 16px 0 0;
+}
+.video-price-card {
+  background: linear-gradient(160deg, #F5F0F5 0%, #F0F2F4 50%, #F5F0F5 100%);
+  border: 1px solid rgba(80,100,150,0.10);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(80,100,150,0.05);
+  margin-bottom: 20px;
+}
+.video-price-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 20px 0;
+  margin-bottom: 2px;
+}
+.video-price-header-title {
+  font-size: 15px; font-weight: 700; color: #4A6898;
+}
+.video-price-header-sub {
+  font-size: 12px; color: rgba(74,104,152,0.45);
+}
+.video-price-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px; font-variant-numeric: tabular-nums;
+}
+.video-price-table thead th {
+  text-align: left; padding: 10px 12px 8px;
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.04em; color: rgba(100,110,140,0.55);
+  border-bottom: 1px solid rgba(80,100,150,0.10);
+}
+.video-price-table tbody td {
+  padding: 5px 12px;
+  transition: background 0.15s;
+}
+/* Alternating blue-tinted rows — same rhythm as Baidu table */
+.video-price-table tbody tr.vprice-data-row:nth-child(odd)  td { background: rgba(90,143,212,0.07); }
+.video-price-table tbody tr.vprice-data-row:nth-child(even) td { background: rgba(90,143,212,0.03); }
+/* Sub-headers blend with their group */
+.video-price-table tbody tr.vprice-sub-header td {
+  background: rgba(90,143,212,0.05) !important;
+  border-top: 1px solid rgba(80,100,150,0.07);
+}
+/* Category header — like Baidu total row */
+.video-price-table tbody tr.vprice-cat-header td {
+  background: rgba(74,104,152,0.08) !important;
+  padding: 9px 12px;
+  border-bottom: 1px solid rgba(80,100,150,0.12);
+}
+.video-price-table tbody tr:hover td {
+  background: rgba(80,100,150,0.10) !important;
+}
+.video-price-table td input {
+  width: 100%; padding: 5px 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 13px; font-variant-numeric: tabular-nums;
+  color: var(--c-ink);
+  transition: all 0.15s;
+  outline: none;
+}
+.video-price-table td input:hover {
+  border-color: rgba(80,100,150,0.18);
+  background: rgba(255,255,255,0.55);
+}
+.video-price-table td input:focus {
+  border-color: #5A8FD4;
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 0 0 3px rgba(90,143,212,0.07);
+}
+/* Notes section — below the table inside the card */
+.video-price-notes {
+  padding: 12px 20px 18px;
+  border-top: 1px solid rgba(80,100,150,0.10);
+  margin-top: 2px;
+}
+.video-price-notes-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: rgba(100,110,140,0.55);
+  margin-bottom: 8px;
+}
+.video-price-notes-input {
+  width: 100%;
+  min-height: 38px; max-height: 120px;
+  padding: 8px 10px;
+  border: 1px solid rgba(80,100,150,0.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.4);
+  font-size: 13px; line-height: 1.5;
+  color: var(--c-ink);
+  outline: none;
+  resize: vertical;
+  transition: all 0.15s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.video-price-notes-input:hover {
+  border-color: rgba(80,100,150,0.22);
+  background: rgba(255,255,255,0.6);
+}
+.video-price-notes-input:focus {
+  border-color: #5A8FD4;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 0 3px rgba(90,143,212,0.07);
+}
+
+/* ========= ADMIN ACTIVITIES TABLE ========= */
+.admin-table-wrap {
+  padding: 16px 0 0;
+}
+.admin-table-card {
+  background: linear-gradient(160deg, #F0F4F8 0%, #EEF2F8 50%, #F0F4F8 100%);
+  border: 1px solid rgba(59,108,176,0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(59,108,176,0.05);
+  margin-bottom: 20px;
+}
+.admin-table-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 20px 0;
+  margin-bottom: 2px;
+}
+.admin-table-header-title {
+  font-size: 15px; font-weight: 700; color: #3B5C8A;
+}
+.admin-table-header-year {
+  font-size: 12px; color: rgba(59,92,138,0.55);
+  font-weight: 500;
+}
+.admin-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px; font-variant-numeric: tabular-nums;
+}
+.admin-table thead th {
+  text-align: left; padding: 10px 12px 8px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.04em; color: rgba(59,92,138,0.5);
+  border-bottom: 1px solid rgba(59,108,176,0.10);
+}
+.admin-table thead th:first-child { width: 52px; text-align: center; }
+.admin-table tbody td {
+  padding: 6px 12px;
+  transition: background 0.15s;
+  vertical-align: middle;
+}
+.admin-table tbody td:first-child {
+  text-align: center; font-weight: 600;
+  color: rgba(59,92,138,0.5); font-size: 12px;
+  width: 52px;
+}
+.admin-table tbody tr:nth-child(odd)  td { background: rgba(59,108,176,0.06); }
+.admin-table tbody tr:nth-child(even) td { background: rgba(59,108,176,0.03); }
+.admin-table tbody tr:hover td {
+  background: rgba(59,108,176,0.09) !important;
+}
+.admin-table td input {
+  width: 100%; padding: 5px 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 13px; font-variant-numeric: tabular-nums;
+  color: var(--c-ink);
+  transition: all 0.15s;
+  outline: none;
+}
+.admin-table td input:hover {
+  border-color: rgba(59,108,176,0.18);
+  background: rgba(255,255,255,0.55);
+}
+.admin-table td input:focus {
+  border-color: #3B6CB0;
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 0 0 3px rgba(59,108,176,0.07);
+}
+.admin-img-cell {
+  padding: 4px 10px !important;
+  min-width: 110px;
+}
+.admin-img-preview {
+  position: relative; display: inline-block;
+  border-radius: 8px; overflow: hidden;
+  border: 1px solid rgba(59,108,176,0.12);
+}
+.admin-img-preview img {
+  width: 80px; height: 56px;
+  object-fit: cover; cursor: pointer;
+  display: block;
+  transition: opacity 0.15s;
+}
+.admin-img-preview img:hover { opacity: 0.8; }
+.admin-img-clear {
+  position: absolute; top: 2px; right: 2px;
+  width: 18px; height: 18px; line-height: 18px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.45); color: #fff;
+  border: none; cursor: pointer;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
+  transition: background 0.15s;
+}
+.admin-img-clear:hover { background: rgba(200,50,50,0.75); }
+.admin-upload-btn {
+  padding: 4px 12px; font-size: 11px;
+  border: 1px dashed rgba(59,108,176,0.25);
+  border-radius: 8px; cursor: pointer;
+  background: transparent; color: rgba(59,92,138,0.55);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.admin-upload-btn:hover {
+  background: rgba(59,108,176,0.06);
+  border-color: rgba(59,108,176,0.4);
+  color: #3B5C8A;
+}
+
+/* ========= FITNESS WEEKLY CHECKIN TABLE ========= */
+.fitness-table-wrap {
+  padding: 16px 0 0;
+}
+.fitness-table-card {
+  background: linear-gradient(160deg, #F5F2F5 0%, #F2F4F8 50%, #F5F2F5 100%);
+  border: 1.5px solid rgba(140,184,138,0.45);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(140,184,138,0.13), 0 0 0 1px rgba(140,184,138,0.08);
+  margin-bottom: 20px;
+}
+.fitness-table-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 20px 0;
+  margin-bottom: 2px;
+  flex-wrap: wrap;
+}
+.fitness-table-header-title {
+  font-size: 15px; font-weight: 700; color: #5A8A5A;
+}
+.fitness-table-header-year {
+  font-size: 12px; color: rgba(90,138,90,0.55);
+  font-weight: 500;
+}
+.fitness-week-nav {
+  display: flex; align-items: center; gap: 6px;
+  margin-left: auto;
+}
+.fitness-week-nav button {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid rgba(140,184,138,0.2);
+  background: transparent; color: #5A8A5A;
+  font-size: 11px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; transition: all 0.15s;
+}
+.fitness-week-nav button:hover:not(:disabled) {
+  background: rgba(140,184,138,0.08);
+  border-color: rgba(140,184,138,0.35);
+}
+.fitness-week-nav button:disabled { opacity: 0.25; cursor: default; }
+.fitness-week-label {
+  font-size: 12px; font-weight: 600; color: #5A8A5A;
+  min-width: 56px; text-align: center;
+}
+.fitness-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px; font-variant-numeric: tabular-nums;
+}
+.fitness-table thead th {
+  text-align: left; padding: 10px 8px 8px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.03em; color: rgba(90,138,90,0.5);
+  border-bottom: 1px solid rgba(140,184,138,0.10);
+}
+.fitness-table thead th:first-child { padding-left: 14px; }
+.fitness-table thead th.fit-th-chk { text-align: center; }
+.fitness-table tbody td {
+  padding: 10px 8px;
+  transition: background 0.15s;
+  vertical-align: top;
+}
+.fitness-table tbody td:first-child { padding-left: 14px; }
+.fitness-table tbody tr:nth-child(odd)  td { background: rgba(140,184,138,0.05); }
+.fitness-table tbody tr:nth-child(even) td { background: rgba(140,184,138,0.02); }
+.fitness-table tbody tr:hover td {
+  background: rgba(140,184,138,0.09) !important;
+}
+.fitness-table td input {
+  width: 100%; padding: 5px 6px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 13px; font-variant-numeric: tabular-nums;
+  color: var(--c-ink);
+  transition: all 0.15s;
+  outline: none;
+}
+.fitness-table td input:hover {
+  border-color: rgba(140,184,138,0.18);
+  background: rgba(255,255,255,0.55);
+}
+.fitness-table td input:focus {
+  border-color: #8CB88A;
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 0 0 3px rgba(140,184,138,0.07);
+}
+.fitness-table td textarea {
+  width: 100%; padding: 5px 6px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 12px; line-height: 1.7;
+  color: var(--c-ink);
+  transition: all 0.15s;
+  outline: none; resize: none;
+  font-family: inherit;
+  min-height: 52px;
+  overflow: hidden;
+  display: block;
+}
+.fitness-table td textarea:hover {
+  border-color: rgba(140,184,138,0.18);
+  background: rgba(255,255,255,0.55);
+}
+.fitness-table td textarea:focus {
+  border-color: #8CB88A;
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 0 0 3px rgba(140,184,138,0.07);
+}
+.fit-chk-cell {
+  text-align: center;
+  padding: 5px 4px !important;
+}
+.fit-chk-label {
+  display: inline-flex; align-items: center; gap: 4px;
+  cursor: pointer; user-select: none;
+}
+.fit-chk-label input[type="checkbox"] {
+  width: 15px; height: 15px;
+  accent-color: #8CB88A;
+  cursor: pointer;
+}
+.fit-chk-mark {
+  font-size: 12px; font-weight: 500;
+  color: rgba(90,138,90,0.6);
+}
+
+/* ========= HIKING MONTHLY CHECKIN TABLE ========= */
+.hiking-table-wrap { padding: 16px 0 0; }
+.hiking-table-card {
+  background: linear-gradient(160deg, #F2F5F2 0%, #EFF4F2 50%, #F2F5F2 100%);
+  border: 1.5px solid rgba(140,184,138,0.45);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(140,184,138,0.13), 0 0 0 1px rgba(140,184,138,0.08);
+  margin-bottom: 20px;
+}
+.hiking-table-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 20px 6px;
+  flex-wrap: wrap;
+}
+.hiking-table-title {
+  font-size: 15px; font-weight: 700; color: #5A8A5A;
+}
+.hiking-table-year {
+  font-size: 12px; color: rgba(90,138,90,0.55); font-weight: 500;
+}
+.hiking-year-nav {
+  margin-left: auto; display: flex; align-items: center; gap: 6px;
+}
+.hiking-year-nav button {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid rgba(140,184,138,0.2);
+  background: transparent; color: #5A8A5A;
+  font-size: 11px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; transition: all 0.15s;
+}
+.hiking-year-nav button:hover:not(:disabled) {
+  background: rgba(140,184,138,0.08);
+  border-color: rgba(140,184,138,0.35);
+}
+.hiking-year-nav button:disabled { opacity: 0.25; cursor: default; }
+.hiking-year-label {
+  font-size: 12px; font-weight: 600; color: #5A8A5A;
+  min-width: 44px; text-align: center;
+}
+.hiking-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 12px; font-variant-numeric: tabular-nums;
+}
+.hiking-table thead th {
+  text-align: left; padding: 8px 6px 7px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.03em; color: rgba(90,138,90,0.5);
+  border-bottom: 1px solid rgba(140,184,138,0.10);
+  white-space: nowrap;
+}
+.hiking-table thead th:first-child { padding-left: 14px; }
+.hiking-table thead th.hk-th-chk { text-align: center; }
+.hiking-table tbody td {
+  padding: 7px 6px;
+  transition: background 0.15s;
+  vertical-align: middle;
+}
+.hiking-table tbody td:first-child { padding-left: 14px; font-weight: 600; color: rgba(90,138,90,0.65); }
+.hiking-table tbody tr:nth-child(odd)  td { background: rgba(140,184,138,0.06); }
+.hiking-table tbody tr:nth-child(even) td { background: rgba(140,184,138,0.02); }
+.hiking-table tbody tr:hover td { background: rgba(140,184,138,0.10) !important; }
+.hiking-table td input[type="text"] {
+  width: 100%; padding: 4px 5px;
+  border: 1px solid transparent; border-radius: 5px;
+  background: transparent; font-size: 12px;
+  color: var(--c-ink); transition: all 0.15s;
+  outline: none; font-family: inherit;
+}
+.hiking-table td input[type="text"]:hover {
+  border-color: rgba(140,184,138,0.20);
+  background: rgba(255,255,255,0.55);
+}
+.hiking-table td input[type="text"]:focus {
+  border-color: #8CB88A;
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 0 0 3px rgba(140,184,138,0.07);
+}
+.hiking-table td.hk-chk-cell { text-align: center; padding: 5px 4px !important; }
+.hiking-table td.hk-chk-cell input[type="checkbox"] {
+  width: 15px; height: 15px; accent-color: #8CB88A; cursor: pointer;
+}
+.hiking-table-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 20px 14px;
+  border-top: 1px solid rgba(140,184,138,0.10);
+  font-size: 12px; color: rgba(90,138,90,0.6); font-weight: 500;
+}
+.hiking-table-footer .hk-count {
+  font-size: 18px; font-weight: 700; color: #5A8A5A;
+  margin-left: 8px;
+}
+
+/* ========= DIET STATS TABLE ========= */
+.diet-table-wrap { padding: 16px 0 0; }
+.diet-table-card {
+  background: linear-gradient(160deg, #F4F5F0 0%, #F0F5F1 50%, #F4F5F0 100%);
+  border: 1.5px solid rgba(140,184,138,0.45);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(140,184,138,0.13), 0 0 0 1px rgba(140,184,138,0.08);
+  margin-bottom: 20px;
+}
+.diet-table-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 20px 6px; flex-wrap: wrap;
+}
+.diet-table-title {
+  font-size: 15px; font-weight: 700; color: #5A8A5A;
+}
+.diet-date-nav {
+  margin-left: auto; display: flex; align-items: center; gap: 6px;
+}
+.diet-date-nav button {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid rgba(140,184,138,0.2);
+  background: transparent; color: #5A8A5A;
+  font-size: 11px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; transition: all 0.15s;
+}
+.diet-date-nav button:hover {
+  background: rgba(140,184,138,0.08);
+  border-color: rgba(140,184,138,0.35);
+}
+.diet-date-label {
+  font-size: 12px; font-weight: 600; color: #5A8A5A;
+  min-width: 82px; text-align: center;
+}
+.diet-date-input {
+  font-size: 12px; font-weight: 600; color: #5A8A5A;
+  border: 1px solid rgba(140,184,138,0.25); border-radius: 6px;
+  background: transparent; padding: 3px 6px; outline: none;
+  text-align: center; font-family: inherit; cursor: pointer;
+  transition: all 0.15s;
+}
+.diet-date-input:focus {
+  border-color: #8CB88A;
+  background: rgba(255,255,255,0.7);
+}
+.diet-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 12px; font-variant-numeric: tabular-nums;
+}
+.diet-table thead th {
+  text-align: left; padding: 8px 7px 7px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.03em; color: rgba(90,138,90,0.5);
+  border-bottom: 1px solid rgba(140,184,138,0.10);
+  white-space: nowrap;
+}
+.diet-table thead th:first-child { padding-left: 14px; }
+.diet-table thead th.dt-num { text-align: right; }
+.diet-table tbody td {
+  padding: 7px 7px; transition: background 0.15s;
+  vertical-align: middle;
+}
+.diet-table tbody td:first-child { padding-left: 14px; font-weight: 600; color: rgba(80,100,80,0.75); white-space: nowrap; }
+.diet-table tbody tr:nth-child(odd)  td { background: rgba(140,184,138,0.05); }
+.diet-table tbody tr:nth-child(even) td { background: rgba(140,184,138,0.02); }
+.diet-table tbody tr:hover td { background: rgba(140,184,138,0.10) !important; }
+.diet-table td input[type="text"] {
+  width: 100%; padding: 4px 5px;
+  border: 1px solid transparent; border-radius: 5px;
+  background: transparent; font-size: 12px;
+  color: var(--c-ink); transition: all 0.15s;
+  outline: none; font-family: inherit;
+}
+.diet-table td input[type="text"]:hover {
+  border-color: rgba(140,184,138,0.20);
+  background: rgba(255,255,255,0.55);
+}
+.diet-table td input[type="text"]:focus {
+  border-color: #8CB88A;
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 0 0 3px rgba(140,184,138,0.07);
+}
+.diet-table td.dt-num input[type="text"] { text-align: right; }
+.diet-table tfoot td {
+  padding: 8px 7px; font-weight: 700;
+  border-top: 1.5px solid rgba(90,138,90,0.20);
+  font-size: 12px;
+}
+.diet-table tfoot td:first-child { padding-left: 14px; color: #5A8A5A; }
+.diet-table tfoot td.dt-num { text-align: right; color: #3A6A3A; font-size: 13px; }
+.diet-table tfoot td.dt-water { text-align: right; color: #3A6A3A; }
+.diet-std-row td {
+  padding: 7px 7px !important;
+  background: rgba(90,138,90,0.07) !important;
+  font-size: 11px; color: rgba(80,100,80,0.65); font-weight: 500;
+}
+.diet-std-row td:first-child { padding-left: 14px !important; }
+.diet-std-row td.dt-num, .diet-std-row td.dt-water { text-align: right; }
+.diet-add-row-btn {
+  margin: 8px 14px 14px;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; color: rgba(90,138,90,0.55);
+  background: transparent; border: 1px dashed rgba(140,184,138,0.3);
+  border-radius: 7px; padding: 5px 12px; cursor: pointer;
+  transition: all 0.15s;
+}
+.diet-add-row-btn:hover {
+  color: #5A8A5A; border-color: rgba(140,184,138,0.55);
+  background: rgba(140,184,138,0.05);
+}
+
+/* ========= SPORT SUB-CAT ========= */
+.video-subcat-wrap {
+  padding: 14px 0 4px;
+}
+.video-subcat-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 0 12px;
+}
+.video-subcat-label {
+  font-size: 13px; font-weight: 700; color: #5A7FBF;
+  display: flex; align-items: center; gap: 6px;
+}
+.video-subcat-label .cat-label-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.video-subcat-count {
+  font-size: 11px; color: rgba(120,140,180,0.6);
+  margin-left: 2px;
+}
+.video-subcat-actions {
+  display: flex; align-items: center; gap: 4px;
+  margin-left: auto;
+}
+.video-subcat-actions button {
+  padding: 3px 10px; font-size: 11px;
+  border: 1px solid rgba(90,143,212,0.15);
+  border-radius: 8px; cursor: pointer;
+  background: transparent; color: #5A7FBF;
+  transition: all 0.15s;
+}
+.video-subcat-actions button:hover {
+  background: rgba(90,143,212,0.08);
+  border-color: rgba(90,143,212,0.25);
+}
+.video-subcat-actions button.danger {
+  border-color: rgba(220,80,70,0.15); color: rgba(200,70,60,0.7);
+}
+.video-subcat-actions button.danger:hover {
+  background: rgba(220,80,70,0.06); border-color: rgba(220,80,70,0.3);
+}
+.video-subcat-add-wrap {
+  padding: 10px 0 0;
+}
+.video-subcat-add-wrap button {
+  padding: 6px 16px; font-size: 12px;
+  border: 1px dashed rgba(90,143,212,0.2);
+  border-radius: 10px; cursor: pointer;
+  background: transparent; color: #5A7FBF;
+  transition: all 0.15s;
+}
+.video-subcat-add-wrap button:hover {
+  background: rgba(90,143,212,0.06);
+  border-color: rgba(90,143,212,0.35);
+}
+
+/* ========= SCROLL ========= */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: rgba(168,208,166,0.2); border-radius: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ========= RESPONSIVE ========= */
+@media (max-width: 720px) {
+  nav { padding: 0 16px; }
+  .hero { padding: 80px 20px 60px; min-height: 60vh; }
+  .hero-deco-num { font-size: 200px; }
+  .hero-h1 { font-size: 30px; }
+  .hero-sub { font-size: 13px; }
+  .hero-stats { gap: 16px; }
+  .hero-stat-val { font-size: 26px; }
+  .hero-stat { padding: 12px 20px; }
+  .tab-bar { padding: 0 20px; }
+  .tab-btn { padding: 8px 20px; font-size: 12px; }
+  .year-bar { padding: 16px 20px 6px; }
+  .work-subnav { padding: 10px 20px 0; gap: 4px; }
+  .work-subnav-btn { padding: 6px 12px; font-size: 11px; }
+  .content-area { padding: 0 20px 60px; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .work-tree-wrap { padding: 24px 0 60px; }
+  .work-tree-branches { gap: 12px; }
+  .work-tree-branch { min-width: 120px; padding: 14px 16px; }
+  .work-tree-root { font-size: 15px; padding: 16px 22px; }
+  .splash-char { font-size: 32px; }
+  .splash-sub { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span class="nav-dot"></span>MY LIFE</a>
+  <div class="theme-switcher" onclick="cycleTheme()" title="切换主题">
+    <span class="theme-label">主题</span>
+    <span class="theme-dot" id="theme-dot" data-dot="green"></span>
+  </div>
+  <button class="nav-add" onclick="openAdd()">+ 记录</button>
+</nav>
+
+<!-- ========= HERO (Always visible, unified) ========= -->
+<div class="hero" id="hero">
+  <div class="hero-deco-num" id="hero-deco-num">2</div>
+  <div class="hero-bg"></div>
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span>PERSONAL ARCHIVE</div>
+    <h1 class="hero-h1">每一份努力<br><em>都值得被记录</em></h1>
+    <p class="hero-sub" id="hero-subtitle">公众号运营 · 百度推广 · 视频制作 · 行政活动</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-val" id="hero-w-total">0</span><span class="hero-stat-label">工作记录</span></div>
+      <div class="hero-stat"><span class="hero-stat-val" id="hero-l-total">0</span><span class="hero-stat-label">生活记录</span></div>
+    </div>
+  </div>
+  <span class="hero-edit-trigger" onclick="openHeroEdit()">自定义</span>
+</div>
+
+<!-- ========= TAB BAR ========= -->
+<div class="tab-bar">
+  <div class="tab-group">
+    <button class="tab-btn work-btn active" onclick="switchTab('work',this)">工作<span class="tab-count" id="wc-total">0</span></button>
+    <button class="tab-btn life-btn" onclick="switchTab('life',this)">生活<span class="tab-count" id="lc-total">0</span></button>
+  </div>
+</div>
+
+<!-- ========= YEAR SELECTOR ========= -->
+<div class="year-bar" id="year-bar">
+  <div class="year-dropdown" id="year-dropdown" onclick="toggleYearDropdown(event)">
+    <span id="year-dropdown-label">2026 年</span>
+    <span class="caret">▼</span>
+    <div class="year-dropdown-menu" id="year-dropdown-menu"></div>
+  </div>
+</div>
+
+<!-- ========= WORK SUB-NAV ========= -->
+<div class="work-subnav" id="work-subnav">
+  <button class="work-subnav-btn active" data-cat="" onclick="setWorkCat('', this)">全部<span class="work-subnav-count" id="wsn-all">0</span></button>
+  <button class="work-subnav-btn" data-cat="wechat" onclick="setWorkCat('wechat', this)">公众号运营<span class="work-subnav-count" id="wsn-wechat">0</span></button>
+  <button class="work-subnav-btn" data-cat="baidu" onclick="setWorkCat('baidu', this)">百度推广营销<span class="work-subnav-count" id="wsn-baidu">0</span></button>
+  <button class="work-subnav-btn" data-cat="video" onclick="setWorkCat('video', this)">视频制作<span class="work-subnav-count" id="wsn-video">0</span></button>
+  <button class="work-subnav-btn" data-cat="admin" onclick="setWorkCat('admin', this)">行政活动协助<span class="work-subnav-count" id="wsn-admin">0</span></button>
+  <button class="work-subnav-btn" data-cat="doc" onclick="setWorkCat('doc', this)">工作资料<span class="work-subnav-count" id="wsn-doc">0</span></button>
+</div>
+
+<!-- ========= LIFE SUB-NAV ========= -->
+<div class="work-subnav" id="life-subnav" style="display:none">
+  <button class="work-subnav-btn active" data-cat="" onclick="setLifeCat('', this)">全部<span class="work-subnav-count" id="lsn-all">0</span></button>
+  <button class="work-subnav-btn" data-cat="sport" onclick="setLifeCat('sport', this)">运动<span class="work-subnav-count" id="lsn-sport">0</span></button>
+  <button class="work-subnav-btn" data-cat="money" onclick="setLifeCat('money', this)">挣钱<span class="work-subnav-count" id="lsn-money">0</span></button>
+  <button class="work-subnav-btn" data-cat="love" onclick="setLifeCat('love', this)">爱情<span class="work-subnav-count" id="lsn-love">0</span></button>
+  <button class="work-subnav-btn" data-cat="social" onclick="setLifeCat('social', this)">人际<span class="work-subnav-count" id="lsn-social">0</span></button>
+</div>
+
+<!-- ========= CONTENT AREA ========= -->
+<div class="content-area">
+  <div class="section-wrap" id="main-cats"></div>
+</div>
+
+</div><!-- /app -->
+
+<!-- ========= ADD MODAL ========= -->
+<div class="overlay" id="overlay-add" onclick="if(event.target===this)closeAdd()">
+<div class="sheet">
+  <div class="sheet-title" id="sheet-title">记录一件事</div>
+  <div class="frow"><label>板块</label><select id="f-sec" onchange="onSecChange()"><option value="work">工作</option><option value="life">生活</option></select></div>
+  <div class="frow" id="f-year-wrap"><label>年份</label><select id="f-year"><option>2024</option><option>2025</option><option selected>2026</option><option>2027</option><option>2028</option></select></div>
+  <div class="frow"><label>分类</label><select id="f-cat" onchange="onCatChange()"></select></div>
+  <div class="frow" id="f-subcat-wrap" style="display:none"><label>子分类</label><select id="f-subcat"></select></div>
+  <div class="frow"><label>标题</label><input type="text" id="f-title" placeholder="简短描述这件事" maxlength="60"/></div>
+  <div class="frow"><label>内容</label><textarea id="f-body" placeholder="详细记录内容、心得、数据…" rows="4"></textarea></div>
+  <div class="frow"><label>插入图片</label>
+    <div class="img-upload-area" id="img-upload-area" onclick="document.getElementById('f-img').click()">
+      <div class="img-upload-icon">&#8679;</div>
+      <div class="img-upload-label">点击上传图片，或 Ctrl+V 直接粘贴图片（支持 JPG / PNG / GIF）</div>
+      <input type="file" id="f-img" accept="image/*" style="display:none" onchange="previewImg(event)"/>
+      <img id="img-preview" class="img-preview" alt=""/>
+    </div>
+    <button type="button" id="img-clear-btn" onclick="clearImg()" style="display:none;margin-top:6px;width:100%;padding:7px 0;background:none;border:1px dashed rgba(220,80,70,0.35);border-radius:10px;color:rgba(220,80,70,0.7);font-size:12px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(220,80,70,0.06)'" onmouseout="this.style.background='none'">× 移除图片</button>
+    <div class="img-pos-wrap" id="img-pos-wrap">
+      <div class="img-pos-label">调整封面显示位置</div>
+      <div class="img-pos-row">
+        <span>左右</span>
+        <input type="range" id="img-pos-x" min="0" max="100" value="50" oninput="updateImgPos()">
+      </div>
+      <div class="img-pos-row">
+        <span>上下</span>
+        <input type="range" id="img-pos-y" min="0" max="100" value="50" oninput="updateImgPos()">
+      </div>
+      <div class="img-pos-tip">滑动调整图片在封面框中的显示区域</div>
+    </div>
+  </div>
+  <div class="frow"><label>标签（逗号分隔）</label><input type="text" id="f-tags" placeholder="如：复盘, 涨粉, 里程碑"/></div>
+  <div class="frow"><label>原文链接</label><input type="url" id="f-link" placeholder="https://..." style="font-size:13px;"/></div>
+  <div class="frow"><label>日期</label><input type="date" id="f-date"/></div>
+  <div class="sheet-actions">
+    <button class="btn-ghost" onclick="closeAdd()">取消</button>
+    <button class="btn-primary" id="save-btn" onclick="saveEntry()">保存记录</button>
+  </div>
+</div>
+</div>
+
+<!-- ========= DETAIL MODAL ========= -->
+<div class="overlay" id="overlay-detail" onclick="if(event.target===this)closeDetail()">
+<div class="detail-sheet">
+  <img id="detail-cover" class="detail-cover" alt=""/>
+  <svg id="detail-cover-art" class="detail-cover-art" viewBox="0 0 680 200" fill="none">
+    <rect width="680" height="200" fill="#F0FAEC"/>
+    <circle cx="560" cy="40" r="100" fill="rgba(168,208,166,0.07)"/>
+    <circle cx="560" cy="40" r="60" fill="rgba(140,184,138,0.1)"/>
+    <circle cx="140" cy="140" r="80" fill="rgba(168,208,166,0.05)"/>
+    <circle cx="400" cy="60" r="40" fill="rgba(190,220,188,0.06)"/>
+    <path d="M0 170 Q200 140 400 170 Q600 200 680 168 L680 200 L0 200Z" fill="rgba(168,208,166,0.08)"/>
+    <text x="24" y="32" font-family="Inter,Georgia,serif" font-size="9" fill="rgba(140,184,138,0.15)" letter-spacing="0.25em">BAMBOO DEW</text>
+  </svg>
+  <button class="detail-close" onclick="closeDetail()">&#x2715;</button>
+  <div class="detail-body">
+    <div class="detail-eyebrow" id="d-eye"></div>
+    <div class="detail-title" id="d-title"></div>
+    <div class="detail-meta" id="d-meta"></div>
+    <div id="d-tags" class="entry-card-tags" style="margin-top:12px"></div>
+    <div class="detail-divider"></div>
+    <div class="detail-content" id="d-body"></div>
+    <div class="detail-link-row" id="d-link-row" style="display:none;">
+      <a class="detail-link-btn" id="d-link-href" href="#" target="_blank">↗ <span id="d-link-text"></span></a>
+    </div>
+    <div class="detail-footer" style="margin-top:24px">
+      <button class="btn-ghost" onclick="closeDetail()">关闭</button>
+      <button class="btn-primary" id="d-edit-btn" onclick="event.stopPropagation();editEntry(this.dataset.eid)">✎ 编辑</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CALENDAR MODAL -->
+<div class="cal-modal-overlay" id="cal-overlay" onclick="if(event.target===this)closeCalendar()">
+  <div class="cal-modal" id="cal-modal-body"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- HERO EDIT MODAL -->
+<div class="hero-edit-overlay" id="hero-edit-overlay" onclick="if(event.target===this)closeHeroEdit()">
+<div class="hero-edit-sheet">
+  <h3 id="he-title">编辑首页</h3>
+  <p class="he-subtitle">自定义首页标题、副标题和背景色</p>
+  <label>顶部状态标签</label>
+  <input id="he-eyebrow" type="text" placeholder="PERSONAL ARCHIVE" maxlength="40">
+  <label>大标题（用 &lt;br&gt; 换行，用 &lt;em&gt; 标记关键词）</label>
+  <textarea id="he-h1" rows="3" placeholder="每一份努力<br>&lt;em&gt;都值得被记录&lt;/em&gt;"></textarea>
+  <label>副标题说明</label>
+  <input id="he-sub" type="text" placeholder="公众号运营 · 百度推广 · 视频制作 · 行政活动" maxlength="100">
+  <label>主题色</label>
+  <div class="he-color-row" id="he-colors"></div>
+  <div class="he-color-custom">
+    <input type="color" id="he-color-picker" value="#8CB88A" onchange="document.getElementById('he-color-custom-val').value=this.value">
+    <input type="text" id="he-color-custom-val" value="#8CB88A" placeholder="#8CB88A" style="flex:1;margin:0;font-size:13px;" onchange="document.getElementById('he-color-picker').value=this.value">
+    自定义
+  </div>
+  <div class="he-actions">
+    <button class="he-btn-reset" onclick="resetHeroEdit()">恢复默认</button>
+    <button class="he-btn-cancel" onclick="closeHeroEdit()">取消</button>
+    <button class="he-btn-save" onclick="saveHeroEdit()">保存修改</button>
+  </div>
+</div>
+</div>
+
+<!-- SPLASH OVERLAY -->
+<div class="splash" id="splash">
+  <svg class="splash-illust" id="splash-illust-work" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sw-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFF5F3"/><stop offset="50%" stop-color="#FEE8E5"/><stop offset="100%" stop-color="#FDD8D3"/>
+      </linearGradient>
+    </defs>
+    <rect width="1400" height="900" fill="url(#sw-sky)"/>
+    <g fill="rgba(231,145,145,0.06)">
+      <circle cx="200" cy="180" r="90"/><circle cx="500" cy="120" r="60"/>
+      <circle cx="800" cy="200" r="80"/><circle cx="1100" cy="140" r="70"/>
+      <circle cx="350" cy="400" r="55"/><circle cx="950" cy="480" r="65"/>
+      <circle cx="120" cy="550" r="45"/><circle cx="1280" cy="350" r="50"/>
+    </g>
+    <g fill="rgba(240,168,168,0.08)">
+      <circle cx="300" cy="300" r="40"/><circle cx="700" cy="350" r="48"/>
+      <circle cx="1050" cy="280" r="36"/><circle cx="500" cy="520" r="42"/>
+    </g>
+    <g fill="rgba(248,220,200,0.07)">
+      <circle cx="150" cy="350" r="50"/><circle cx="600" cy="280" r="35"/>
+      <circle cx="1150" cy="450" r="44"/><circle cx="850" cy="380" r="30"/>
+    </g>
+    <path d="M0 700 Q200 660 500 680 Q800 700 1100 670 Q1300 655 1400 680 L1400 900 L0 900Z" fill="rgba(231,145,145,0.06)"/>
+    <path d="M0 750 Q300 720 600 740 Q900 760 1200 730 Q1350 720 1400 745 L1400 900 L0 900Z" fill="rgba(240,168,168,0.04)"/>
+    <path d="M0 800 Q350 775 700 790 Q1050 805 1400 785 L1400 900 L0 900Z" fill="rgba(248,220,200,0.05)"/>
+  </svg>
+
+  <svg class="splash-illust" id="splash-illust-life" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sl-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FBF6FE"/><stop offset="50%" stop-color="#F2ECF8"/><stop offset="100%" stop-color="#EDE6F5"/>
+      </linearGradient>
+    </defs>
+    <rect width="1400" height="900" fill="url(#sl-sky)"/>
+    <g fill="rgba(181,164,203,0.06)">
+      <circle cx="150" cy="150" r="70"/><circle cx="400" cy="250" r="55"/>
+      <circle cx="650" cy="180" r="65"/><circle cx="900" cy="220" r="50"/>
+      <circle cx="1150" cy="160" r="60"/><circle cx="200" cy="400" r="45"/>
+      <circle cx="500" cy="500" r="55"/><circle cx="800" cy="450" r="50"/>
+      <circle cx="1050" cy="420" r="48"/><circle cx="1250" cy="350" r="52"/>
+    </g>
+    <g fill="rgba(200,187,218,0.08)">
+      <circle cx="300" cy="320" r="38"/><circle cx="700" cy="380" r="40"/>
+      <circle cx="1100" cy="300" r="35"/><circle cx="530" cy="450" r="30"/>
+    </g>
+    <path d="M0 680 Q250 640 500 660 Q750 680 1000 655 Q1250 630 1400 660 L1400 900 L0 900Z" fill="rgba(181,164,203,0.07)"/>
+    <path d="M0 740 Q300 710 600 730 Q900 750 1200 720 Q1350 710 1400 735 L1400 900 L0 900Z" fill="rgba(200,187,218,0.05)"/>
+    <path d="M0 790 Q350 770 700 785 Q1050 800 1400 780 L1400 900 L0 900Z" fill="rgba(210,200,220,0.04)"/>
+  </svg>
+
+  <svg class="splash-illust" id="splash-illust-wechat" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="swc-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFF5F3"/><stop offset="50%" stop-color="#FEE8E5"/><stop offset="100%" stop-color="#FDD8D3"/>
+      </linearGradient>
+    </defs>
+    <rect width="1400" height="900" fill="url(#swc-bg)"/>
+    <g fill="rgba(231,145,145,0.06)">
+      <circle cx="180" cy="150" r="55"/><circle cx="500" cy="200" r="48"/>
+      <circle cx="900" cy="160" r="52"/><circle cx="1200" cy="240" r="58"/>
+      <circle cx="300" cy="450" r="45"/><circle cx="700" cy="480" r="50"/>
+      <circle cx="1050" cy="460" r="44"/>
+    </g>
+    <g fill="rgba(240,168,168,0.07)">
+      <rect x="250" y="60" width="280" height="12" rx="6"/><rect x="250" y="84" width="180" height="8" rx="4"/>
+      <rect x="600" y="100" width="340" height="12" rx="6"/><rect x="600" y="124" width="200" height="8" rx="4"/>
+      <rect x="350" y="180" width="260" height="12" rx="6"/><rect x="350" y="204" width="300" height="8" rx="4"/>
+      <rect x="800" y="60" width="310" height="12" rx="6"/><rect x="800" y="84" width="160" height="8" rx="4"/>
+    </g>
+    <path d="M0 680 Q250 650 500 670 Q750 690 1000 660 Q1250 635 1400 665 L1400 900 L0 900Z" fill="rgba(231,145,145,0.06)"/>
+    <path d="M0 740 Q300 715 600 735 Q900 755 1200 725 Q1350 710 1400 735 L1400 900 L0 900Z" fill="rgba(240,168,168,0.04)"/>
+  </svg>
+
+  <svg class="splash-illust" id="splash-illust-baidu" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sbd-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F0F5FA"/><stop offset="100%" stop-color="#E4EDF8"/>
+      </linearGradient>
+    </defs>
+    <rect width="1400" height="900" fill="url(#sbd-bg)"/>
+    <g fill="rgba(59,108,176,0.07)">
+      <circle cx="200" cy="180" r="50"/><circle cx="200" cy="180" r="26" fill="rgba(90,143,212,0.12)"/>
+      <circle cx="650" cy="250" r="60"/><circle cx="650" cy="250" r="34" fill="rgba(90,143,212,0.1)"/>
+      <circle cx="1100" cy="180" r="45"/><circle cx="1100" cy="180" r="24" fill="rgba(90,143,212,0.1)"/>
+      <circle cx="420" cy="460" r="52"/><circle cx="420" cy="460" r="28" fill="rgba(90,143,212,0.1)"/>
+      <circle cx="920" cy="420" r="48"/><circle cx="920" cy="420" r="26" fill="rgba(90,143,212,0.1)"/>
+    </g>
+    <g stroke="rgba(90,143,212,0.1)" stroke-width="0.6" fill="none">
+      <line x1="250" y1="180" x2="590" y2="250"/><line x1="710" y1="250" x2="1055" y2="180"/>
+      <line x1="250" y1="180" x2="368" y2="460"/><line x1="472" y1="460" x2="872" y2="420"/>
+      <line x1="710" y1="250" x2="872" y2="420"/>
+    </g>
+    <path d="M0 670 Q250 640 500 660 Q750 680 1000 650 Q1250 625 1400 655 L1400 900 L0 900Z" fill="rgba(59,108,176,0.06)"/>
+    <path d="M0 730 Q300 700 600 720 Q900 740 1200 710 Q1350 695 1400 720 L1400 900 L0 900Z" fill="rgba(90,143,212,0.04)"/>
+  </svg>
+
+  <svg class="splash-illust" id="splash-illust-video" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="svi-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F0F5FA"/><stop offset="100%" stop-color="#E4EDF8"/>
+      </linearGradient>
+    </defs>
+    <rect width="1400" height="900" fill="url(#svi-bg)"/>
+    <g fill="rgba(59,108,176,0.06)">
+      <circle cx="200" cy="180" r="55"/><circle cx="500" cy="140" r="48"/>
+      <circle cx="850" cy="200" r="52"/><circle cx="1150" cy="160" r="50"/>
+      <circle cx="350" cy="450" r="44"/><circle cx="1000" cy="460" r="46"/>
+    </g>
+    <g fill="rgba(90,143,212,0.08)">
+      <circle cx="300" cy="320" r="38"/><circle cx="650" cy="360" r="45"/>
+      <circle cx="950" cy="330" r="36"/>
+    </g>
+    <path d="M0 660 Q250 630 500 650 Q750 670 1000 640 Q1250 615 1400 645 L1400 900 L0 900Z" fill="rgba(59,108,176,0.07)"/>
+    <path d="M0 720 Q300 690 600 710 Q900 730 1200 700 Q1350 685 1400 710 L1400 900 L0 900Z" fill="rgba(90,143,212,0.05)"/>
+    <path d="M0 780 Q350 760 700 775 Q1050 790 1400 770 L1400 900 L0 900Z" fill="rgba(90,143,212,0.03)"/>
+  </svg>
+
+  <svg class="splash-illust" id="splash-illust-admin" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sad-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F0F5FA"/><stop offset="100%" stop-color="#E4EDF8"/>
+      </linearGradient>
+    </defs>
+    <rect width="1400" height="900" fill="url(#sad-bg)"/>
+    <g fill="rgba(59,108,176,0.06)">
+      <circle cx="150" cy="160" r="50"/><circle cx="450" cy="200" r="45"/>
+      <circle cx="750" cy="150" r="48"/><circle cx="1050" cy="190" r="42"/>
+      <circle cx="300" cy="450" r="40"/><circle cx="650" cy="480" r="46"/>
+      <circle cx="1000" cy="460" r="44"/>
+    </g>
+    <g fill="rgba(90,143,212,0.08)">
+      <rect x="320" y="140" width="240" height="180" rx="10"/>
+      <rect x="620" y="140" width="240" height="180" rx="10"/>
+      <rect x="320" y="360" width="240" height="180" rx="10"/>
+      <rect x="620" y="360" width="240" height="180" rx="10"/>
+    </g>
+    <path d="M0 670 Q250 640 500 660 Q750 680 1000 650 Q1250 625 1400 655 L1400 900 L0 900Z" fill="rgba(59,108,176,0.06)"/>
+    <path d="M0 730 Q300 700 600 720 Q900 740 1200 710 Q1350 695 1400 720 L1400 900 L0 900Z" fill="rgba(90,143,212,0.04)"/>
+  </svg>
+
+  <svg class="splash-illust" id="splash-illust-doc" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sdoc-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F0F6F9"/><stop offset="100%" stop-color="#E8F0F5"/>
+      </linearGradient>
+    </defs>
+    <rect width="1400" height="900" fill="url(#sdoc-bg)"/>
+    <g fill="rgba(106,159,181,0.06)">
+      <circle cx="180" cy="160" r="55"/><circle cx="500" cy="200" r="48"/>
+      <circle cx="820" cy="150" r="52"/><circle cx="1120" cy="180" r="45"/>
+      <circle cx="350" cy="480" r="42"/><circle cx="700" cy="500" r="50"/>
+      <circle cx="1050" cy="460" r="46"/>
+    </g>
+    <g fill="rgba(122,176,197,0.05)">
+      <rect x="280" y="130" width="280" height="200" rx="12"/>
+      <rect x="640" y="130" width="280" height="200" rx="12"/>
+      <rect x="280" y="380" width="280" height="200" rx="12"/>
+      <rect x="640" y="380" width="280" height="200" rx="12"/>
+    </g>
+    <path d="M0 670 Q250 640 500 660 Q750 680 1000 650 Q1250 625 1400 655 L1400 900 L0 900Z" fill="rgba(106,159,181,0.06)"/>
+    <path d="M0 730 Q300 700 600 720 Q900 740 1200 710 Q1350 695 1400 720 L1400 900 L0 900Z" fill="rgba(122,176,197,0.04)"/>
+  </svg>
+
+  <div class="splash-text-wrap" id="splash-txt"></div>
+  <div class="splash-sub" id="splash-sub"></div>
+</div>
+
+<script>
+// ============ CONFIG ============
+const WORK_CATS = [
+  { key:'wechat', label:'公众号运营',  dot:'#E79191', accentLight:'rgba(231,145,145,0.06)' },
+  { key:'baidu',  label:'百度推广营销', dot:'#3B6CB0', accentLight:'rgba(59,108,176,0.06)' },
+  { key:'video',  label:'视频制作',    dot:'#5A8FD4', accentLight:'rgba(90,143,212,0.06)' },
+  { key:'admin',  label:'行政活动协助', dot:'#3B6CB0', accentLight:'rgba(59,108,176,0.06)' },
+  { key:'doc',    label:'工作资料',    dot:'#6A9FB5', accentLight:'rgba(106,159,181,0.06)' },
+];
+const LIFE_CATS = [
+  { key:'sport',  label:'运动',  sub:'爬山 · 健身',  dot:'#B5A4CB', accentLight:'rgba(181,164,203,0.06)' },
+  { key:'money',  label:'挣钱',  sub:'剪辑 · 主业',  dot:'#C8BBDA', accentLight:'rgba(200,187,218,0.06)' },
+  { key:'love',   label:'爱情',  sub:'记录美好',      dot:'#D2C4E0', accentLight:'rgba(210,196,224,0.06)' },
+  { key:'social', label:'人际',  sub:'友情 · 关系',   dot:'#B5A4CB', accentLight:'rgba(181,164,203,0.06)' },
+];
+
+// ============ VIDEO PRICING + SUB-CATS CONFIG ============
+const VIDEO_PRICE_DATA = [
+  {
+    cat: '基础信息流',
+    rows: [
+      { spec:'30s以内', price:'60', unit:'元/条' },
+      { spec:'60s以内', price:'120', unit:'元/条' },
+      { spec:'60s以上', price:'每30s加20', unit:'' }
+    ]
+  },
+  {
+    cat: '基础IP口播',
+    rows: [
+      { spec:'30s以内', price:'70', unit:'元/条' },
+      { spec:'60s以内', price:'140', unit:'元/条' },
+      { spec:'60s以上', price:'每30s加20', unit:'' }
+    ]
+  },
+  {
+    cat: 'Vlog/开箱/卡点/游戏等',
+    rows: [
+      { sub:'慢节奏难度低', spec:'30s以内', price:'100', unit:'元/条' },
+      { sub:'', spec:'60s以内', price:'200', unit:'元/条' },
+      { sub:'', spec:'60s以上', price:'每30s加40', unit:'' },
+      { sub:'快节奏难度高', spec:'30s以内', price:'150', unit:'元/条' },
+      { sub:'', spec:'60s以内', price:'300', unit:'元/条' },
+      { sub:'', spec:'60s以上', price:'每30秒加80', unit:'' }
+    ]
+  },
+  {
+    cat: '长视频',
+    rows: [
+      { spec:'3-5分钟', price:'500', unit:'元/条' },
+      { spec:'5-10分钟', price:'800', unit:'元/条' },
+      { spec:'10-15分钟', price:'1200', unit:'元/条' }
+    ]
+  }
+];
+const VIDEO_SUBCATS_DEFAULT = [
+  { key:'vlog', label:'VLOG', dot:'#5A8FD4' },
+  { key:'koubo', label:'口播', dot:'#6BA0E0' },
+  { key:'aivideo', label:'AI视频', dot:'#7CB0EC' },
+  { key:'infoflow', label:'信息流', dot:'#8DC0F8' },
+];
+const SPORT_SUBCATS_DEFAULT = [
+  { key:'hiking', label:'爬山', dot:'#8CB88A' },
+  { key:'fitness', label:'健身', dot:'#E79191' },
+];
+const DOC_SUBCATS_DEFAULT = [
+  { key:'imgref', label:'图片风格参考', dot:'#6A9FB5' },
+  { key:'vidref', label:'视频参考', dot:'#5A8FA8' },
+  { key:'artref', label:'文章参考', dot:'#7AB0C5' },
+];
+
+// ============ STATE ============
+let db = JSON.parse(localStorage.getItem('mlb-v2') || '[]');
+let activeYear = String(new Date().getFullYear());
+let currentTab = 'work';
+let currentWorkCat = '';
+let currentLifeCat = '';
+let pendingImg = null;
+let pendingImgPos = '50% 50%';
+let _imgCleared = false;
+let videoSubCats = [];
+try { videoSubCats = JSON.parse(localStorage.getItem('mlb-video-subcats')||'null'); } catch(e) { videoSubCats = null; }
+if(!videoSubCats || !Array.isArray(videoSubCats) || videoSubCats.length===0) {
+  videoSubCats = JSON.parse(JSON.stringify(VIDEO_SUBCATS_DEFAULT));
+  localStorage.setItem('mlb-video-subcats', JSON.stringify(videoSubCats));
+}
+let videoPriceData = null;
+try { videoPriceData = JSON.parse(localStorage.getItem('mlb-video-prices')||'null'); } catch(e) { videoPriceData = null; }
+if(!videoPriceData || !Array.isArray(videoPriceData) || videoPriceData.length===0) {
+  videoPriceData = JSON.parse(JSON.stringify(VIDEO_PRICE_DATA));
+  localStorage.setItem('mlb-video-prices', JSON.stringify(videoPriceData));
+}
+function persistVideoSubCats() { localStorage.setItem('mlb-video-subcats', JSON.stringify(videoSubCats)); }
+function persistVideoPriceData() { localStorage.setItem('mlb-video-prices', JSON.stringify(videoPriceData)); }
+let videoPriceNotes = localStorage.getItem('mlb-video-notes') || '';
+function persistVideoNotes() { localStorage.setItem('mlb-video-notes', videoPriceNotes); }
+// ============ SPORT SUB-CATS ============
+let sportSubCats = [];
+try { sportSubCats = JSON.parse(localStorage.getItem('mlb-sport-subcats')||'null'); } catch(e) { sportSubCats = null; }
+if(!sportSubCats || !Array.isArray(sportSubCats) || sportSubCats.length===0) {
+  sportSubCats = JSON.parse(JSON.stringify(SPORT_SUBCATS_DEFAULT));
+  localStorage.setItem('mlb-sport-subcats', JSON.stringify(sportSubCats));
+}
+function persistSportSubCats() { localStorage.setItem('mlb-sport-subcats', JSON.stringify(sportSubCats)); }
+// ============ DOC SUB-CATS ============
+let docSubCats = [];
+try { docSubCats = JSON.parse(localStorage.getItem('mlb-doc-subcats')||'null'); } catch(e) { docSubCats = null; }
+if(!docSubCats || !Array.isArray(docSubCats) || docSubCats.length===0) {
+  docSubCats = JSON.parse(JSON.stringify(DOC_SUBCATS_DEFAULT));
+  localStorage.setItem('mlb-doc-subcats', JSON.stringify(docSubCats));
+}
+function persistDocSubCats() { localStorage.setItem('mlb-doc-subcats', JSON.stringify(docSubCats)); }
+// ============ FITNESS WEEKLY CHECKIN TABLE ============
+let fitnessCheckins = {};
+try { fitnessCheckins = JSON.parse(localStorage.getItem('mlb-fitness-checkin')||'{}'); } catch(e) { fitnessCheckins = {}; }
+
+// Default workout items per weekday (Mon-Fri) — user's actual plan
+const FITNESS_DEFAULT_ITEMS = [
+  '上肢训练：高位下拉4组×12个、坐姿划船4组×12个、直臂下压4组×12个、辅助引体向上4组×12个',
+  '臀腿训练：哈克深蹲4组×12个、坐姿髋外展4组×15个、山羊挺身/高脚杯深蹲4组×12个',
+  '核心训练：平板支撑4组×1分钟、卷腹4组×15个、提膝腹肌4组×15个',
+  '上肢训练：高位下拉4组×12个、坐姿划船4组×12个、直臂下压4组×12个、辅助引体向上4组×12个',
+  '臀腿训练：哈克深蹲4组×12个、坐姿髋外展4组×15个、山羊挺身/高脚杯深蹲4组×12个'
+];
+
+function getWeekDates(year, weekNum) {
+  const jan1 = new Date(year, 0, 1);
+  const daysOffset = (weekNum - 1) * 7 - jan1.getDay();
+  const mon = new Date(year, 0, 1 + daysOffset);
+  const weekdays = ['周一','周二','周三','周四','周五'];
+  const dates = [];
+  for(let d=0; d<5; d++) {
+    const dt = new Date(mon);
+    dt.setDate(mon.getDate() + d);
+    const mm = String(dt.getMonth()+1);
+    const dd = String(dt.getDate());
+    dates.push({ day: mm + '/' + dd, weekday: weekdays[d] });
+  }
+  return dates;
+}
+
+function getFitnessWeekKey(year, weekNum) { return year + '-W' + String(weekNum).padStart(2,'0'); }
+function getFitnessWeekData(year, weekNum) {
+  const key = getFitnessWeekKey(year, weekNum);
+  if(!fitnessCheckins[key]) {
+    fitnessCheckins[key] = [];
+    const dates = getWeekDates(year, weekNum);
+    for(let d=0; d<5; d++) {
+      fitnessCheckins[key].push({ day: dates[d].day, weekday: dates[d].weekday, items: FITNESS_DEFAULT_ITEMS[d], completed: false, feeling: '', note: '' });
+    }
+  }
+  return fitnessCheckins[key];
+}
+function saveFitCell(year, weekNum, dayIdx, field, value) {
+  const data = getFitnessWeekData(year, weekNum);
+  if(field === 'completed') data[dayIdx].completed = value;
+  else data[dayIdx][field] = value;
+  try { localStorage.setItem('mlb-fitness-checkin', JSON.stringify(fitnessCheckins)); } catch(e) { toast('保存失败，空间不足'); }
+}
+function persistFitnessCheckins() { localStorage.setItem('mlb-fitness-checkin', JSON.stringify(fitnessCheckins)); }
+function repairFitnessCheckins() {
+  let changed = false;
+  const OLD_ITEMS = ['上肢训练+爬坡', '下肢训练+拉伸', '上肢训练', '核心训练', '综合训练'];
+  Object.keys(fitnessCheckins).forEach(key => {
+    const m = key.match(/^(\d{4})-W(\d{2})$/);
+    if(!m) return;
+    const year = parseInt(m[1]), weekNum = parseInt(m[2]);
+    const dates = getWeekDates(year, weekNum);
+    const data = fitnessCheckins[key];
+    for(let d=0; d<5; d++) {
+      if(!data[d].day && !data[d].items) {
+        data[d].day = dates[d].day;
+        data[d].weekday = dates[d].weekday;
+        data[d].items = FITNESS_DEFAULT_ITEMS[d];
+        changed = true;
+      } else if(OLD_ITEMS.includes(data[d].items) && data[d].items !== FITNESS_DEFAULT_ITEMS[d]) {
+        data[d].items = FITNESS_DEFAULT_ITEMS[d];
+        changed = true;
+      }
+    }
+  });
+  if(changed) persistFitnessCheckins();
+}
+// ============ HIKING MONTHLY CHECKIN TABLE ============
+let hikingCheckins = {};
+try { hikingCheckins = JSON.parse(localStorage.getItem('mlb-hiking-checkin')||'{}'); } catch(e) { hikingCheckins = {}; }
+
+// Pre-fill 2026 data from user's records
+const HIKING_SEED_2026 = [
+  { month:1,  date:'',     name:'华山',           depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:true,  feeling:'', note:'' },
+  { month:2,  date:'',     name:'',               depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:false, feeling:'', note:'' },
+  { month:3,  date:'3.28', name:'朱雀国家森林公园', depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:true,  feeling:'', note:'' },
+  { month:4,  date:'4.26', name:'小五台',           depart:'早上十点', arrive:'中午12点',  duration:'4h', dist:'', elev:'', completed:true, feeling:'', note:'' },
+  { month:5,  date:'5.3',  name:'翠华山',           depart:'早上十点半',arrive:'中午12点半',duration:'4h', dist:'', elev:'', completed:true, feeling:'', note:'' },
+  { month:6,  date:'',     name:'',               depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:false, feeling:'', note:'' },
+  { month:7,  date:'',     name:'',               depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:false, feeling:'', note:'' },
+  { month:8,  date:'',     name:'',               depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:false, feeling:'', note:'' },
+  { month:9,  date:'',     name:'',               depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:false, feeling:'', note:'' },
+  { month:10, date:'',     name:'',               depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:false, feeling:'', note:'' },
+  { month:11, date:'',     name:'',               depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:false, feeling:'', note:'' },
+  { month:12, date:'',     name:'',               depart:'',        arrive:'',          duration:'', dist:'', elev:'', completed:false, feeling:'', note:'' },
+];
+
+function getHikingYearData(year) {
+  const key = 'y' + year;
+  if(!hikingCheckins[key]) {
+    // Seed 2026 with user's data
+    if(year === 2026) {
+      hikingCheckins[key] = JSON.parse(JSON.stringify(HIKING_SEED_2026));
+    } else {
+      hikingCheckins[key] = [];
+      for(let m=1; m<=12; m++) {
+        hikingCheckins[key].push({ month:m, date:'', name:'', depart:'', arrive:'', duration:'', dist:'', elev:'', completed:false, feeling:'', note:'' });
+      }
+    }
+    localStorage.setItem('mlb-hiking-checkin', JSON.stringify(hikingCheckins));
+  }
+  return hikingCheckins[key];
+}
+function saveHikingCell(year, monthIdx, field, value) {
+  const data = getHikingYearData(year);
+  if(!data[monthIdx]) return;
+  data[monthIdx][field] = value;
+  localStorage.setItem('mlb-hiking-checkin', JSON.stringify(hikingCheckins));
+}
+function saveHikingCheck(year, monthIdx, checked) {
+  const data = getHikingYearData(year);
+  if(!data[monthIdx]) return;
+  data[monthIdx].completed = checked;
+  localStorage.setItem('mlb-hiking-checkin', JSON.stringify(hikingCheckins));
+}
+
+let activeHikingYear = new Date().getFullYear();
+
+function renderHikingTable(year) {
+  const data = getHikingYearData(year);
+  const completedCount = data.filter(r => r.completed).length;
+  const rows = data.map((r, i) => {
+    const rowStyle = r.completed ? 'background:rgba(140,184,138,0.13)!important' : '';
+    return `<tr style="${rowStyle}">
+      <td>${r.month}月</td>
+      <td><input type="text" value="${escHtml(r.date||'')}" placeholder="" onchange="saveHikingCell(${year},${i},'date',this.value)"></td>
+      <td><input type="text" value="${escHtml(r.name||'')}" placeholder="" style="min-width:90px" onchange="saveHikingCell(${year},${i},'name',this.value)"></td>
+      <td><input type="text" value="${escHtml(r.depart||'')}" placeholder="" style="min-width:72px" onchange="saveHikingCell(${year},${i},'depart',this.value)"></td>
+      <td><input type="text" value="${escHtml(r.arrive||'')}" placeholder="" style="min-width:72px" onchange="saveHikingCell(${year},${i},'arrive',this.value)"></td>
+      <td><input type="text" value="${escHtml(r.duration||'')}" placeholder="" style="min-width:56px" onchange="saveHikingCell(${year},${i},'duration',this.value)"></td>
+      <td><input type="text" value="${escHtml(r.dist||'')}" placeholder="" style="min-width:52px" onchange="saveHikingCell(${year},${i},'dist',this.value)"></td>
+      <td><input type="text" value="${escHtml(r.elev||'')}" placeholder="" style="min-width:52px" onchange="saveHikingCell(${year},${i},'elev',this.value)"></td>
+      <td class="hk-chk-cell"><input type="checkbox" ${r.completed?'checked':''} onchange="saveHikingCheck(${year},${i},this.checked);renderLife()"></td>
+      <td><input type="text" value="${escHtml(r.feeling||'')}" placeholder="" onchange="saveHikingCell(${year},${i},'feeling',this.value)"></td>
+      <td><input type="text" value="${escHtml(r.note||'')}" placeholder="" onchange="saveHikingCell(${year},${i},'note',this.value)"></td>
+    </tr>`;
+  }).join('');
+
+  return `<div class="hiking-table-wrap">
+    <div class="hiking-table-card">
+      <div class="hiking-table-header">
+        <span class="hiking-table-title">🏔 月度爬山打卡记录表</span>
+        <span class="hiking-table-year">${year}年</span>
+        <div class="hiking-year-nav">
+          <button onclick="activeHikingYear--;renderLife()" title="上一年">◂</button>
+          <span class="hiking-year-label">${year}</span>
+          <button onclick="activeHikingYear++;renderLife()" title="下一年">▸</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="hiking-table">
+          <thead><tr>
+            <th>月份</th>
+            <th>日期</th>
+            <th>山名</th>
+            <th>出发时间</th>
+            <th>到达时间</th>
+            <th>总时长(小时)</th>
+            <th>累计里程(km)</th>
+            <th>累计海拔(m)</th>
+            <th class="hk-th-chk">是否完成</th>
+            <th>完成感受</th>
+            <th>备注</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+      <div class="hiking-table-footer">
+        <span>本年累计完成爬山次数</span>
+        <span class="hk-count">${completedCount}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ============ ADMIN ACTIVITIES TABLE ============
+let adminActivities = {};
+try { adminActivities = JSON.parse(localStorage.getItem('mlb-admin-activities')||'{}'); } catch(e) { adminActivities = {}; }
+function getAdminKey(year) { return 'y'+year; }
+function getAdminYearData(year) {
+  const key = getAdminKey(year);
+  if(!adminActivities[key]) adminActivities[key] = {};
+  for(let m=1; m<=12; m++) {
+    if(!adminActivities[key][m]) adminActivities[key][m] = { theme:'', image:null, video:'' };
+  }
+  return adminActivities[key];
+}
+function saveAdminCell(year, month, field, value) {
+  const data = getAdminYearData(year);
+  data[month][field] = value;
+  try { localStorage.setItem('mlb-admin-activities', JSON.stringify(adminActivities)); } catch(e) { toast('保存失败，空间不足'); }
+}
+function adminUploadImage(year, month) {
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'image/*';
+  inp.onchange = function(ev) {
+    const file = ev.target.files[0];
+    if(!file) return;
+    compressImage(file, 800, 600, 0.65, function(compressed) {
+      saveAdminCell(year, month, 'image', compressed);
+      renderContent();
+    });
+  };
+  inp.click();
+}
+function adminClearImage(year, month) {
+  saveAdminCell(year, month, 'image', null);
+  renderContent();
+}
+
+function persist() {
+  try {
+    localStorage.setItem('mlb-v2', JSON.stringify(db));
+  } catch(err) {
+    if(err.name === 'QuotaExceededError' || err.code === 22) {
+      // 尝试自动回收：从最旧到最新，移除条目图片以腾出空间
+      let freed = 0;
+      const sorted = [...db].reverse(); // 从旧到新
+      for(let i = 0; i < sorted.length; i++) {
+        if(!sorted[i].img) continue;
+        sorted[i].img = null;
+        freed++;
+        try {
+          localStorage.setItem('mlb-v2', JSON.stringify(db));
+          toast('已自动压缩'+freed+'张旧图片以释放空间，记录已保存');
+          return;
+        } catch(e2) {
+          if(e2.name !== 'QuotaExceededError' && e2.code !== 22) throw e2;
+        }
+      }
+      // 还不够，去掉所有图片
+      db.forEach(e => { e.img = null; });
+      try {
+        localStorage.setItem('mlb-v2', JSON.stringify(db));
+        toast('存储空间不足，已移除所有图片，记录已保存');
+        return;
+      } catch(e3) {
+        const size = new Blob([JSON.stringify(db)]).size;
+        toast('存储空间已满（约'+(size/1048576).toFixed(1)+'MB），请删除一些旧记录后再试');
+      }
+    } else {
+      throw err;
+    }
+  }
+}
+
+// ============ BAIDU MONTHLY DATA TABLE ============
+let baiduMonthly = {};
+try { baiduMonthly = JSON.parse(localStorage.getItem('mlb-baidu')||'{}'); } catch(e) { baiduMonthly = {}; }
+
+// Seed data — 预填 2025年12月 + 2026年1-5月百度推广数据
+(function initBaiduSeed() {
+  const SEED = {
+    y2025: { 12: { impressions:'123693', clicks:'9509', cost:'22624.34', leads:'21' } },
+    y2026: {
+      1: { impressions:'157664', clicks:'9251',  cost:'19964.92', leads:'6'  },
+      2: { impressions:'136020', clicks:'7240',  cost:'13645.96', leads:'11' },
+      3: { impressions:'162513', clicks:'10350', cost:'21673.09', leads:'19' },
+      4: { impressions:'208230', clicks:'9435',  cost:'21841.88', leads:'19' },
+      5: { impressions:'146160', clicks:'7234',  cost:'19963.67', leads:'15' }
+    }
+  };
+  let changed = false;
+  for(const [k, months] of Object.entries(SEED)) {
+    if(!baiduMonthly[k]) baiduMonthly[k] = {};
+    for(const [m, fields] of Object.entries(months)) {
+      const mi = parseInt(m);
+      if(!baiduMonthly[k][mi]) { baiduMonthly[k][mi] = {}; changed = true; }
+      // Only fill empty cells
+      for(const [f, v] of Object.entries(fields)) {
+        if(!baiduMonthly[k][mi][f] || baiduMonthly[k][mi][f] === '') {
+          baiduMonthly[k][mi][f] = v;
+          changed = true;
+        }
+      }
+    }
+  }
+  if(changed) {
+    try { localStorage.setItem('mlb-baidu', JSON.stringify(baiduMonthly)); } catch(e) {}
+  }
+})();
+
+function getBaiduKey(year) { return 'y'+year; }
+function getBaiduYearData(year) {
+  const key = getBaiduKey(year);
+  if(!baiduMonthly[key]) baiduMonthly[key] = {};
+  for(let m=1; m<=12; m++) {
+    if(!baiduMonthly[key][m]) baiduMonthly[key][m] = { impressions:'', clicks:'', cost:'', leads:'' };
+  }
+  return baiduMonthly[key];
+}
+function saveBaiduCell(year, month, field, value) {
+  const key = getBaiduKey(year);
+  if(!baiduMonthly[key]) baiduMonthly[key] = {};
+  if(!baiduMonthly[key][month]) baiduMonthly[key][month] = { impressions:'', clicks:'', cost:'', leads:'' };
+  baiduMonthly[key][month][field] = value;
+  try { localStorage.setItem('mlb-baidu', JSON.stringify(baiduMonthly)); } catch(e) { toast('保存失败，空间不足'); }
+}
+function renderBaiduTable(year) {
+  const data = getBaiduYearData(year);
+  const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+  // Calculate totals
+  let totals = { impressions:0, clicks:0, cost:0, leads:0 };
+  for(let m=1; m<=12; m++) {
+    totals.impressions += parseFloat(data[m].impressions) || 0;
+    totals.clicks += parseFloat(data[m].clicks) || 0;
+    totals.cost += parseFloat(data[m].cost) || 0;
+    totals.leads += parseFloat(data[m].leads) || 0;
+  }
+
+  const fmt = (v, isCost) => {
+    const n = parseFloat(v) || 0;
+    if(n === 0) return '';
+    if(isCost) return n.toFixed(2);
+    if(n === Math.floor(n)) return n.toLocaleString();
+    return n.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  };
+
+  const rows = months.map((label, i) => {
+    const m = i + 1;
+    return `<tr>
+      <td>${label}</td>
+      <td><input type="text" inputmode="numeric" value="${escHtml(data[m].impressions||'')}" placeholder="0" onchange="saveBaiduCell(${year},${m},'impressions',this.value);renderBaiduTable(${year})"></td>
+      <td><input type="text" inputmode="numeric" value="${escHtml(data[m].clicks||'')}" placeholder="0" onchange="saveBaiduCell(${year},${m},'clicks',this.value);renderBaiduTable(${year})"></td>
+      <td><input type="text" inputmode="numeric" value="${escHtml(data[m].cost||'')}" placeholder="0.00" onchange="saveBaiduCell(${year},${m},'cost',this.value);renderBaiduTable(${year})"></td>
+      <td><input type="text" inputmode="numeric" value="${escHtml(data[m].leads||'')}" placeholder="0" onchange="saveBaiduCell(${year},${m},'leads',this.value);renderBaiduTable(${year})"></td>
+    </tr>`;
+  }).join('');
+
+  return `
+    <div class="baidu-table-wrap">
+      <div class="baidu-table-card">
+        <div class="baidu-table-header">
+          <span class="baidu-table-header-title">月度投放数据</span>
+          <span class="baidu-table-header-year">${year} 年</span>
+        </div>
+        <table class="baidu-table">
+          <thead><tr>
+            <th>月份</th>
+            <th>展现</th>
+            <th>点击</th>
+            <th>消费 (¥)</th>
+            <th>线索</th>
+          </tr></thead>
+          <tbody>
+            ${rows}
+            <tr class="baidu-table-total">
+              <td>合计</td>
+              <td><input type="text" readonly value="${fmt(totals.impressions)}"></td>
+              <td><input type="text" readonly value="${fmt(totals.clicks)}"></td>
+              <td><input type="text" readonly value="${fmt(totals.cost, true)}"></td>
+              <td><input type="text" readonly value="${fmt(totals.leads)}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+// ============ VIDEO PRICE TABLE ============
+function renderVideoPriceTable() {
+  const rows = videoPriceData.map((category, catIdx) => {
+    const hasSub = category.rows[0] && category.rows[0].sub !== undefined;
+    // Category header row (editable category name)
+    let html = `<tr class="vprice-cat-header">
+      <td colspan="${hasSub ? 4 : 3}">
+        <input type="text" value="${escHtml(category.cat)}" placeholder="分类名称"
+          onchange="saveVPCell(${catIdx},-1,'cat',this.value);renderContent()"
+          style="font-weight:700;font-size:13px;color:#4A6898;width:100%;border:none;background:transparent;outline:none;padding:4px 0">
+      </td>
+    </tr>`;
+
+    let currentSubLabel = '';
+    category.rows.forEach((r, rowIdx) => {
+      let subRow = '';
+      if(hasSub && r.sub !== undefined) {
+        if(r.sub && r.sub !== currentSubLabel) {
+          currentSubLabel = r.sub;
+          subRow = `<tr class="vprice-sub-header">
+            <td colspan="${hasSub ? 4 : 3}" style="padding:5px 12px">
+              <input type="text" value="${escHtml(r.sub)}" placeholder="子类别（如：慢节奏难度低）"
+                onchange="saveVPCell(${catIdx},${rowIdx},'sub',this.value);renderContent()"
+                style="font-weight:600;font-size:11px;color:rgba(100,130,170,0.65);width:100%;border:none;background:transparent;outline:none;padding:2px 0">
+            </td>
+          </tr>`;
+        } else {
+          // empty sub — hide the sub-header but keep the row index for potential edit
+          subRow = '';
+        }
+      }
+      html += subRow + `<tr class="vprice-data-row">
+        <td style="padding-left:${hasSub?'24px':'14px'}">
+          <input type="text" value="${escHtml(r.spec)}" placeholder="规格"
+            onchange="saveVPCell(${catIdx},${rowIdx},'spec',this.value);renderContent()">
+        </td>
+        <td><input type="text" value="${escHtml(r.price)}" placeholder="单价"
+          onchange="saveVPCell(${catIdx},${rowIdx},'price',this.value);renderContent()"></td>
+        <td><input type="text" value="${escHtml(r.unit)}" placeholder="单位"
+          onchange="saveVPCell(${catIdx},${rowIdx},'unit',this.value);renderContent()"
+          style="font-size:12px;color:rgba(100,130,170,0.5)"></td>
+      </tr>`;
+    });
+    return html;
+  }).join('');
+
+  return `
+    <div class="video-price-wrap">
+      <div class="video-price-card">
+        <div class="video-price-header">
+          <span class="video-price-header-title">剪辑报价标准</span>
+          <span class="video-price-header-sub">全部内容可编辑</span>
+        </div>
+        <table class="video-price-table">
+          <thead><tr>
+            <th>规格</th>
+            <th>单价</th>
+            <th>单位</th>
+          </tr></thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+        <div class="video-price-notes">
+          <div class="video-price-notes-label">备注</div>
+          <textarea class="video-price-notes-input" placeholder="输入备注信息…"
+            onchange="videoPriceNotes=this.value;persistVideoNotes()">${escHtml(videoPriceNotes)}</textarea>
+        </div>
+      </div>
+    </div>`;
+}
+
+function saveVPCell(catIdx, rowIdx, field, value) {
+  if(field === 'cat') {
+    videoPriceData[catIdx].cat = value;
+  } else {
+    videoPriceData[catIdx].rows[rowIdx][field] = value;
+  }
+  persistVideoPriceData();
+}
+
+// ============ ADMIN ACTIVITIES TABLE ============
+function renderAdminTable(year) {
+  const data = getAdminYearData(year);
+  const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
+  const rows = months.map((label, i) => {
+    const m = i + 1;
+    const d = data[m];
+    const hasImg = !!d.image;
+    const imgCell = hasImg
+      ? `<div class="admin-img-preview">
+          <img src="${d.image}" alt="" onclick="event.stopPropagation();adminUploadImage(${year},${m})">
+          <button class="admin-img-clear" onclick="event.stopPropagation();adminClearImage(${year},${m})" title="移除图片">×</button>
+        </div>`
+      : `<button class="admin-upload-btn" onclick="event.stopPropagation();adminUploadImage(${year},${m})">+ 上传图片</button>`;
+    return `<tr>
+      <td>${label}</td>
+      <td><input type="text" value="${escHtml(d.theme||'')}" placeholder="活动主题"
+        onchange="saveAdminCell(${year},${m},'theme',this.value);renderContent()"></td>
+      <td class="admin-img-cell">${imgCell}</td>
+      <td><input type="text" value="${escHtml(d.video||'')}" placeholder="视频链接"
+        onchange="saveAdminCell(${year},${m},'video',this.value);renderContent()"></td>
+    </tr>`;
+  }).join('');
+
+  return `
+    <div class="admin-table-wrap">
+      <div class="admin-table-card">
+        <div class="admin-table-header">
+          <span class="admin-table-header-title">月度活动记录</span>
+          <span class="admin-table-header-year">${year} 年</span>
+        </div>
+        <table class="admin-table">
+          <thead><tr>
+            <th>月份</th>
+            <th>活动主题</th>
+            <th>活动图片</th>
+            <th>活动视频</th>
+          </tr></thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+// ============ VIDEO SUB-CAT HELPER ============
+function addVideoSubCat() {
+  _showPrompt('输入新分类名称', '', '如：宣传片、混剪', function(name) {
+    if(!name) return;
+    const trimmed = name;
+    const key = 'vsub_' + Date.now().toString(36);
+    const palette = ['#5A8FD4','#6BA0E0','#7CB0EC','#8DC0F8','#9EC5FF','#4A7FC0','#A0C8E8','#7898C8'];
+    const dot = palette[videoSubCats.length % palette.length];
+    videoSubCats.push({ key, label: trimmed, dot });
+    persistVideoSubCats();
+    renderContent();
+    toast('已添加分类「' + trimmed + '」');
+  });
+}
+
+function editVideoSubCat(key) {
+  const cat = videoSubCats.find(c => c.key === key);
+  if(!cat) return;
+  _showPrompt('修改分类名称', cat.label, '', function(newLabel) {
+    if(!newLabel) return;
+    cat.label = newLabel;
+    persistVideoSubCats();
+    renderContent();
+    toast('已更新为「' + cat.label + '」');
+  });
+}
+
+function delVideoSubCat(key) {
+  const cat = videoSubCats.find(c => c.key === key);
+  if(!cat) return;
+  _showConfirm('确定删除分类「' + escHtml(cat.label) + '」？该分类下的记录将移至「未分类」。', function(ok) {
+    if(!ok) return;
+    db.forEach(e => { if(e.subcat === key) e.subcat = ''; });
+    persist();
+    videoSubCats = videoSubCats.filter(c => c.key !== key);
+    persistVideoSubCats();
+    renderContent();
+    toast('已删除「' + cat.label + '」');
+  });
+}
+
+// ============ SPORT SUB-CAT HELPER ============
+function addSportSubCat() {
+  _showPrompt('输入新运动分类名称', '', '如：跑步、游泳', function(name) {
+    if(!name) return;
+    const trimmed = name;
+    const key = 'ssub_' + Date.now().toString(36);
+    const palette = ['#8CB88A','#E79191','#B5A4CB','#6BA0E0','#E8A090','#9EC59C','#D2C4E0','#A0C8E8'];
+    const dot = palette[sportSubCats.length % palette.length];
+    sportSubCats.push({ key, label: trimmed, dot });
+    persistSportSubCats();
+    renderContent();
+    toast('已添加运动分类「' + trimmed + '」');
+  });
+}
+
+function editSportSubCat(key) {
+  const cat = sportSubCats.find(c => c.key === key);
+  if(!cat) return;
+  _showPrompt('修改分类名称', cat.label, '', function(newLabel) {
+    if(!newLabel) return;
+    cat.label = newLabel;
+    persistSportSubCats();
+    renderContent();
+    toast('已更新为「' + cat.label + '」');
+  });
+}
+
+function delSportSubCat(key) {
+  const cat = sportSubCats.find(c => c.key === key);
+  if(!cat) return;
+  _showConfirm('确定删除分类「' + escHtml(cat.label) + '」？该分类下的记录将移至「未分类」。', function(ok) {
+    if(!ok) return;
+    db.forEach(e => { if(e.subcat === key) e.subcat = ''; });
+    persist();
+    sportSubCats = sportSubCats.filter(c => c.key !== key);
+    persistSportSubCats();
+    renderContent();
+    toast('已删除「' + cat.label + '」');
+  });
+}
+
+// ============ DOC SUB-CATS CRUD ============
+function addDocSubCat() {
+  _showPrompt('输入新参考资料分类名称', '', '如：设计灵感', function(name) {
+    if(!name) return;
+    const trimmed = name;
+    const key = 'dsub_' + Date.now().toString(36);
+    const palette = ['#6A9FB5','#5A8FA8','#7AB0C5','#8CA8B8','#6BA0C0','#7DB8CC'];
+    const dot = palette[docSubCats.length % palette.length];
+    docSubCats.push({ key, label: trimmed, dot });
+    persistDocSubCats();
+    renderContent();
+    toast('已添加工作资料分类「' + trimmed + '」');
+  });
+}
+function editDocSubCat(key) {
+  const cat = docSubCats.find(c => c.key === key);
+  if(!cat) return;
+  _showPrompt('修改分类名称', cat.label, '', function(newLabel) {
+    if(!newLabel) return;
+    cat.label = newLabel;
+    persistDocSubCats();
+    renderContent();
+    toast('已更新为「' + cat.label + '」');
+  });
+}
+function delDocSubCat(key) {
+  const cat = docSubCats.find(c => c.key === key);
+  if(!cat) return;
+  _showConfirm('确定删除分类「' + escHtml(cat.label) + '」？该分类下的记录将移至「未分类」。', function(ok) {
+    if(!ok) return;
+    db.forEach(e => { if(e.subcat === key) e.subcat = ''; });
+    persist();
+    docSubCats = docSubCats.filter(c => c.key !== key);
+    persistDocSubCats();
+    renderContent();
+    toast('已删除「' + cat.label + '」');
+  });
+}
+
+// ============ FITNESS WEEKLY CHECKIN TABLE (render) ============
+function renderFitnessTable(year) {
+  // Week navigation controls (simple: pick a week number)
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  // Find current week number
+  const jan1 = new Date(currentYear, 0, 1);
+  const dayOfYear = Math.floor((now - jan1) / 86400000);
+  const defaultWeek = Math.ceil((dayOfYear + jan1.getDay() + 1) / 7);
+  const weekNum = (typeof _fitnessWeekNum !== 'undefined') ? _fitnessWeekNum : defaultWeek;
+  const data = getFitnessWeekData(year, weekNum);
+  const weekdays = ['周一','周二','周三','周四','周五'];
+
+  const rows = data.map((d, i) => `<tr>
+    <td><input type="text" value="${escHtml(d.day||'')}" placeholder="日期" style="width:60px"
+      onchange="saveFitCell(${year},${weekNum},${i},'day',this.value)"></td>
+    <td><input type="text" value="${escHtml(d.weekday||'')}" placeholder="${weekdays[i]}"
+      onchange="saveFitCell(${year},${weekNum},${i},'weekday',this.value)"></td>
+    <td><textarea class="fit-items-ta"
+      oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';saveFitCell(${year},${weekNum},${i},'items',this.value)"
+      onchange="saveFitCell(${year},${weekNum},${i},'items',this.value)">${escHtml(d.items||'')}</textarea></td>
+    <td class="fit-chk-cell">
+      <label class="fit-chk-label">
+        <input type="checkbox" ${d.completed?'checked':''}
+          onchange="saveFitCell(${year},${weekNum},${i},'completed',this.checked)">
+        <span class="fit-chk-mark">${d.completed?'✓ 完成':'☐ 未完成'}</span>
+      </label>
+    </td>
+    <td><input type="text" value="${escHtml(d.feeling||'')}" placeholder="身体感受"
+      onchange="saveFitCell(${year},${weekNum},${i},'feeling',this.value)"></td>
+    <td><input type="text" value="${escHtml(d.note||'')}" placeholder="备注"
+      onchange="saveFitCell(${year},${weekNum},${i},'note',this.value)"></td>
+  </tr>`).join('');
+
+  const prevWeek = weekNum > 1 ? weekNum - 1 : null;
+  const nextWeek = weekNum < 52 ? weekNum + 1 : null;
+
+  return `
+    <div class="fitness-table-wrap">
+      <div class="fitness-table-card">
+        <div class="fitness-table-header">
+          <span class="fitness-table-header-title">周一到周五健身打卡</span>
+          <span class="fitness-table-header-year">${year} 年</span>
+          <div class="fitness-week-nav">
+            ${prevWeek ? `<button onclick="_fitnessWeekNum=${prevWeek};renderContent()" title="上一周">◀</button>` : '<button disabled>◀</button>'}
+            <span class="fitness-week-label">第 ${weekNum} 周</span>
+            ${nextWeek ? `<button onclick="_fitnessWeekNum=${nextWeek};renderContent()" title="下一周">▶</button>` : '<button disabled>▶</button>'}
+          </div>
+        </div>
+        <table class="fitness-table">
+          <thead><tr>
+            <th>日期</th>
+            <th>星期</th>
+            <th>健身项目</th>
+            <th class="fit-th-chk">是否完成</th>
+            <th>完成感受</th>
+            <th>备注</th>
+          </tr></thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>requestAnimationFrame(()=>{document.querySelectorAll('.fit-items-ta').forEach(t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px';});});<\/script>`;
+}
+
+// ============ DIET STATS TABLE ============
+let dietRecords = {};
+try { dietRecords = JSON.parse(localStorage.getItem('mlb-diet-records')||'{}'); } catch(e) { dietRecords = {}; }
+
+// MEAL_SLOTS: default time-of-day segments
+const MEAL_SLOTS = ['早餐', '上午加餐', '午餐', '下午加餐', '晚餐'];
+// Standard nutritional targets (user's data from screenshot)
+const DIET_STD = { weight:'48kg', kcal:'1700-1800', protein:'86-96', carb:'190-290', fat:'39-48', water:'1440-1920' };
+
+// Seed data from user's screenshot (2026.06.08)
+const DIET_SEED = {
+  '2026-06-08': [
+    { slot:'早餐',    food:'220ml 牛奶 + 全麦面包 1 片 + 25g 鸡肉肠 + 鸡蛋 1 颗', kcal:'382', protein:'23.64', carb:'29.6',  fat:'17',  water:'' },
+    { slot:'上午加餐', food:'', kcal:'', protein:'', carb:'', fat:'', water:'500' },
+    { slot:'午餐',    food:'米饭 + 红烧肉 + 包菜', kcal:'520', protein:'22', carb:'65', fat:'20', water:'' },
+    { slot:'下午加餐', food:'', kcal:'', protein:'', carb:'', fat:'', water:'500' },
+    { slot:'晚餐',    food:'凉面 1 碗 + 50g 猪肉丝 + 50g 包菜+50ml 银耳莲子羹', kcal:'453', protein:'16.3', carb:'62.0', fat:'14.0', water:'' },
+  ]
+};
+
+function getDietDayData(dateStr) {
+  if(!dietRecords[dateStr]) {
+    if(DIET_SEED[dateStr]) {
+      dietRecords[dateStr] = JSON.parse(JSON.stringify(DIET_SEED[dateStr]));
+    } else {
+      dietRecords[dateStr] = MEAL_SLOTS.map(s => ({ slot:s, food:'', kcal:'', protein:'', carb:'', fat:'', water:'' }));
+    }
+    localStorage.setItem('mlb-diet-records', JSON.stringify(dietRecords));
+  }
+  return dietRecords[dateStr];
+}
+function saveDietCell(dateStr, rowIdx, field, value) {
+  const data = getDietDayData(dateStr);
+  if(!data[rowIdx]) return;
+  data[rowIdx][field] = value;
+  localStorage.setItem('mlb-diet-records', JSON.stringify(dietRecords));
+}
+function addDietRow(dateStr) {
+  const data = getDietDayData(dateStr);
+  data.push({ slot:'', food:'', kcal:'', protein:'', carb:'', fat:'', water:'' });
+  localStorage.setItem('mlb-diet-records', JSON.stringify(dietRecords));
+  renderLife();
+}
+function deleteDietRow(dateStr, rowIdx) {
+  const data = getDietDayData(dateStr);
+  data.splice(rowIdx, 1);
+  localStorage.setItem('mlb-diet-records', JSON.stringify(dietRecords));
+  renderLife();
+}
+
+// Track current diet date globally
+let activeDietDate = (function(){
+  const n = new Date();
+  return n.getFullYear() + '-' + String(n.getMonth()+1).padStart(2,'0') + '-' + String(n.getDate()).padStart(2,'0');
+})();
+
+function shiftDietDate(delta) {
+  const d = new Date(activeDietDate);
+  d.setDate(d.getDate() + delta);
+  activeDietDate = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  renderLife();
+}
+
+function renderDietTable(dateStr) {
+  const data = getDietDayData(dateStr);
+  // Totals
+  const sumKcal    = data.reduce((s,r) => s + (parseFloat(r.kcal)||0), 0);
+  const sumProtein = data.reduce((s,r) => s + (parseFloat(r.protein)||0), 0);
+  const sumCarb    = data.reduce((s,r) => s + (parseFloat(r.carb)||0), 0);
+  const sumFat     = data.reduce((s,r) => s + (parseFloat(r.fat)||0), 0);
+  const sumWater   = data.reduce((s,r) => s + (parseFloat(r.water)||0), 0);
+  const fmt = n => n > 0 ? (Math.round(n*10)/10).toString() : '';
+
+  const rows = data.map((r, i) => `<tr>
+    <td><input type="text" value="${escHtml(r.slot||'')}" placeholder="时段" style="min-width:56px;font-weight:600"
+      onchange="saveDietCell('${dateStr}',${i},'slot',this.value)"></td>
+    <td><input type="text" value="${escHtml(r.food||'')}" placeholder="食物描述" style="min-width:200px"
+      onchange="saveDietCell('${dateStr}',${i},'food',this.value)"></td>
+    <td class="dt-num"><input type="text" value="${escHtml(r.kcal||'')}" placeholder=""
+      onchange="saveDietCell('${dateStr}',${i},'kcal',this.value)"></td>
+    <td class="dt-num"><input type="text" value="${escHtml(r.protein||'')}" placeholder=""
+      onchange="saveDietCell('${dateStr}',${i},'protein',this.value)"></td>
+    <td class="dt-num"><input type="text" value="${escHtml(r.carb||'')}" placeholder=""
+      onchange="saveDietCell('${dateStr}',${i},'carb',this.value)"></td>
+    <td class="dt-num"><input type="text" value="${escHtml(r.fat||'')}" placeholder=""
+      onchange="saveDietCell('${dateStr}',${i},'fat',this.value)"></td>
+    <td class="dt-water dt-num"><input type="text" value="${escHtml(r.water||'')}" placeholder=""
+      onchange="saveDietCell('${dateStr}',${i},'water',this.value)"></td>
+    <td style="text-align:center;padding:4px"><button onclick="deleteDietRow('${dateStr}',${i})" title="删除行" style="width:20px;height:20px;border-radius:50%;border:none;background:transparent;color:rgba(200,80,70,0.35);font-size:13px;cursor:pointer;padding:0;line-height:1;transition:all .15s" onmouseover="this.style.color='rgba(200,80,70,0.75)'" onmouseout="this.style.color='rgba(200,80,70,0.35)'">✕</button></td>
+  </tr>`).join('');
+
+  // Display date as YYYY.MM.DD
+  const dispDate = dateStr.replace(/-/g,'.');
+
+  return `<div class="diet-table-wrap">
+    <div class="diet-table-card">
+      <div class="diet-table-header">
+        <span class="diet-table-title">🥗 每日饮食营养摄入统计表</span>
+        <div class="diet-date-nav">
+          <button onclick="shiftDietDate(-1)" title="前一天">◂</button>
+          <input class="diet-date-input" type="date" value="${dateStr}"
+            onchange="activeDietDate=this.value;renderLife()" title="选择日期">
+          <button onclick="shiftDietDate(1)" title="后一天">▸</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="diet-table">
+          <thead><tr>
+            <th>时段</th>
+            <th>食物</th>
+            <th class="dt-num">估算热量<br>(kcal)</th>
+            <th class="dt-num">蛋白质<br>(g)</th>
+            <th class="dt-num">碳水<br>(g)</th>
+            <th class="dt-num">脂肪<br>(g)</th>
+            <th class="dt-num dt-water">饮水量<br>(ml)</th>
+            <th style="width:28px"></th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+          <tfoot>
+            <tr>
+              <td>合计 <span style="font-size:11px;font-weight:400;color:rgba(90,138,90,0.5)">${dispDate}</span></td>
+              <td></td>
+              <td class="dt-num">${fmt(sumKcal)||'—'}</td>
+              <td class="dt-num">${fmt(sumProtein)||'—'}</td>
+              <td class="dt-num">${fmt(sumCarb)||'—'}</td>
+              <td class="dt-num">${fmt(sumFat)||'—'}</td>
+              <td class="dt-water dt-num">${fmt(sumWater)||'—'}</td>
+              <td></td>
+            </tr>
+            <tr class="diet-std-row">
+              <td>标准参考</td>
+              <td style="font-size:11px;color:rgba(80,100,80,0.55)">${escHtml(DIET_STD.weight)}</td>
+              <td class="dt-num">${escHtml(DIET_STD.kcal)}</td>
+              <td class="dt-num">${escHtml(DIET_STD.protein)}</td>
+              <td class="dt-num">${escHtml(DIET_STD.carb)}</td>
+              <td class="dt-num">${escHtml(DIET_STD.fat)}</td>
+              <td class="dt-water dt-num">${escHtml(DIET_STD.water)}</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <button class="diet-add-row-btn" onclick="addDietRow('${dateStr}')">＋ 添加一行</button>
+    </div>
+  </div>`;
+}
+
+// ============ HERO EDIT (unified hero) ============
+const HERO_DEFAULTS = {
+  eyebrow: 'PERSONAL ARCHIVE',
+  h1: '每一份努力<br><em>都值得被记录</em>',
+  sub: '公众号运营 · 百度推广 · 视频制作 · 行政活动',
+  accent: '#8CB88A'
+};
+const HERO_COLORS = ['#8CB88A','#A5C8A3','#B8D8B6','#9EC59C','#7AAA78','#90BF8E','#6A9A68','#B0D0AE','#85B883','#95C093'];
+
+let heroData = {};
+try { heroData = JSON.parse(localStorage.getItem('mlb-hero')||'{}'); } catch(e) { heroData = {}; }
+
+function getHeroData() {
+  return { ...HERO_DEFAULTS, ...(heroData||{}) };
+}
+
+function applyHero() {
+  const d = getHeroData();
+  document.querySelector('.hero-badge').innerHTML = `<span class="badge-dot"></span>${d.eyebrow}`;
+  document.querySelector('.hero-h1').innerHTML = d.h1;
+  document.getElementById('hero-subtitle').textContent = d.sub;
+  // Hero accent is hardcoded green - CSS variable stays managed by theme switching
+}
+
+function openHeroEdit() {
+  const d = getHeroData();
+  document.getElementById('he-eyebrow').value = d.eyebrow;
+  document.getElementById('he-h1').value = d.h1;
+  document.getElementById('he-sub').value = d.sub;
+  document.getElementById('he-color-picker').value = d.accent;
+  document.getElementById('he-color-custom-val').value = d.accent;
+  const colorRow = document.getElementById('he-colors');
+  colorRow.innerHTML = HERO_COLORS.map(c =>
+    `<div class="he-color-swatch${c===d.accent?' selected':''}" style="background:${c}" data-color="${c}" onclick="selectHeroColor('${c}',this)"></div>`
+  ).join('');
+  document.getElementById('hero-edit-overlay').classList.add('on');
+}
+
+function selectHeroColor(color, el) {
+  document.getElementById('he-color-picker').value = color;
+  document.getElementById('he-color-custom-val').value = color;
+  document.querySelectorAll('#he-colors .he-color-swatch').forEach(s => s.classList.remove('selected'));
+  if(el) el.classList.add('selected');
+}
+
+function closeHeroEdit() { document.getElementById('hero-edit-overlay').classList.remove('on'); }
+
+function saveHeroEdit() {
+  const d = {
+    eyebrow: document.getElementById('he-eyebrow').value.trim(),
+    h1: document.getElementById('he-h1').value.trim(),
+    sub: document.getElementById('he-sub').value.trim(),
+    accent: document.getElementById('he-color-custom-val').value.trim()
+  };
+  if(!d.h1) { toast('请填写标题'); return; }
+  heroData = d;
+  localStorage.setItem('mlb-hero', JSON.stringify(heroData));
+  applyHero();
+  closeHeroEdit();
+  toast('首页已更新');
+}
+
+function resetHeroEdit() {
+  if(!confirm('确定恢复为默认样式？所有自定义内容将丢失。')) return;
+  heroData = {};
+  localStorage.setItem('mlb-hero', JSON.stringify(heroData));
+  applyHero();
+  closeHeroEdit();
+  toast('已恢复默认');
+}
+
+// ============ TAB SWITCH ============
+function switchTab(tab, btn) {
+  if(currentTab === tab) return;
+  currentTab = tab;
+
+  const text = tab === 'work' ? '你今天贵人运爆棚' : '酸甜苦辣都是人生体验';
+  const subText = tab === 'work' ? '今日宜 · 全力以赴' : '记住 · 每一刻都珍贵';
+  const goldIndices = tab === 'work' ? [4,5,6] : [];
+
+  const splash = document.getElementById('splash');
+  const illustW = document.getElementById('splash-illust-work');
+  const illustL = document.getElementById('splash-illust-life');
+  const txtWrap = document.getElementById('splash-txt');
+  const subEl = document.getElementById('splash-sub');
+
+  illustW.classList.toggle('active', tab === 'work');
+  illustL.classList.toggle('active', tab === 'life');
+  subEl.textContent = subText;
+
+  txtWrap.innerHTML = text.split('').map((ch,i) =>
+    `<span class="splash-char${goldIndices.includes(i)?' gold':''}" data-i="${i}">${ch}</span>`
+  ).join('');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      splash.classList.add('on');
+      txtWrap.querySelectorAll('.splash-char').forEach((ch,i) => {
+        setTimeout(() => ch.classList.add('reveal'), 60 + i * 55);
+      });
+    });
+  });
+
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Apply color theme
+  autoSetTheme(tab === 'work' ? 'pink' : 'purple');
+
+  renderContent();
+
+  const wTotal = db.filter(e=>e.sec==='work').length;
+  const lTotal = db.filter(e=>e.sec==='life').length;
+  document.querySelectorAll('[id^="wc-total"]').forEach(el => el.textContent = wTotal);
+  document.querySelectorAll('[id^="lc-total"]').forEach(el => el.textContent = lTotal);
+  document.getElementById('hero-w-total').textContent = wTotal;
+  document.getElementById('hero-l-total').textContent = lTotal;
+
+  setTimeout(() => {
+    splash.classList.remove('on');
+    setTimeout(() => {
+      txtWrap.querySelectorAll('.splash-char').forEach(ch => ch.classList.remove('reveal'));
+    }, 300);
+  }, 2800);
+}
+
+// ============ WORK CAT FILTER ============
+const WORK_CAT_SPLASH_TEXT = {
+  '':       { text:'纵观全局，每一面都精彩',  gold:[3,4,5], sub:'全部分类 · 一览无余' },
+  'wechat': { text:'一字一句，都是品牌的声音',  gold:[0,1,2,3], sub:'公众号运营 · 内容为王' },
+  'baidu':  { text:'精准投放，让增长有迹可循',  gold:[0,1,2,3], sub:'百度推广营销 · 数据驱动' },
+  'video':  { text:'光影之间，讲述品牌故事',    gold:[0,1], sub:'视频制作 · 镜头语言' },
+  'admin':  { text:'每一场活动，都是精心呈现',  gold:[0,1,2], sub:'行政活动协助 · 细节致胜' },
+  'doc':    { text:'沉淀积累，让知识产生复利',  gold:[0,1,2], sub:'工作资料 · 归档传承' },
+};
+
+const LIFE_CAT_SPLASH_TEXT = {
+  '':       { text:'酸甜苦辣，都是人生体验',  gold:[], sub:'全部分类 · 精彩纷呈' },
+  'sport':  { text:'挥汗如雨，每一滴都有意义',  gold:[0,1,2], sub:'运动 · 爬山 · 健身' },
+  'money':  { text:'用心耕耘，静待花开',       gold:[0,1], sub:'挣钱 · 副业主业' },
+  'love':   { text:'最浪漫的事，是与你共度时光', gold:[0,1,2,3], sub:'爱情 · 记录美好' },
+  'social': { text:'知己二三，胜过万千繁华',   gold:[0,1], sub:'人际 · 友情关系' },
+};
+
+function setWorkCat(cat, btn) {
+  if(currentWorkCat === cat) return;
+  if(currentTab !== 'work') { switchTab('work', document.querySelector('.tab-btn.work-btn')); }
+
+  currentWorkCat = cat;
+  document.querySelectorAll('#work-subnav .work-subnav-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  // Apply color theme based on subcategory
+  autoSetTheme((cat === 'baidu' || cat === 'video' || cat === 'admin') ? 'blue' : 'pink');
+
+  const sc = WORK_CAT_SPLASH_TEXT[cat] || WORK_CAT_SPLASH_TEXT[''];
+  const text = sc.text, subText = sc.sub, goldIndices = sc.gold;
+  const splash = document.getElementById('splash');
+  const txtWrap = document.getElementById('splash-txt');
+  const subEl = document.getElementById('splash-sub');
+
+  const illustIds = ['splash-illust-work','splash-illust-life','splash-illust-wechat','splash-illust-baidu','splash-illust-video','splash-illust-admin','splash-illust-doc'];
+  const targetIllust = 'splash-illust-' + (cat || 'work');
+  illustIds.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.toggle('active', id === targetIllust);
+  });
+  subEl.textContent = subText;
+  txtWrap.innerHTML = text.split('').map((ch,i) =>
+    `<span class="splash-char${goldIndices.includes(i)?' gold':''}" data-i="${i}">${ch}</span>`
+  ).join('');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      splash.classList.add('on');
+      txtWrap.querySelectorAll('.splash-char').forEach((ch,i) => {
+        setTimeout(() => ch.classList.add('reveal'), 60 + i * 55);
+      });
+    });
+  });
+
+  renderContent();
+
+  setTimeout(() => {
+    splash.classList.remove('on');
+    setTimeout(() => {
+      txtWrap.querySelectorAll('.splash-char').forEach(ch => ch.classList.remove('reveal'));
+    }, 300);
+  }, 2800);
+}
+
+function setLifeCat(cat, btn) {
+  if(currentLifeCat === cat) return;
+  if(currentTab !== 'life') { switchTab('life', document.querySelector('.tab-btn.life-btn')); }
+
+  currentLifeCat = cat;
+  document.querySelectorAll('#life-subnav .work-subnav-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  // Life categories always use purple theme
+  autoSetTheme('purple');
+
+  const sc = LIFE_CAT_SPLASH_TEXT[cat] || LIFE_CAT_SPLASH_TEXT[''];
+  const text = sc.text, subText = sc.sub, goldIndices = sc.gold;
+  const splash = document.getElementById('splash');
+  const txtWrap = document.getElementById('splash-txt');
+  const subEl = document.getElementById('splash-sub');
+
+  // Show life illustration for all life categories
+  const illustIds = ['splash-illust-work','splash-illust-life','splash-illust-wechat','splash-illust-baidu','splash-illust-video','splash-illust-admin','splash-illust-doc'];
+  illustIds.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.toggle('active', id === 'splash-illust-life');
+  });
+
+  subEl.textContent = subText;
+  txtWrap.innerHTML = text.split('').map((ch,i) =>
+    `<span class="splash-char${goldIndices.includes(i)?' gold':''}" data-i="${i}">${ch}</span>`
+  ).join('');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      splash.classList.add('on');
+      txtWrap.querySelectorAll('.splash-char').forEach((ch,i) => {
+        setTimeout(() => ch.classList.add('reveal'), 60 + i * 55);
+      });
+    });
+  });
+
+  renderContent();
+
+  setTimeout(() => {
+    splash.classList.remove('on');
+    setTimeout(() => {
+      txtWrap.querySelectorAll('.splash-char').forEach(ch => ch.classList.remove('reveal'));
+    }, 300);
+  }, 2800);
+}
+
+// ============ RENDER CONTENT ============
+const PRESET_YEARS = ['2022','2023','2024','2025','2026','2027','2028','2029','2030'];
+
+let catCustomLabels = {};
+try { catCustomLabels = JSON.parse(localStorage.getItem('mlb-catlabels')||'{}'); } catch(e) { catCustomLabels = {}; }
+function persistCatLabels() { localStorage.setItem('mlb-catlabels', JSON.stringify(catCustomLabels)); }
+function editCatLabel(key) {
+  const newLabel = prompt('修改分类名称：', catCustomLabels[key] || '');
+  if(newLabel && newLabel.trim()) {
+    catCustomLabels[key] = newLabel.trim();
+    persistCatLabels();
+    renderContent();
+  }
+}
+
+function renderContent() {
+  const wrap = document.getElementById('main-cats');
+  wrap.innerHTML = '';
+
+  if(currentTab === 'work') {
+    document.getElementById('year-bar').style.display = '';
+    document.getElementById('work-subnav').style.display = '';
+    document.getElementById('life-subnav').style.display = 'none';
+    renderWork(wrap);
+    // Reset year selector
+    const dynamicYears = [...new Set(db.filter(e=>e.sec==='work').map(e=>e.year))];
+    const allYears = [...new Set([...PRESET_YEARS, ...dynamicYears])].sort();
+    if(!allYears.includes(activeYear)) activeYear = allYears[allYears.length-1];
+    document.getElementById('year-dropdown-label').textContent = activeYear + ' 年';
+    const menu = document.getElementById('year-dropdown-menu');
+    menu.innerHTML = allYears.map(y =>
+      `<button class="year-dd-option${y===activeYear?' current':''}" onclick="event.stopPropagation();setYear('${y}')">${y} 年</button>`
+    ).join('') + `
+      <form onsubmit="event.preventDefault();addYearSubmit()" style="display:flex;gap:4px;padding:8px 6px 2px;border-top:1px solid var(--c-line);margin-top:4px;">
+        <input id="year-add-input" type="text" inputmode="numeric" placeholder="输入年份..." onclick="event.stopPropagation()" style="flex:1;padding:7px 10px;border:1px solid var(--c-line);border-radius:8px;font-size:13px;outline:none;text-align:center;width:80px;background:rgba(0,0,0,0.015);color:var(--c-ink);">
+        <button type="submit" class="year-dd-add" style="margin:0;padding:7px 12px;border-top:none;">添加</button>
+      </form>
+    `;
+  } else {
+    document.getElementById('year-bar').style.display = '';
+    document.getElementById('work-subnav').style.display = 'none';
+    document.getElementById('life-subnav').style.display = '';
+    renderLife(wrap);
+    // Reset year selector for life
+    const dynamicYears = [...new Set(db.filter(e=>e.sec==='life').map(e=>e.year).filter(Boolean))];
+    const allYears = [...new Set([...PRESET_YEARS, ...dynamicYears])].sort();
+    if(!allYears.includes(activeYear)) activeYear = allYears[allYears.length-1];
+    document.getElementById('year-dropdown-label').textContent = activeYear + ' 年';
+    const menu = document.getElementById('year-dropdown-menu');
+    menu.innerHTML = allYears.map(y =>
+      `<button class="year-dd-option${y===activeYear?' current':''}" onclick="event.stopPropagation();setYear('${y}')">${y} 年</button>`
+    ).join('') + `
+      <form onsubmit="event.preventDefault();addYearSubmit()" style="display:flex;gap:4px;padding:8px 6px 2px;border-top:1px solid var(--c-line);margin-top:4px;">
+        <input id="year-add-input" type="text" inputmode="numeric" placeholder="输入年份..." onclick="event.stopPropagation()" style="flex:1;padding:7px 10px;border:1px solid var(--c-line);border-radius:8px;font-size:13px;outline:none;text-align:center;width:80px;background:rgba(0,0,0,0.015);color:var(--c-ink);">
+        <button type="submit" class="year-dd-add" style="margin:0;padding:7px 12px;border-top:none;">添加</button>
+      </form>
+    `;
+  }
+}
+
+function renderWork(wrap) {
+  if(currentWorkCat) {
+    // 百度推广营销：顶部插入月度数据表
+    if(currentWorkCat === 'baidu') {
+      const tableDiv = document.createElement('div');
+      tableDiv.className = 'cat-section';
+      tableDiv.innerHTML = renderBaiduTable(activeYear);
+      wrap.appendChild(tableDiv);
+    }
+    // 行政活动协助：顶部插入月度活动表格
+    if(currentWorkCat === 'admin') {
+      const tableDiv = document.createElement('div');
+      tableDiv.className = 'cat-section';
+      tableDiv.innerHTML = renderAdminTable(activeYear);
+      wrap.appendChild(tableDiv);
+    }
+    // 视频制作：顶部插入报价表 + 子分类卡片
+    if(currentWorkCat === 'video') {
+      const priceDiv = document.createElement('div');
+      priceDiv.className = 'cat-section';
+      priceDiv.innerHTML = renderVideoPriceTable();
+      wrap.appendChild(priceDiv);
+      // Render sub-category card groups
+      const videoEntries = db.filter(e => e.sec==='work' && e.year===activeYear && e.cat==='video');
+      const videoCat = WORK_CATS.find(c => c.key === 'video');
+      videoSubCats.forEach(subCat => {
+        const subEntries = videoEntries.filter(e => e.subcat === subCat.key);
+        wrap.appendChild(makeVideoSubCatSection(subCat, subEntries));
+      });
+      // Uncategorized video entries
+      const uncatEntries = videoEntries.filter(e => !e.subcat);
+      if(uncatEntries.length > 0) {
+        const uncatDiv = document.createElement('div');
+        const displayLabel = `未分类 · ${uncatEntries.length} 条`;
+        wrap.appendChild(makeVideoSubCatSection({ key:'', label: displayLabel, dot:'#999' }, uncatEntries));
+      }
+      // Add sub-category button
+      const addDiv = document.createElement('div');
+      addDiv.className = 'video-subcat-add-wrap';
+      addDiv.innerHTML = `<button onclick="addVideoSubCat()">+ 添加分类</button>`;
+      wrap.appendChild(addDiv);
+    } else if(currentWorkCat === 'doc') {
+      // 工作资料：子分类卡片
+      const docEntries = db.filter(e => e.sec==='work' && e.year===activeYear && e.cat==='doc');
+      docSubCats.forEach(subCat => {
+        const subEntries = docEntries.filter(e => e.subcat === subCat.key);
+        wrap.appendChild(makeDocSubCatSection(subCat, subEntries));
+      });
+      // Uncategorized doc entries
+      const uncatDocEntries = docEntries.filter(e => !e.subcat);
+      if(uncatDocEntries.length > 0) {
+        wrap.appendChild(makeDocSubCatSection({ key:'', label: `未分类 · ${uncatDocEntries.length} 条`, dot:'#999' }, uncatDocEntries));
+      }
+      // Add sub-category button
+      const addDivDoc = document.createElement('div');
+      addDivDoc.className = 'video-subcat-add-wrap';
+      addDivDoc.innerHTML = `<button onclick="addDocSubCat()">+ 添加分类</button>`;
+      wrap.appendChild(addDivDoc);
+    } else {
+      const catsToShow = WORK_CATS.filter(c => c.key === currentWorkCat);
+      catsToShow.forEach(cat => {
+        const entries = db.filter(e => e.sec==='work' && e.year===activeYear && e.cat===cat.key);
+        wrap.appendChild(makeCatSection(cat, entries, 'work'));
+      });
+    }
+  } else {
+    renderWorkTree(wrap);
+  }
+
+  const allWorkEntries = db.filter(e => e.sec==='work' && e.year===activeYear);
+  document.getElementById('wsn-all').textContent = allWorkEntries.length;
+  WORK_CATS.forEach(c => {
+    const cnt = allWorkEntries.filter(e => e.cat === c.key).length;
+    const el = document.getElementById('wsn-' + c.key);
+    if(el) el.textContent = cnt;
+  });
+}
+
+function renderLife(wrap) {
+  if(currentLifeCat) {
+    if(currentLifeCat === 'sport') {
+      // Sport: render sub-category card groups (similar to video)
+      const sportEntries = db.filter(e => e.sec==='life' && (e.year===activeYear || !e.year) && e.cat==='sport');
+      sportSubCats.forEach(subCat => {
+        const subEntries = sportEntries.filter(e => e.subcat === subCat.key);
+        wrap.appendChild(makeSportSubCatSection(subCat, subEntries));
+      });
+      // Uncategorized sport entries
+      const uncatEntries = sportEntries.filter(e => !e.subcat);
+      if(uncatEntries.length > 0) {
+        wrap.appendChild(makeSportSubCatSection({ key:'', label: '未分类 · ' + uncatEntries.length + ' 条', dot:'#999' }, uncatEntries));
+      }
+      // Add sub-category button
+      const addDiv = document.createElement('div');
+      addDiv.className = 'video-subcat-add-wrap';
+      addDiv.innerHTML = `<button onclick="addSportSubCat()">+ 添加分类</button>`;
+      wrap.appendChild(addDiv);
+    } else {
+      const catsToShow = LIFE_CATS.filter(c => c.key === currentLifeCat);
+      catsToShow.forEach(cat => {
+        const entries = db.filter(e => e.sec==='life' && (e.year===activeYear || !e.year) && e.cat===cat.key);
+        wrap.appendChild(makeCatSection(cat, entries, 'life'));
+      });
+    }
+  } else {
+    renderLifeTree(wrap);
+  }
+
+  const allLifeEntries = db.filter(e => e.sec==='life' && (e.year===activeYear || !e.year));
+  document.getElementById('lsn-all').textContent = allLifeEntries.length;
+  LIFE_CATS.forEach(c => {
+    const cnt = allLifeEntries.filter(e => e.cat === c.key).length;
+    const el = document.getElementById('lsn-' + c.key);
+    if(el) el.textContent = cnt;
+  });
+}
+
+// ============ SPORT SUB-CAT SECTION ============
+function makeSportSubCatSection(subCat, entries) {
+  const div = document.createElement('div');
+  div.className = 'cat-section';
+  const isUncat = !subCat.key;
+  const isFitness = subCat.key === 'fitness';
+  const isHiking = subCat.key === 'hiking';
+
+  // Header first — category label, edit/delete, count, + add button
+  const header = document.createElement('div');
+  header.className = 'cat-label';
+  const editBtns = isUncat ? '' : `
+    <button class="cat-edit-btn" onclick="event.stopPropagation();editSportSubCat('${subCat.key}')" title="重命名">✎</button>
+    <button class="cat-edit-btn" onclick="event.stopPropagation();delSportSubCat('${subCat.key}')" title="删除" style="color:rgba(220,80,70,0.55);margin-left:0">✕</button>
+  `;
+  header.innerHTML = `
+    <div class="cat-label-dot" style="background:${subCat.dot}"></div>
+    <span class="cat-label-name" style="color:${subCat.dot}">${escHtml(subCat.label)}</span>
+    ${editBtns}
+    <span class="cat-label-count">${entries.length} 条记录</span>
+    <button class="cat-add-small" onclick="quickAddSport('${subCat.key}')">+ 添加</button>
+  `;
+  div.appendChild(header);
+
+  // Sub-category-specific tables below header
+  if(isFitness) {
+    const fitDiv = document.createElement('div');
+    fitDiv.innerHTML = renderFitnessTable(activeYear);
+    div.appendChild(fitDiv.firstElementChild);
+
+    const dietWrap = document.createElement('div');
+    dietWrap.innerHTML = renderDietTable(activeDietDate);
+    div.appendChild(dietWrap.firstElementChild);
+  }
+
+  if(isHiking) {
+    const hikDiv = document.createElement('div');
+    hikDiv.innerHTML = renderHikingTable(activeHikingYear);
+    div.appendChild(hikDiv.firstElementChild);
+  }
+
+  // Entries grid at the bottom
+  const grid = document.createElement('div');
+  grid.className = 'cards-grid';
+
+  if(entries.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><div style="font-size:28px;opacity:0.15">◇</div><p>还没有记录，点击「+ 添加」开始</p></div>`;
+  } else {
+    entries.forEach(e => grid.appendChild(makeCard(e)));
+  }
+  div.appendChild(grid);
+  return div;
+}
+
+function quickAddSport(subcat) {
+  openAdd();
+  document.getElementById('f-sec').value = 'life';
+  onSecChange();
+  document.getElementById('f-cat').value = 'sport';
+  onCatChange();
+  document.getElementById('f-subcat').value = subcat;
+  document.getElementById('f-year').value = activeYear;
+  _qSec = 'life'; _qCat = 'sport';
+}
+
+// ============ LIFE TREE ============
+const LIFE_TREE_ICONS = { sport:'♠', money:'◆', love:'♥', social:'●' };
+const LIFE_TREE_HINT = { sport:'点击查看', money:'点击查看', love:'点击查看', social:'点击查看' };
+
+function renderLifeTree(wrap) {
+  const allLifeEntries = db.filter(e => e.sec==='life' && (e.year===activeYear || !e.year));
+  const total = allLifeEntries.length;
+  const branches = LIFE_CATS.map(cat => ({
+    ...cat, count: allLifeEntries.filter(e => e.cat === cat.key).length,
+    icon: LIFE_TREE_ICONS[cat.key] || '●', hint: LIFE_TREE_HINT[cat.key] || ''
+  }));
+  const topCat = branches.reduce((a,b) => a.count >= b.count ? a : b, branches[0]);
+
+  const treeHTML = `
+    <div class="work-tree-wrap">
+      <div class="work-tree-trunk">
+        <div class="work-tree-root">${activeYear}年 · 生活总览<span class="tree-root-sub">${total} 条记录 · ${branches.length} 个分类</span></div>
+        <div class="work-tree-branches" id="tree-branches">
+          ${branches.map(b => `
+            <div class="work-tree-branch" onclick="setLifeCat('${b.key}', document.querySelector('#life-subnav [data-cat=${b.key}]'))">
+              <div class="work-tree-branch-dot" style="background:${b.accentLight};color:${b.dot}">${b.icon}</div>
+              <div class="work-tree-branch-name">${catCustomLabels[b.key] || b.label}</div>
+              <div class="work-tree-branch-count"><strong>${b.count}</strong> 条</div>
+              <div class="work-tree-branch-hint">${b.hint} →</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="work-tree-summary">
+        <div class="work-tree-stat">最多：<strong>${catCustomLabels[topCat.key] || topCat.label}</strong>（${topCat.count}条）</div>
+        <div class="work-tree-stat">覆盖 <strong>${new Set(allLifeEntries.map(e=>e.date?.slice(0,7)).filter(Boolean)).size}</strong> 个月</div>
+        <div class="work-tree-stat">带摘要 <strong>${allLifeEntries.filter(e=>e.body).length}</strong> 条</div>
+      </div>
+    </div>
+  `;
+  wrap.innerHTML = treeHTML;
+
+  setTimeout(() => {
+    const svgEl = document.getElementById('tree-lines');
+    if(svgEl) svgEl.remove();
+    const branchesContainer = document.getElementById('tree-branches');
+    const root = document.querySelector('.work-tree-root');
+    if(!branchesContainer || !root) return;
+    const rootRect = root.getBoundingClientRect();
+    const branchesRect = branchesContainer.getBoundingClientRect();
+    const wrapRect = wrap.getBoundingClientRect();
+    const rootCX = rootRect.left + rootRect.width/2 - wrapRect.left;
+    const rootCY = rootRect.bottom - wrapRect.top;
+    const branchEls = branchesContainer.querySelectorAll('.work-tree-branch');
+    let paths = '';
+    branchEls.forEach(el => {
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width/2 - wrapRect.left;
+      const cy = r.top - wrapRect.top;
+      const midY = (rootCY + cy) / 2;
+      paths += `<path d="M${rootCX},${rootCY} L${rootCX},${midY} L${cx},${midY} L${cx},${cy-4}" fill="none" stroke="rgba(140,184,138,0.1)" stroke-width="1.2" stroke-linecap="round"/>`;
+    });
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('class','work-tree-svg');
+    svg.setAttribute('id','tree-lines');
+    svg.setAttribute('viewBox',`0 0 ${wrapRect.width} ${branchesRect.bottom - wrapRect.top}`);
+    svg.setAttribute('width',wrapRect.width);
+    svg.setAttribute('height',branchesRect.bottom - wrapRect.top);
+    svg.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;z-index:0;';
+    svg.innerHTML = paths;
+    const trunk = document.querySelector('.work-tree-trunk');
+    if(trunk) { trunk.style.position = 'relative'; trunk.appendChild(svg); }
+  }, 50);
+}
+
+// ============ WORK TREE ============
+const TREE_BRANCH_ICONS = { wechat:'✦', baidu:'◆', video:'◈', admin:'●', doc:'▤' };
+const TREE_BRANCH_HINT = { wechat:'点击查看', baidu:'点击查看', video:'点击查看', admin:'点击查看', doc:'点击查看' };
+
+function renderWorkTree(wrap) {
+  const allWorkEntries = db.filter(e => e.sec==='work' && e.year===activeYear);
+  const total = allWorkEntries.length;
+  const branches = WORK_CATS.map(cat => ({
+    ...cat, count: allWorkEntries.filter(e => e.cat === cat.key).length,
+    icon: TREE_BRANCH_ICONS[cat.key] || '●', hint: TREE_BRANCH_HINT[cat.key] || ''
+  }));
+  const topCat = branches.reduce((a,b) => a.count >= b.count ? a : b, branches[0]);
+
+  const treeHTML = `
+    <div class="work-tree-wrap">
+      <div class="work-tree-trunk">
+        <div class="work-tree-root">${activeYear}年 · 工作总览<span class="tree-root-sub">${total} 条记录 · ${branches.length} 个分类</span></div>
+        <div class="work-tree-branches" id="tree-branches">
+          ${branches.map(b => `
+            <div class="work-tree-branch" onclick="setWorkCat('${b.key}', document.querySelector('#work-subnav [data-cat=${b.key}]'))">
+              <div class="work-tree-branch-dot" style="background:${b.accentLight};color:${b.dot}">${b.icon}</div>
+              <div class="work-tree-branch-name">${catCustomLabels[b.key] || b.label}</div>
+              <div class="work-tree-branch-count"><strong>${b.count}</strong> 条</div>
+              <div class="work-tree-branch-hint">${b.hint} →</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="work-tree-summary">
+        <div class="work-tree-stat">最多：<strong>${catCustomLabels[topCat.key] || topCat.label}</strong>（${topCat.count}条）</div>
+        <div class="work-tree-stat">覆盖 <strong>${new Set(allWorkEntries.map(e=>e.date?.slice(0,7)).filter(Boolean)).size}</strong> 个月</div>
+        <div class="work-tree-stat">带摘要 <strong>${allWorkEntries.filter(e=>e.body).length}</strong> 条</div>
+      </div>
+    </div>
+  `;
+  wrap.innerHTML = treeHTML;
+
+  setTimeout(() => {
+    const svgEl = document.getElementById('tree-lines');
+    if(svgEl) svgEl.remove();
+    const branchesContainer = document.getElementById('tree-branches');
+    const root = document.querySelector('.work-tree-root');
+    if(!branchesContainer || !root) return;
+    const rootRect = root.getBoundingClientRect();
+    const branchesRect = branchesContainer.getBoundingClientRect();
+    const wrapRect = wrap.getBoundingClientRect();
+    const rootCX = rootRect.left + rootRect.width/2 - wrapRect.left;
+    const rootCY = rootRect.bottom - wrapRect.top;
+    const branchEls = branchesContainer.querySelectorAll('.work-tree-branch');
+    let paths = '';
+    branchEls.forEach(el => {
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width/2 - wrapRect.left;
+      const cy = r.top - wrapRect.top;
+      const midY = (rootCY + cy) / 2;
+      paths += `<path d="M${rootCX},${rootCY} L${rootCX},${midY} L${cx},${midY} L${cx},${cy-4}" fill="none" stroke="rgba(140,184,138,0.1)" stroke-width="1.2" stroke-linecap="round"/>`;
+    });
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('class','work-tree-svg');
+    svg.setAttribute('id','tree-lines');
+    svg.setAttribute('viewBox',`0 0 ${wrapRect.width} ${branchesRect.bottom - wrapRect.top}`);
+    svg.setAttribute('width',wrapRect.width);
+    svg.setAttribute('height',branchesRect.bottom - wrapRect.top);
+    svg.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;z-index:0;';
+    svg.innerHTML = paths;
+    const trunk = document.querySelector('.work-tree-trunk');
+    if(trunk) { trunk.style.position = 'relative'; trunk.appendChild(svg); }
+  }, 50);
+}
+
+// ============ YEAR ============
+function setYear(y) {
+  activeYear = y;
+  document.getElementById('year-dropdown').classList.remove('open');
+  const wrap = document.getElementById('main-cats');
+  wrap.innerHTML = '';
+  if(currentTab === 'work') { renderWork(wrap); }
+  else { renderLife(wrap); }
+}
+
+function toggleYearDropdown(e) { document.getElementById('year-dropdown').classList.toggle('open'); }
+
+function addYearSubmit() {
+  const input = document.getElementById('year-add-input');
+  const y = input.value.trim();
+  if(!y || !/^\d{4}$/.test(y)) { input.style.borderColor = '#F0668A'; return; }
+  if(!PRESET_YEARS.includes(y)) { PRESET_YEARS.push(y); PRESET_YEARS.sort(); }
+  activeYear = y;
+  document.getElementById('year-dropdown').classList.remove('open');
+  const wrap = document.getElementById('main-cats');
+  wrap.innerHTML = '';
+  if(currentTab === 'work') { renderWork(wrap); }
+  else { renderLife(wrap); }
+}
+
+document.addEventListener('click', function(e) {
+  const dd = document.getElementById('year-dropdown');
+  if(dd && !dd.contains(e.target)) dd.classList.remove('open');
+});
+
+// ============ BUILD CATEGORY ============
+function makeCatSection(cat, entries, sec) {
+  const div = document.createElement('div');
+  div.className = 'cat-section';
+  const displayLabel = catCustomLabels[cat.key] || cat.label;
+  const header = document.createElement('div');
+  header.className = 'cat-label';
+  header.innerHTML = `
+    <div class="cat-label-dot" style="background:${cat.dot}"></div>
+    <span class="cat-label-name" style="color:${cat.dot}" data-catkey="${cat.key}">${displayLabel}</span>
+    <button class="cat-edit-btn" onclick="event.stopPropagation();editCatLabel('${cat.key}')" title="编辑名称">✎</button>
+    ${cat.sub ? `<span style="font-size:12px;color:var(--c-ink3);margin-left:4px">/ ${cat.sub}</span>` : ''}
+    <span class="cat-label-count">${entries.length} 条记录</span>
+    ${cat.key==='wechat' ? `<button class="cat-cal-btn" onclick="event.stopPropagation();openCalendar()" title="年度日历">日历</button>` : ''}
+    <button class="cat-add-small" onclick="quickAdd('${sec}','${cat.key}')">+ 添加</button>
+  `;
+  div.appendChild(header);
+
+  const grid = document.createElement('div');
+  grid.className = 'cards-grid';
+
+  if(entries.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><div style="font-size:28px;opacity:0.15">◇</div><p>还没有记录，点击「+ 添加」开始</p></div>`;
+  } else {
+    entries.forEach(e => grid.appendChild(makeCard(e)));
+  }
+  div.appendChild(grid);
+  return div;
+}
+
+// ============ VIDEO SUB-CAT SECTION ============
+function makeVideoSubCatSection(subCat, entries) {
+  const div = document.createElement('div');
+  div.className = 'cat-section';
+  const isUncat = !subCat.key;
+
+  const header = document.createElement('div');
+  header.className = 'cat-label';
+  const editBtns = isUncat ? '' : `
+    <button class="cat-edit-btn" onclick="event.stopPropagation();editVideoSubCat('${subCat.key}')" title="重命名">✎</button>
+    <button class="cat-edit-btn" onclick="event.stopPropagation();delVideoSubCat('${subCat.key}')" title="删除" style="color:rgba(220,80,70,0.55);margin-left:0">✕</button>
+  `;
+  header.innerHTML = `
+    <div class="cat-label-dot" style="background:${subCat.dot}"></div>
+    <span class="cat-label-name" style="color:${subCat.dot}">${escHtml(subCat.label)}</span>
+    ${editBtns}
+    <span class="cat-label-count">${entries.length} 条记录</span>
+    <button class="cat-add-small" onclick="quickAddVideo('${subCat.key}')">+ 添加</button>
+  `;
+  div.appendChild(header);
+
+  const grid = document.createElement('div');
+  grid.className = 'cards-grid';
+
+  if(entries.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><div style="font-size:28px;opacity:0.15">◇</div><p>还没有记录，点击「+ 添加」开始</p></div>`;
+  } else {
+    entries.forEach(e => grid.appendChild(makeCard(e)));
+  }
+  div.appendChild(grid);
+  return div;
+}
+
+function quickAddVideo(subcat) {
+  openAdd();
+  document.getElementById('f-sec').value = 'work';
+  onSecChange();
+  document.getElementById('f-cat').value = 'video';
+  onCatChange();
+  document.getElementById('f-subcat').value = subcat;
+  document.getElementById('f-year').value = activeYear;
+  _qSec = 'work'; _qCat = 'video';
+}
+
+function makeDocSubCatSection(subCat, entries) {
+  const div = document.createElement('div');
+  div.className = 'cat-section';
+  const isUncat = !subCat.key;
+  const header = document.createElement('div');
+  header.className = 'cat-label';
+  const editBtns = isUncat ? '' : `
+    <button class="cat-edit-btn" onclick="event.stopPropagation();editDocSubCat('${subCat.key}')" title="重命名">✎</button>
+    <button class="cat-edit-btn" onclick="event.stopPropagation();delDocSubCat('${subCat.key}')" title="删除" style="color:rgba(220,80,70,0.55);margin-left:0">✕</button>
+  `;
+  header.innerHTML = `
+    <div class="cat-label-dot" style="background:${subCat.dot}"></div>
+    <span class="cat-label-name" style="color:${subCat.dot}">${escHtml(subCat.label)}</span>
+    ${editBtns}
+    <span class="cat-label-count">${entries.length} 条记录</span>
+    <button class="cat-add-small" onclick="quickAddDoc('${subCat.key}')">+ 添加</button>
+  `;
+  div.appendChild(header);
+  const grid = document.createElement('div');
+  grid.className = 'cards-grid';
+  if(entries.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><div style="font-size:28px;opacity:0.15">◇</div><p>还没有记录，点击「+ 添加」开始</p></div>`;
+  } else {
+    entries.forEach(e => grid.appendChild(makeCard(e)));
+  }
+  div.appendChild(grid);
+  return div;
+}
+
+function quickAddDoc(subcat) {
+  openAdd();
+  document.getElementById('f-sec').value = 'work';
+  onSecChange();
+  document.getElementById('f-cat').value = 'doc';
+  onCatChange();
+  document.getElementById('f-subcat').value = subcat;
+  document.getElementById('f-year').value = activeYear;
+  _qSec = 'work'; _qCat = 'doc';
+}
+
+// ============ CARD ============
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function makeCard(e) {
+  const div = document.createElement('div');
+  div.className = 'entry-card';
+  div.onclick = () => openDetail(e.id);
+
+  let imgHtml = '';
+  if(e.img) {
+    imgHtml = `<img class="entry-card-img" src="${e.img}" style="object-position:${e.imgPos||'50% 50%'}" alt=""/>`;
+  } else {
+    const artColors = getArtColors(e.cat, e.sec);
+    imgHtml = `<div class="entry-card-img-placeholder">${makeMiniArt(artColors)}</div>`;
+  }
+
+  const tags = (e.tags||[]).map(t=>`<span class="entry-tag">${t}</span>`).join('');
+  div.innerHTML = `
+    ${imgHtml}
+    <div class="entry-card-body">
+      <div class="entry-card-date">${escHtml(e.date || '')}</div>
+      <div class="entry-card-title">${escHtml(e.title)}</div>
+      ${e.body ? `<div class="entry-card-excerpt">${escHtml(e.body)}</div>` : ''}
+      ${tags ? `<div class="entry-card-tags">${tags}</div>` : ''}
+    </div>
+    <button class="entry-card-del" onclick="event.stopPropagation();delEntry('${e.id}')">&#x2715;</button>
+    ${e.link ? `<a class="entry-card-link" href="${e.link}" target="_blank" onclick="event.stopPropagation()" title="跳转原文">↗</a>` : ''}
+  `;
+  return div;
+}
+
+function getArtColors(cat, sec) {
+  const map = {
+    wechat: ['rgba(231,145,145,0.06)','rgba(231,145,145,0.1)','rgba(231,145,145,0.16)'],
+    baidu:  ['rgba(59,108,176,0.06)','rgba(59,108,176,0.1)','rgba(59,108,176,0.16)'],
+    video:  ['rgba(90,143,212,0.06)','rgba(90,143,212,0.1)','rgba(90,143,212,0.16)'],
+    admin:  ['rgba(59,108,176,0.06)','rgba(59,108,176,0.1)','rgba(59,108,176,0.16)'],
+    doc:    ['rgba(106,159,181,0.06)','rgba(106,159,181,0.1)','rgba(106,159,181,0.16)'],
+    sport:  ['rgba(181,164,203,0.06)','rgba(181,164,203,0.1)','rgba(181,164,203,0.16)'],
+    money:  ['rgba(200,187,218,0.06)','rgba(200,187,218,0.1)','rgba(200,187,218,0.16)'],
+    love:   ['rgba(210,196,224,0.06)','rgba(210,196,224,0.1)','rgba(210,196,224,0.16)'],
+    social: ['rgba(181,164,203,0.06)','rgba(181,164,203,0.1)','rgba(181,164,203,0.16)'],
+  };
+  return map[cat] || ['rgba(0,0,0,0.03)','rgba(0,0,0,0.04)','rgba(0,0,0,0.06)'];
+}
+
+function makeMiniArt(cols) {
+  return `<svg viewBox="0 0 320 180" fill="none" width="100%" height="100%">
+    <rect width="320" height="180" fill="#F0FAEC"/>
+    <circle cx="260" cy="36" r="60" fill="${cols[1]}"/>
+    <circle cx="260" cy="36" r="38" fill="${cols[2]}"/>
+    <circle cx="80" cy="120" r="40" fill="${cols[0]}"/>
+    <path d="M0 150 Q80 120 160 150 Q240 180 320 148 L320 180 L0 180Z" fill="${cols[1]}"/>
+    <line x1="20" y1="60" x2="100" y2="60" stroke="${cols[2]}" stroke-width="0.5" opacity="0.5"/>
+    <line x1="20" y1="76" x2="70" y2="76" stroke="${cols[2]}" stroke-width="0.5" opacity="0.3"/>
+  </svg>`;
+}
+
+// ============ DETAIL ============
+function openDetail(id) {
+  const e = db.find(x => x.id === id);
+  if(!e) return;
+  const catObj = e.sec==='work' ? WORK_CATS.find(c=>c.key===e.cat) : LIFE_CATS.find(c=>c.key===e.cat);
+  let subcatLabel = '';
+  if(e.subcat) {
+    const subCat = videoSubCats.find(c => c.key === e.subcat) || sportSubCats.find(c => c.key === e.subcat) || docSubCats.find(c => c.key === e.subcat);
+    if(subCat) subcatLabel = ' · ' + subCat.label;
+  }
+  const cover = document.getElementById('detail-cover');
+  const art = document.getElementById('detail-cover-art');
+  if(e.img) { cover.src = e.img; cover.style.objectPosition = e.imgPos || '50% 50%'; cover.classList.add('show'); art.style.display = 'none'; }
+  else { cover.classList.remove('show'); cover.src=''; art.style.display = 'block'; }
+
+  document.getElementById('d-eye').textContent = (e.sec==='work'?'工作':'生活') + ' · ' + (catObj?.label||'') + subcatLabel + (e.year?' · '+e.year+'年':'');
+  document.getElementById('d-title').textContent = e.title;
+  document.getElementById('d-meta').textContent = e.date || '';
+  document.getElementById('d-tags').innerHTML = (e.tags||[]).map(t=>`<span class="entry-tag">${t}</span>`).join('');
+  document.getElementById('d-body').textContent = e.body || '（暂无详细内容）';
+  const dLink = document.getElementById('d-link-row');
+  if(e.link) {
+    dLink.style.display = 'block';
+    document.getElementById('d-link-href').href = e.link;
+    document.getElementById('d-link-text').textContent = e.link.length > 50 ? e.link.slice(0,50)+'...' : e.link;
+  } else { dLink.style.display = 'none'; }
+  document.getElementById('d-edit-btn').dataset.eid = e.id;
+  document.getElementById('overlay-detail').classList.add('open');
+}
+function closeDetail() { document.getElementById('overlay-detail').classList.remove('open'); }
+
+// ============ ADD / EDIT ============
+let _qSec=null, _qCat=null, _editId = null;
+function openAdd() {
+  _qSec=null; _qCat=null; _editId = null;
+  document.getElementById('sheet-title').textContent = '记录一件事';
+  document.getElementById('save-btn').textContent = '保存记录';
+  document.getElementById('f-sec').value='work';
+  document.getElementById('f-date').value = new Date().toISOString().slice(0,10);
+  pendingImg = null;
+  pendingImgPos = '50% 50%';
+  _imgCleared = false;
+  document.getElementById('img-preview').style.display='none';
+  document.getElementById('img-pos-wrap').classList.remove('show');
+  document.getElementById('img-pos-x').value = 50;
+  document.getElementById('img-pos-y').value = 50;
+  document.getElementById('img-clear-btn').style.display = 'none';
+  document.getElementById('f-title').value='';
+  document.getElementById('f-body').value='';
+  document.getElementById('f-tags').value='';
+  document.getElementById('f-link').value='';
+  onSecChange();
+  document.getElementById('overlay-add').classList.add('open');
+}
+function quickAdd(sec, cat) {
+  openAdd();
+  document.getElementById('f-sec').value=sec;
+  onSecChange();
+  document.getElementById('f-cat').value=cat;
+  _qSec=sec; _qCat=cat;
+  document.getElementById('f-year').value=activeYear;
+}
+function closeAdd() { document.getElementById('overlay-add').classList.remove('open'); }
+
+function editEntry(id) {
+  const e = db.find(x => x.id === id);
+  if(!e) return;
+  _editId = id; _qSec = null; _qCat = null; _imgCleared = false;
+  closeDetail();
+  document.getElementById('sheet-title').textContent = '编辑记录';
+  document.getElementById('save-btn').textContent = '更新记录';
+  document.getElementById('f-sec').value = e.sec;
+  onSecChange();
+  document.getElementById('f-cat').value = e.cat;
+  onCatChange();
+  if(e.subcat) {
+    const subEl = document.getElementById('f-subcat');
+    if(subEl) subEl.value = e.subcat;
+  }
+  document.getElementById('f-year').value = e.year || activeYear;
+  document.getElementById('f-date').value = e.date || '';
+  document.getElementById('f-title').value = e.title || '';
+  document.getElementById('f-body').value = e.body || '';
+  document.getElementById('f-tags').value = (e.tags||[]).join(', ');
+  document.getElementById('f-link').value = e.link || '';
+  pendingImg = e.img || null;
+  pendingImgPos = e.imgPos || '50% 50%';
+  const prev = document.getElementById('img-preview');
+  if(pendingImg) {
+    prev.src = pendingImg; prev.style.display = 'block';
+    prev.style.objectPosition = pendingImgPos;
+    document.getElementById('img-pos-wrap').classList.add('show');
+    document.getElementById('img-clear-btn').style.display = 'block';
+    // Restore sliders
+    const parts = pendingImgPos.split(' ');
+    document.getElementById('img-pos-x').value = parseInt(parts[0]) || 50;
+    document.getElementById('img-pos-y').value = parseInt(parts[1]) || 50;
+  } else {
+    prev.style.display = 'none';
+    document.getElementById('img-pos-wrap').classList.remove('show');
+    document.getElementById('img-clear-btn').style.display = 'none';
+  }
+  document.getElementById('overlay-add').classList.add('open');
+}
+
+function onSecChange() {
+  const sec = document.getElementById('f-sec').value;
+  const cats = sec==='work' ? WORK_CATS : LIFE_CATS;
+  document.getElementById('f-cat').innerHTML = cats.map(c=>`<option value="${c.key}">${c.label}</option>`).join('');
+  document.getElementById('f-year-wrap').style.display = '';
+  onCatChange();
+}
+
+function onCatChange() {
+  const cat = document.getElementById('f-cat').value;
+  const subWrap = document.getElementById('f-subcat-wrap');
+  if(cat === 'video') {
+    subWrap.style.display = '';
+    document.getElementById('f-subcat').innerHTML = [
+      '<option value="">（不限）</option>',
+      ...videoSubCats.map(c => `<option value="${c.key}">${c.label}</option>`)
+    ].join('');
+  } else if(cat === 'sport') {
+    subWrap.style.display = '';
+    document.getElementById('f-subcat').innerHTML = [
+      '<option value="">（不限）</option>',
+      ...sportSubCats.map(c => `<option value="${c.key}">${c.label}</option>`)
+    ].join('');
+  } else if(cat === 'doc') {
+    subWrap.style.display = '';
+    document.getElementById('f-subcat').innerHTML = [
+      '<option value="">（不限）</option>',
+      ...docSubCats.map(c => `<option value="${c.key}">${c.label}</option>`)
+    ].join('');
+  } else {
+    subWrap.style.display = 'none';
+  }
+}
+
+function updateImgPos() {
+  const x = document.getElementById('img-pos-x').value;
+  const y = document.getElementById('img-pos-y').value;
+  pendingImgPos = x + '% ' + y + '%';
+  const prev = document.getElementById('img-preview');
+  prev.style.objectPosition = pendingImgPos;
+}
+
+function previewImg(ev) {
+  const file = ev.target.files[0];
+  if(!file) return;
+  // 压缩图片后再转 Base64，避免 localStorage 配额超限
+  compressImage(file, 1200, 1200, 0.7, (compressedBase64) => {
+    pendingImg = compressedBase64;
+    _imgCleared = false;
+    const prev = document.getElementById('img-preview');
+    prev.src = pendingImg; prev.style.display = 'block';
+    prev.style.objectPosition = pendingImgPos;
+    document.getElementById('img-pos-wrap').classList.add('show');
+    document.getElementById('img-clear-btn').style.display = 'block';
+  });
+}
+
+// 使用 Canvas 压缩图片，限制最大尺寸和 JPEG 质量
+function compressImage(file, maxW, maxH, quality, callback) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      let w = img.width, h = img.height;
+      if(w > maxW || h > maxH) {
+        const ratio = Math.min(maxW/w, maxH/h);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      // 总是输出 JPEG（比 PNG 小很多），PNG 图转 JPEG 保留白色背景
+      callback(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearImg() {
+  pendingImg = null;
+  pendingImgPos = '50% 50%';
+  _imgCleared = true;
+  const prev = document.getElementById('img-preview');
+  prev.src = ''; prev.style.display = 'none';
+  document.getElementById('img-pos-wrap').classList.remove('show');
+  document.getElementById('img-clear-btn').style.display = 'none';
+  document.getElementById('img-pos-x').value = 50;
+  document.getElementById('img-pos-y').value = 50;
+  // Reset file input so same file can be re-uploaded
+  const fi = document.getElementById('f-img');
+  fi.value = '';
+}
+
+function saveEntry() {
+  try {
+  const title = document.getElementById('f-title').value.trim();
+  if(!title) { toast('请填写标题'); return; }
+  const sec = document.getElementById('f-sec').value;
+  const year = document.getElementById('f-year').value;
+  const cat = document.getElementById('f-cat').value;
+  const subcat = document.getElementById('f-subcat').value;
+  const body = document.getElementById('f-body').value.trim();
+  const tags = document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const date = document.getElementById('f-date').value;
+  const link = document.getElementById('f-link').value.trim();
+
+  if(_editId) {
+    const idx = db.findIndex(e => e.id === _editId);
+    if(idx === -1) { toast('记录不存在'); return; }
+    const imgVal = _imgCleared ? null : (pendingImg || db[idx].img);
+    const posVal = _imgCleared ? '50% 50%' : (pendingImgPos || db[idx].imgPos || '50% 50%');
+    db[idx] = { ...db[idx], sec, year, cat, subcat, title, body, tags, date, link, img: imgVal, imgPos: posVal };
+    persist(); closeAdd(); _editId = null; _imgCleared = false;
+    renderContent(); toast('已更新');
+  } else {
+    db.unshift({ id:Date.now().toString(), sec, year, cat, subcat, title, body, tags, date, link, img:pendingImg||null, imgPos:pendingImgPos||'50% 50%', createdAt:new Date().toISOString() });
+    persist(); closeAdd(); _imgCleared = false;
+    renderContent(); toast('已保存');
+  }
+  updateHeroStats();
+  } catch(err) { toast('保存失败: '+err.message); console.error('saveEntry error:', err); }
+}
+
+// ============ CUSTOM PROMPT (replaces browser prompt/confirm for file:// compat) ============
+function _showPrompt(title, defVal, placeholder, callback) {
+  const existing = document.getElementById('custom-prompt-overlay');
+  if(existing) existing.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'custom-prompt-overlay';
+  overlay.className = 'prompt-overlay';
+  overlay.innerHTML = `<div class="prompt-dialog">
+    <h3>${title}</h3>
+    <input type="text" id="cp-input" value="${escHtml(defVal||'')}" placeholder="${escHtml(placeholder||'')}" maxlength="30" autofocus/>
+    <div class="prompt-btns">
+      <button class="prompt-btn-cancel" id="cp-cancel">取消</button>
+      <button class="prompt-btn-ok" id="cp-ok">确定</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+  const input = document.getElementById('cp-input');
+  const okBtn = document.getElementById('cp-ok');
+  const cancelBtn = document.getElementById('cp-cancel');
+  const close = () => { overlay.remove(); };
+  const submit = () => { const v = input.value.trim(); overlay.remove(); if(callback) callback(v); };
+  okBtn.onclick = submit;
+  cancelBtn.onclick = close;
+  overlay.onclick = function(e) { if(e.target === overlay) close(); };
+  input.addEventListener('keydown', function(e) { if(e.key==='Enter') submit(); if(e.key==='Escape') close(); });
+  setTimeout(() => input.focus(), 50);
+}
+function _showConfirm(msg, callback) {
+  const existing = document.getElementById('custom-prompt-overlay');
+  if(existing) existing.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'custom-prompt-overlay';
+  overlay.className = 'prompt-overlay';
+  overlay.innerHTML = `<div class="prompt-dialog">
+    <h3>${msg}</h3>
+    <div class="prompt-btns">
+      <button class="prompt-btn-cancel" id="cp-cancel">取消</button>
+      <button class="prompt-btn-ok" id="cp-ok">确定</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+  const cancelBtn = document.getElementById('cp-cancel');
+  const okBtn = document.getElementById('cp-ok');
+  const close = () => { overlay.remove(); if(callback) callback(false); };
+  const confirm_ = () => { overlay.remove(); if(callback) callback(true); };
+  okBtn.onclick = confirm_;
+  cancelBtn.onclick = close;
+  overlay.onclick = function(e) { if(e.target === overlay) close(); };
+  document.addEventListener('keydown', function escHandler(e) {
+    if(e.key==='Escape') { document.removeEventListener('keydown', escHandler); close(); }
+  }, {once: true});
+  document.addEventListener('keydown', function entHandler(e) {
+    if(e.key==='Enter') { document.removeEventListener('keydown', entHandler); confirm_(); }
+  }, {once: true});
+}
+
+function delEntry(id) {
+  // Show custom inline confirm toast instead of browser confirm() which may be blocked
+  const existing = document.getElementById('del-confirm-toast');
+  if(existing) existing.remove();
+
+  const t = document.createElement('div');
+  t.id = 'del-confirm-toast';
+  t.style.cssText = 'position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid rgba(220,80,70,0.25);border-radius:14px;padding:14px 20px;box-shadow:0 6px 28px rgba(0,0,0,0.12);z-index:9999;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--c-ink);min-width:220px;';
+  t.innerHTML = `<span>确定删除这条记录？</span>
+    <button onclick="document.getElementById('del-confirm-toast').remove();_confirmDel('${id}')" style="padding:5px 14px;background:linear-gradient(135deg,#DC5046,#E8756A);color:#fff;border:none;border-radius:8px;font-size:12px;cursor:pointer;flex-shrink:0;">删除</button>
+    <button onclick="document.getElementById('del-confirm-toast').remove()" style="padding:5px 12px;background:rgba(0,0,0,0.05);border:none;border-radius:8px;font-size:12px;cursor:pointer;color:var(--c-ink3);flex-shrink:0;">取消</button>`;
+  document.body.appendChild(t);
+  // Auto-dismiss after 5s
+  setTimeout(() => { if(document.getElementById('del-confirm-toast')) document.getElementById('del-confirm-toast').remove(); }, 5000);
+}
+
+function _confirmDel(id) {
+  db = db.filter(e=>e.id!==id);
+  persist(); renderContent(); updateHeroStats();
+  toast('已删除');
+}
+
+function updateHeroStats() {
+  const wTotal = db.filter(e=>e.sec==='work').length;
+  const lTotal = db.filter(e=>e.sec==='life').length;
+  document.getElementById('hero-w-total').textContent = wTotal;
+  document.getElementById('hero-l-total').textContent = lTotal;
+  document.querySelectorAll('[id^="wc-total"]').forEach(el => el.textContent = wTotal);
+  document.querySelectorAll('[id^="lc-total"]').forEach(el => el.textContent = lTotal);
+}
+
+// ============ TOAST ============
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('on');
+  setTimeout(()=>el.classList.remove('on'), 2200);
+}
+
+// ============ KEY ============
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape') { closeAdd(); closeDetail(); closeCalendar(); closeHeroEdit(); }
+});
+
+// ============ CALENDAR ============
+const CAL_MONTH_NAMES = ['','一月 January','二月 February','三月 March','四月 April','五月 May','六月 June','七月 July','八月 August','九月 September','十月 October','十一月 November','十二月 December'];
+const CAL_MONTH_COLORS = [null,'#C8E6C9','#FCE4EC','#E8F5E9','#FFF9C4','#E3F2FD','#E1F5FE','#FFF3E0','#F3E5F5','#FBE9E7','#E8EAF6','#EFEBE9','#E0F7FA'];
+const CAL_MONTH_DOTS = [null,'#3B6D11','#C2185B','#2E7D32','#F9A825','#1565C0','#0277BD','#EF6C00','#7B1FA2','#D84315','#283593','#4E342E','#00838F'];
+const CAL_FESTIVALS = {
+  1:[["1.1","元旦"],["1.25","腊八节"],["1.28","除夕"],["1.29","春节"]],
+  2:[["2.3","立春"],["2.4","人日"],["2.14","情人节"],["2.17","元宵节"]],
+  3:[["3.3","全国爱耳日"],["3.5","学雷锋纪念日"],["3.8","国际妇女节"],["3.12","植树节"],["3.15","消费者权益日"],["3.22","世界水日"]],
+  4:[["4.1","愚人节"],["4.4","清明节"],["4.5","清明假期"],["4.22","世界地球日"],["4.23","世界读书日"]],
+  5:[["5.1","劳动节"],["5.4","青年节"],["5.10","母亲节"],["5.12","护士节"],["5.17","世界电信日"],["5.31","世界无烟日"]],
+  6:[["6.1","儿童节"],["6.5","世界环境日"],["6.19","父亲节"],["6.21","夏至"],["6.25","端午节"]],
+  7:[["7.1","建党节"],["7.11","世界人口日"],["7.25","七夕"]],
+  8:[["8.1","建军节"],["8.8","全民健身日"],["8.25","中元节"]],
+  9:[["9.3","抗战胜利纪念日"],["9.9","重阳节"],["9.10","教师节"],["9.17","中秋节"],["9.20","全国爱牙日"]],
+  10:[["10.1","国庆节"],["10.4","世界动物日"],["10.10","世界心理健康日"],["10.31","万圣夜"]],
+  11:[["11.1","万圣节"],["11.11","双十一"],["11.17","国际学生节"]],
+  12:[["12.1","世界艾滋病日"],["12.3","国际残疾人日"],["12.13","国家公祭日"],["12.22","冬至"],["12.24","平安夜"],["12.25","圣诞节"]]
+};
+const CAL_ARTICLES = { /* same as before */ };
+Object.assign(CAL_ARTICLES, {1:["元旦特辑","腊八节·年味儿渐浓","除夕倒计时","春节特辑"],2:["立春到了","情人节特辑","元宵节","二月总结"],3:["三八妇女节","植树节","消费者权益日","春日焕新"],4:["清明踏青","愚人节趣味","世界读书日","四月热点"],5:["劳动节特辑","母亲节","青年节专题","五月深度"],6:["六一儿童节","端午节特辑","父亲节","夏至时节"],7:["建党节","七夕情人节","暑期专题","七月热点"],8:["建军节","全民健身日","暑末特辑","八月复盘"],9:["教师节特辑","中秋节","重阳节","金九银十"],10:["国庆节","十一黄金周","万圣节趣味","十月总结"],11:["双十一购物节","双十一战报","初冬生活","十一月深度"],12:["冬至特辑","圣诞平安夜","年终盘点","新年前夕"]});
+
+function openCalendar() {
+  const body = document.getElementById('cal-modal-body');
+  let html = `<div class="cal-modal-head"><h3>2026年公众号年度内容日历</h3><button class="cal-close" onclick="closeCalendar()">✕</button></div>`;
+  let totalFests = 0;
+  for(let m=1; m<=12; m++) {
+    const dot = CAL_MONTH_DOTS[m];
+    html += `<div class="cal-month-block"><div class="cal-month-title"><div class="cal-month-dot" style="background:${dot}"></div>${m}月 ${CAL_MONTH_NAMES[m].split(' ')[1]}</div>`;
+    const fests = CAL_FESTIVALS[m]||[];
+    totalFests += fests.length;
+    fests.forEach(f => { html += `<div class="cal-festival-row"><span>${f[0]}</span><span>${f[1]}</span></div>`; });
+    const arts = CAL_ARTICLES[m]||[];
+    arts.forEach((a,i) => { html += `<div class="cal-article-row"><span class="cal-article-num">第${i+1}篇</span><span>${a}</span><span class="cal-article-week">${m}月第${i+1}周</span></div>`; });
+    html += `</div>`;
+  }
+  html += `<div class="cal-stat-row"><span class="cal-stat-chip dark">${totalFests} 个节日节点</span><span class="cal-stat-chip green">12月 × 4篇 = 48篇</span></div>`;
+  body.innerHTML = html;
+  document.getElementById('cal-overlay').classList.add('on');
+}
+function closeCalendar() { document.getElementById('cal-overlay').classList.remove('on'); }
+
+// ============ WECHAT ARTICLES DATA ============
+const WECHAT_ARTICLES_2026 = [
+  { title:'2026年，智慧办公终于不再是"给领导看的PPT"', date:'2026-01-20', body:'', tags:['智慧办公','行业观点'], link:'' },
+  { title:'告别手工考勤！供应商表现，FM系统自动"算"出来', date:'2026-01-30', body:'', tags:['FM','考勤'], link:'' },
+  { title:'新岁启封，一同跨新年，威思客祝大家元旦快乐！', date:'2026-01-01', body:'', tags:['节日','祝福'], link:'' },
+  { title:'威思客 Outlook 插件：一份日历，撬动整个办公系统', date:'2026-02-27', body:'', tags:['Outlook','插件','办公'], link:'' },
+  { title:'己巳辞旧岁，金马迎新春。威思客恭祝：新年快乐、马年大吉！', date:'2026-02-17', body:'', tags:['春节','祝福'], link:'' },
+  { title:'威思客智慧园区：全新升级智能硬板，用效率成就企业人本管理', date:'2026-03-11', body:'', tags:['智慧园区','硬件'], link:'' },
+  { title:'设备管不好，全是糊涂账？FM设施管理该升级了！', date:'2026-03-20', body:'', tags:['FM','设施管理'], link:'' },
+  { title:'别再用AI会议工具了——除非你用的是威思客&影石这套方案', date:'2026-03-25', body:'', tags:['AI','会议','影石'], link:'' },
+  { title:'威思客携手AI数字员工团队·亮相 Cisco Connect 2026 大会，定义智慧办公新未来', date:'2026-03-27', body:'', tags:['AI','Cisco','大会'], link:'' },
+  { title:'威思客亮相2026粤港澳大湾区智慧办公展览会：办公系统的"Skill"孵化分享', date:'2026-04-10', body:'', tags:['展览','Skill'], link:'' },
+  { title:'威思客 × OpenClaw重磅上线！点一份小龙虾和预订办公会议室无区别', date:'2026-04-17', body:'', tags:['OpenClaw','产品'], link:'' },
+  { title:'威思客亮相如行领跑活动：AI赋能智慧办公空间新生态', date:'2026-04-20', body:'', tags:['AI','活动'], link:'' },
+  { title:'威思客×星纵物联×影石insta360 | 今天在青岛，聊了一件大事', date:'2026-04-23', body:'', tags:['合作','青岛'], link:'' },
+  { title:'MetaE空间颠覆：让3000个工位开口微语，办公室第一次有了经营视角', date:'2026-05-06', body:'', tags:['MetaE','空间'], link:'' },
+  { title:'威思客FM x 飞书：让"运维委员长"长在"办公流里"', date:'2026-05-08', body:'', tags:['FM','飞书','集成'], link:'' },
+  { title:'成功案例 | 地平线×威思客：构建一体化智能行政管理体系', date:'2026-05-19', body:'', tags:['案例','行政'], link:'' },
+  { title:'威思客云平台荣获等保二级认证，SaaS服务安全合规再升级！', date:'2026-06-04', body:'', tags:['认证','等保','安全'], link:'' },
+  { title:'你的积分系统，大概只发挥了10%的价值', date:'2026-06-09', body:'', tags:['积分','运营'], link:'' },
+];
+
+// ============ SEED ============
+function seed() {
+  if(db.length) return;
+  const s = [
+    { sec:'work', year:'2026', cat:'wechat', title:'6月公众号涨粉 214 人复盘', body:'通过短视频引流+公众号联动，粉丝净增214人。主要来源：评论区引导，占比62%。', tags:['涨粉','引流','复盘'], date:'2026-06-01', img:null },
+    { sec:'work', year:'2026', cat:'baidu', title:'品牌词竞价 ROI 提升至 3.2', body:'优化出价策略和落地页，ROI从2.1→3.2，主要得益于负词优化和时段调整。', tags:['ROI','竞价'], date:'2026-05-15', img:null },
+    { sec:'work', year:'2026', cat:'video', title:'首条破万播放短视频', body:'标题策略：疑问式+数字；封面：强对比色。拍摄到剪辑全纪录。', tags:['里程碑','技巧'], date:'2026-04-10', img:null },
+    { sec:'work', year:'2025', cat:'admin', title:'年会策划全程执行', body:'300人年会，从场地到节目单全程跟进，满意度98%。', tags:['年会','活动'], date:'2025-12-28', img:null },
+    { sec:'life', year:'2026', cat:'sport', subcat:'hiking', title:'雁荡山三日穿越', body:'总计步行48km，累计爬升2200米。脚起泡但心很满足。', tags:['徒步','挑战'], date:'2026-03-22', img:null },
+    { sec:'life', year:'2026', cat:'money', title:'副业剪辑月收入首破 3000', body:'4个商业视频单，合计3200元，时薪约107元/小时。', tags:['里程碑','副业'], date:'2026-05-30', img:null },
+    { sec:'life', year:'2026', cat:'love', title:'第一次一起看日落', body:'在山顶等了两小时，那个画面会记很久。', tags:['纪念','浪漫'], date:'2026-04-18', img:null },
+    { sec:'life', year:'2026', cat:'social', title:'老朋友久别重逢', body:'分开两年后终于在同城重叠，聊到凌晨三点。', tags:['友情','珍贵'], date:'2026-02-14', img:null },
+  ];
+  WECHAT_ARTICLES_2026.forEach(a => {
+    s.push({ sec:'work', year:'2026', cat:'wechat', title:a.title, body:a.body, tags:a.tags||['公众号'], date:a.date, link:a.link||'', img:null });
+  });
+  db = s.map((x,i)=>({...x, id:String(Date.now()+i), createdAt:new Date().toISOString()}));
+  persist();
+}
+
+function migrateWechatArticles() {
+  let changed = false;
+  WECHAT_ARTICLES_2026.forEach(a => {
+    const exists = db.some(e => e.sec==='work' && e.cat==='wechat' && e.title===a.title);
+    if(!exists) {
+      db.unshift({ id: String(Date.now()) + '_' + Math.random().toString(36).slice(2,8), sec:'work', year:'2026', cat:'wechat', title: a.title, body: a.body, tags: a.tags||['公众号'], date: a.date, link: a.link||'', img: null, createdAt: new Date().toISOString() });
+      changed = true;
+    }
+  });
+  if(changed) { persist(); }
+}
+
+// ============ THEME MANAGEMENT ============
+const THEME_ORDER = ['pink','purple','blue','warm','green'];
+const THEME_NAMES = { pink:'春莓序曲', purple:'紫薯奶方', blue:'鲸落于海', warm:'海岛暖风', green:'森语原色' };
+
+function getThemeOverride() { return localStorage.getItem('lb_theme')||''; }
+function setThemeOverride(t) { localStorage.setItem('lb_theme',t||''); }
+
+function cycleTheme() {
+  const cur = getThemeOverride();
+  let idx = THEME_ORDER.indexOf(cur);
+  if(idx < 0) idx = -1;
+  idx = (idx + 1) % (THEME_ORDER.length + 1);
+  const next = idx < THEME_ORDER.length ? THEME_ORDER[idx] : '';
+  setThemeOverride(next);
+  if(next) { document.body.dataset.theme = next; }
+  else {
+    // auto mode — infer from current context
+    if(currentTab==='life') document.body.dataset.theme = 'purple';
+    else if(currentTab==='work' && (currentWorkCat==='baidu'||currentWorkCat==='video'||currentWorkCat==='admin')) document.body.dataset.theme = 'blue';
+    else document.body.dataset.theme = 'pink';
+  }
+  updateThemeDot();
+  const name = next ? THEME_NAMES[next] : '自动（基于板块）';
+  toast('主题: ' + name);
+}
+
+function updateThemeDot() {
+  const dot = document.getElementById('theme-dot');
+  const ov = getThemeOverride();
+  dot.dataset.dot = (ov && THEME_ORDER.includes(ov)) ? ov : 'auto';
+}
+
+function autoSetTheme(theme) {
+  if(getThemeOverride()) return;
+  document.body.dataset.theme = theme;
+}
+
+// ============ INITIALIZE ============
+// Apply saved theme override on load
+(function() {
+  const ov = getThemeOverride();
+  if(ov) { document.body.dataset.theme = ov; }
+  else { document.body.dataset.theme = 'pink'; }
+  updateThemeDot();
+})();
+document.getElementById('splash-illust-work').classList.add('active');
+onSecChange();
+seed();
+migrateWechatArticles();
+repairFitnessCheckins();
+
+// 粘贴图片支持（在添加/编辑弹窗中直接 Ctrl+V 粘贴图片）
+document.addEventListener('paste', function(ev) {
+  const overlay = document.getElementById('overlay-add');
+  if(!overlay.classList.contains('open')) return;
+  const items = ev.clipboardData?.items;
+  if(!items) return;
+  for(let i = 0; i < items.length; i++) {
+    if(items[i].type.indexOf('image') !== -1) {
+      ev.preventDefault();
+      const file = items[i].getAsFile();
+      if(!file) continue;
+      compressImage(file, 1200, 1200, 0.7, (compressedBase64) => {
+        pendingImg = compressedBase64;
+        _imgCleared = false;
+        const prev = document.getElementById('img-preview');
+        prev.src = pendingImg; prev.style.display = 'block';
+        prev.style.objectPosition = pendingImgPos;
+        document.getElementById('img-pos-wrap').classList.add('show');
+        document.getElementById('img-clear-btn').style.display = 'block';
+        toast('已粘贴图片，记得保存');
+      });
+      break;
+    }
+  }
+});
+
+const wTotal = db.filter(e=>e.sec==='work').length;
+const lTotal = db.filter(e=>e.sec==='life').length;
+document.querySelectorAll('[id^="wc-total"]').forEach(el => el.textContent = wTotal);
+document.querySelectorAll('[id^="lc-total"]').forEach(el => el.textContent = lTotal);
+document.getElementById('hero-w-total').textContent = wTotal;
+document.getElementById('hero-l-total').textContent = lTotal;
+
+applyHero();
+renderContent();
+</script>
+</body>
+</html>
