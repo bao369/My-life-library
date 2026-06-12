@@ -15,7 +15,7 @@
 
 ## 在线访问
 
-https://bao369.github.io/my-life-library/
+https://bao369.github.io/My-life-library/
 
 ---
 
