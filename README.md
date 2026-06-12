@@ -15,7 +15,7 @@
 
 ## 在线访问
 
-https://[你的GitHub用户名].github.io/my-life-library/
+https://bao369.github.io/my-life-library/
 
 ---
 
