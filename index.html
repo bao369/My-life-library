@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<!-- v10.1: 健身打卡表+饮食表移到"健身"标签下方 -->
+<!-- v12.0: 新增「饮食」板块，15道2L电饭煲健身餐食谱 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -263,6 +263,99 @@ body[data-theme="warm"]::before {
     radial-gradient(circle 150px at 10% 80%, rgba(180,200,220,0.04) 0%, transparent 60%),
     radial-gradient(circle 180px at 40% 90%, rgba(200,215,230,0.05) 0%, transparent 65%);
 }
+
+/* Star - 星梦派对 (Brawl Stars-inspired cartoon wonderland) */
+body[data-theme="star"] {
+  --c-bg: #F8F5FC;
+  --c-surface: #F3EFF9;
+  --c-surface-solid: #F8F5FC;
+  --c-line: rgba(124,92,191,0.10);
+  --c-line-med: rgba(124,92,191,0.16);
+  --c-accent-w: #7C5CBF;
+  --c-accent-w-lt: rgba(124,92,191,0.07);
+  --c-accent-l: #F5A0B5;
+  --c-accent-l-lt: rgba(245,160,181,0.07);
+  --c-accent-baidu: #7C5CBF;
+  --c-accent-video: #7C5CBF;
+  --c-accent-admin: #7C5CBF;
+}
+
+/* Star theme components */
+body[data-theme="star"] .tab-btn.active {
+  background: linear-gradient(135deg, #7C5CBF, #9B7ED8);
+  box-shadow: 0 3px 12px rgba(124,92,191,0.25);
+}
+body[data-theme="star"] .btn-primary,
+body[data-theme="star"] .he-btn-save {
+  background: linear-gradient(135deg, #7C5CBF, #9B7ED8);
+  box-shadow: 0 3px 12px rgba(124,92,191,0.25);
+}
+body[data-theme="star"] .btn-primary:hover,
+body[data-theme="star"] .he-btn-save:hover {
+  box-shadow: 0 5px 18px rgba(124,92,191,0.35);
+}
+body[data-theme="star"] .nav-add:hover {
+  background: linear-gradient(135deg, #7C5CBF, #9B7ED8);
+  box-shadow: 0 3px 12px rgba(124,92,191,0.2);
+}
+body[data-theme="star"] .work-subnav-btn.active {
+  background: linear-gradient(135deg, rgba(124,92,191,0.1), rgba(155,126,216,0.08));
+  color: #7C5CBF;
+  border-color: rgba(124,92,191,0.25);
+}
+body[data-theme="star"] .entry-tag {
+  background: rgba(124,92,191,0.06);
+  border-color: rgba(124,92,191,0.12);
+  color: #7C5CBF;
+}
+body[data-theme="star"] .splash-char.gold {
+  color: #F5A0B5;
+  text-shadow: 0 0 30px rgba(245,160,181,0.6);
+}
+body[data-theme="star"] .nav-logo .nav-dot {
+  background: #F5A0B5;
+}
+body[data-theme="star"] .hero {
+  background: linear-gradient(180deg, rgba(248,245,252,0) 0%, rgba(180,155,215,0.18) 35%, rgba(160,130,200,0.22) 65%, rgba(248,245,252,0) 100%);
+}
+body[data-theme="star"] .hero-deco-num {
+  color: rgba(124,92,191,0.04);
+}
+body[data-theme="star"] .hero-bg {
+  background:
+    radial-gradient(circle 260px at 20% 18%, rgba(124,92,191,0.06) 0%, transparent 60%),
+    radial-gradient(circle 200px at 75% 20%, rgba(245,160,181,0.05) 0%, transparent 55%),
+    radial-gradient(circle 180px at 50% 50%, rgba(160,130,210,0.04) 0%, transparent 50%),
+    radial-gradient(circle 150px at 30% 70%, rgba(200,170,230,0.05) 0%, transparent 55%);
+}
+body[data-theme="star"] .hero-bg-grid {
+  background:
+    radial-gradient(circle 12px at 18% 22%, rgba(160,130,210,0.2) 0%, transparent 70%),
+    radial-gradient(circle 8px at 72% 15%, rgba(245,160,181,0.12) 0%, transparent 65%),
+    radial-gradient(circle 14px at 45% 38%, rgba(130,100,190,0.1) 0%, transparent 60%),
+    radial-gradient(circle 10px at 85% 42%, rgba(170,140,215,0.12) 0%, transparent 65%),
+    radial-gradient(circle 16px at 15% 58%, rgba(150,120,200,0.08) 0%, transparent 55%),
+    radial-gradient(circle 8px at 55% 65%, rgba(190,160,225,0.1) 0%, transparent 60%),
+    radial-gradient(circle 11px at 78% 72%, rgba(165,135,210,0.09) 0%, transparent 60%);
+}
+body[data-theme="star"] .hero-glow {
+  background:
+    radial-gradient(circle at 40% 35%, rgba(124,92,191,0.07) 0%, transparent 35%),
+    radial-gradient(circle at 55% 45%, rgba(245,160,181,0.05) 0%, transparent 40%),
+    radial-gradient(circle at 30% 50%, rgba(160,140,210,0.04) 0%, transparent 50%);
+}
+body[data-theme="star"]::before {
+  background:
+    radial-gradient(circle 180px at 15% 12%, rgba(124,92,191,0.05) 0%, transparent 70%),
+    radial-gradient(circle 140px at 78% 18%, rgba(245,160,181,0.05) 0%, transparent 65%),
+    radial-gradient(circle 200px at 50% 35%, rgba(160,140,210,0.04) 0%, transparent 60%),
+    radial-gradient(circle 160px at 22% 55%, rgba(200,180,225,0.05) 0%, transparent 65%),
+    radial-gradient(circle 120px at 85% 48%, rgba(245,160,181,0.04) 0%, transparent 60%),
+    radial-gradient(circle 220px at 65% 72%, rgba(170,150,210,0.05) 0%, transparent 70%),
+    radial-gradient(circle 150px at 10% 80%, rgba(195,175,222,0.04) 0%, transparent 60%),
+    radial-gradient(circle 180px at 40% 90%, rgba(210,195,230,0.05) 0%, transparent 65%);
+}
+
 html { scroll-behavior: smooth; background: var(--c-bg); }
 body {
   font-family: var(--font);
@@ -458,6 +551,7 @@ nav {
 .theme-dot[data-dot="purple"] { background: #B5A4CB; }
 .theme-dot[data-dot="blue"] { background: #3B6CB0; }
 .theme-dot[data-dot="warm"] { background: #E8A090; }
+.theme-dot[data-dot="star"] { background: #7C5CBF; }
 .theme-dot[data-dot="green"] { background: #8CB88A; }
 .theme-dot[data-dot="auto"] { background: transparent; border-style: dashed; border-color: var(--c-ink3); opacity: 0.5; }
 .theme-label {
@@ -769,6 +863,98 @@ nav {
   color: var(--c-ink3);
 }
 .empty-state p { font-size: 13px; margin-top: 10px; }
+
+/* ========= RECIPE CARDS ========= */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+}
+.recipe-card {
+  background: var(--c-card);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--c-line);
+  overflow: hidden;
+  transition: all var(--tr);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.recipe-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border-color: var(--c-line-med);
+}
+.recipe-card-header {
+  padding: 18px 20px 12px;
+  border-bottom: 1px solid var(--c-line);
+  background: linear-gradient(135deg, rgba(232,160,144,0.06), rgba(232,160,144,0.02));
+}
+.recipe-name {
+  font-size: 16px; font-weight: 700;
+  color: var(--c-ink); margin-bottom: 8px;
+  letter-spacing: 0.01em;
+}
+.recipe-badges {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.recipe-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 11px; padding: 3px 10px;
+  border-radius: 20px; font-weight: 500;
+  color: var(--c-ink2);
+  background: var(--c-accent-w-lt);
+}
+body[data-theme="pink"] .recipe-badge { background: rgba(231,145,145,0.08); }
+body[data-theme="purple"] .recipe-badge { background: rgba(181,164,203,0.08); }
+body[data-theme="blue"] .recipe-badge { background: rgba(59,108,176,0.08); }
+body[data-theme="warm"] .recipe-badge { background: rgba(232,160,144,0.08); }
+body[data-theme="star"] .recipe-badge { background: rgba(124,92,191,0.08); }
+.recipe-body {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; padding: 14px 20px;
+}
+.recipe-col h4 {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #E8A090; margin-bottom: 8px;
+}
+.recipe-ingredients {
+  list-style: none; padding: 0; margin: 0;
+}
+.recipe-ingredients li {
+  font-size: 12px; color: var(--c-ink2); padding: 3px 0;
+  padding-left: 14px; position: relative; line-height: 1.5;
+}
+.recipe-ingredients li::before {
+  content: '·'; position: absolute; left: 2px; color: #E8A090; font-weight: 700;
+}
+.recipe-steps {
+  margin: 0; padding-left: 18px;
+}
+.recipe-steps li {
+  font-size: 12px; color: var(--c-ink2); padding: 3px 0;
+  line-height: 1.5;
+}
+.recipe-tags {
+  padding: 8px 20px; display: flex; gap: 6px; flex-wrap: wrap;
+  border-top: 1px solid var(--c-line);
+}
+.recipe-tag {
+  font-size: 10px; padding: 2px 8px;
+  border-radius: 4px; background: rgba(232,160,144,0.08);
+  color: #E8A090; font-weight: 500;
+}
+.recipe-actions {
+  padding: 8px 20px 14px;
+  display: flex; gap: 8px; justify-content: flex-end;
+  border-top: 1px solid var(--c-line);
+}
+.recipe-action-btn {
+  font-size: 11px; padding: 4px 12px; border-radius: 6px;
+  cursor: pointer; border: 1px solid var(--c-line); background: transparent;
+  color: var(--c-ink3); transition: all var(--tr);
+}
+.recipe-action-btn:hover { border-color: #E8A090; color: #E8A090; }
+.recipe-action-btn.del:hover { border-color: #DC5046; color: #DC5046; }
 
 /* ========= MODALS ========= */
 .overlay {
@@ -1915,6 +2101,7 @@ nav {
   <button class="work-subnav-btn" data-cat="money" onclick="setLifeCat('money', this)">挣钱<span class="work-subnav-count" id="lsn-money">0</span></button>
   <button class="work-subnav-btn" data-cat="love" onclick="setLifeCat('love', this)">爱情<span class="work-subnav-count" id="lsn-love">0</span></button>
   <button class="work-subnav-btn" data-cat="social" onclick="setLifeCat('social', this)">人际<span class="work-subnav-count" id="lsn-social">0</span></button>
+  <button class="work-subnav-btn" data-cat="diet" onclick="setLifeCat('diet', this)">饮食<span class="work-subnav-count" id="lsn-diet">0</span></button>
 </div>
 
 <!-- ========= CONTENT AREA ========= -->
@@ -2195,6 +2382,90 @@ nav {
     <path d="M0 730 Q300 700 600 720 Q900 740 1200 710 Q1350 695 1400 720 L1400 900 L0 900Z" fill="rgba(122,176,197,0.04)"/>
   </svg>
 
+  <svg class="splash-illust" id="splash-illust-star" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sstar-bg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F8F5FC"/><stop offset="100%" stop-color="#EDE4FA"/>
+      </linearGradient>
+    </defs>
+    <rect width="1400" height="900" fill="url(#sstar-bg)"/>
+    <!-- Stars and sparkles -->
+    <g fill="rgba(124,92,191,0.08)">
+      <circle cx="120" cy="100" r="4"/><circle cx="350" cy="60" r="5"/>
+      <circle cx="600" cy="90" r="4"/><circle cx="850" cy="50" r="5"/>
+      <circle cx="1100" cy="80" r="4"/><circle cx="1280" cy="120" r="4"/>
+      <circle cx="200" cy="180" r="3"/><circle cx="950" cy="140" r="3"/>
+    </g>
+    <!-- Sparkle stars (4-point) -->
+    <g fill="rgba(245,160,181,0.15)">
+      <path d="M280,120 l8,20 l20,0 l-16,14 l6,20 l-18,-10 l-18,10 l6,-20 l-16,-14 l20,0z"/>
+      <path d="M780,100 l8,20 l20,0 l-16,14 l6,20 l-18,-10 l-18,10 l6,-20 l-16,-14 l20,0z"/>
+      <path d="M1080,160 l8,20 l20,0 l-16,14 l6,20 l-18,-10 l-18,10 l6,-20 l-16,-14 l20,0z"/>
+    </g>
+    <!-- Cute pink cat character (left) -->
+    <g transform="translate(180,380)">
+      <!-- Body -->
+      <ellipse cx="0" cy="60" rx="55" ry="65" fill="#F5A0B5"/>
+      <ellipse cx="0" cy="65" rx="42" ry="45" fill="#FCD5E0"/>
+      <!-- Ears -->
+      <path d="M-35,-5 L-50,-55 L-15,-15Z" fill="#F5A0B5"/>
+      <path d="M-38,-12 L-47,-47 L-18,-18Z" fill="#FCD5E0"/>
+      <path d="M35,-5 L50,-55 L15,-15Z" fill="#F5A0B5"/>
+      <path d="M38,-12 L47,-47 L18,-18Z" fill="#FCD5E0"/>
+      <!-- Eyes -->
+      <circle cx="-18" cy="35" r="10" fill="#2D1B4E"/>
+      <circle cx="-18" cy="33" r="4" fill="#fff"/>
+      <circle cx="18" cy="35" r="10" fill="#2D1B4E"/>
+      <circle cx="18" cy="33" r="4" fill="#fff"/>
+      <!-- Blush -->
+      <ellipse cx="-30" cy="48" rx="10" ry="6" fill="rgba(255,120,150,0.3)"/>
+      <ellipse cx="30" cy="48" rx="10" ry="6" fill="rgba(255,120,150,0.3)"/>
+      <!-- Mouth -->
+      <path d="M-6,48 Q0,56 6,48" fill="none" stroke="#C47080" stroke-width="2" stroke-linecap="round"/>
+      <!-- Nose -->
+      <ellipse cx="0" cy="42" rx="4" ry="3" fill="#E88090"/>
+      <!-- Whiskers -->
+      <line x1="-60" y1="38" x2="-25" y2="42" stroke="rgba(200,130,150,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="-62" y1="48" x2="-25" y2="46" stroke="rgba(200,130,150,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="60" y1="38" x2="25" y2="42" stroke="rgba(200,130,150,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="62" y1="48" x2="25" y2="46" stroke="rgba(200,130,150,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Tail -->
+      <path d="M40,90 Q80,50 70,0" fill="none" stroke="#F5A0B5" stroke-width="8" stroke-linecap="round"/>
+    </g>
+    <!-- Cute blue/purple robot character (right) -->
+    <g transform="translate(1020,400)">
+      <!-- Body (boxy robot) -->
+      <rect x="-45" y="-10" width="90" height="100" rx="18" fill="#9B7ED8"/>
+      <rect x="-35" y="0" width="70" height="70" rx="10" fill="#C5B5E8"/>
+      <!-- Head -->
+      <rect x="-30" y="-65" width="60" height="55" rx="16" fill="#7C5CBF"/>
+      <rect x="-24" y="-58" width="48" height="40" rx="10" fill="#B5A0D8"/>
+      <!-- Antenna -->
+      <line x1="0" y1="-65" x2="0" y2="-85" stroke="#7C5CBF" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="0" cy="-90" r="8" fill="#F5A0B5"/>
+      <!-- Eyes (screen-style) -->
+      <rect x="-14" y="-45" width="12" height="12" rx="3" fill="#39FF96"/>
+      <rect x="2" y="-45" width="12" height="12" rx="3" fill="#39FF96"/>
+      <!-- Mouth -->
+      <rect x="-10" y="-28" width="20" height="4" rx="2" fill="rgba(0,0,0,0.2)"/>
+      <!-- Arms -->
+      <rect x="-65" y="10" width="20" height="45" rx="10" fill="#9B7ED8"/>
+      <rect x="45" y="10" width="20" height="45" rx="10" fill="#9B7ED8"/>
+      <!-- Hands -->
+      <circle cx="-55" cy="60" r="14" fill="#7C5CBF"/>
+      <circle cx="55" cy="60" r="14" fill="#7C5CBF"/>
+      <!-- Legs -->
+      <rect x="-35" y="90" width="30" height="30" rx="10" fill="#9B7ED8"/>
+      <rect x="5" y="90" width="30" height="30" rx="10" fill="#9B7ED8"/>
+    </g>
+    <!-- Decorative floating elements -->
+    <g opacity="0.4">
+      <circle cx="580" cy="520" r="15" fill="#F5A0B5"/>
+      <circle cx="750" cy="580" r="10" fill="#7C5CBF"/>
+      <circle cx="480" cy="600" r="8" fill="#9B7ED8"/>
+    </g>
+  </svg>
+
   <div class="splash-text-wrap" id="splash-txt"></div>
   <div class="splash-sub" id="splash-sub"></div>
 </div>
@@ -2213,6 +2484,7 @@ const LIFE_CATS = [
   { key:'money',  label:'挣钱',  sub:'剪辑 · 主业',  dot:'#C8BBDA', accentLight:'rgba(200,187,218,0.06)' },
   { key:'love',   label:'爱情',  sub:'记录美好',      dot:'#D2C4E0', accentLight:'rgba(210,196,224,0.06)' },
   { key:'social', label:'人际',  sub:'友情 · 关系',   dot:'#B5A4CB', accentLight:'rgba(181,164,203,0.06)' },
+  { key:'diet',   label:'饮食',  sub:'电饭煲 · 健身餐', dot:'#E8A090', accentLight:'rgba(232,160,144,0.06)' },
 ];
 
 // ============ VIDEO PRICING + SUB-CATS CONFIG ============
@@ -3137,6 +3409,219 @@ function renderDietTable(dateStr) {
   </div>`;
 }
 
+// ============ RECIPE SYSTEM ============
+const DIET_RECIPES_DEFAULT = [
+  {
+    id:'r1', name:'番茄鸡胸肉焖饭', time:'30分钟', kcal:'420', protein:'35g',
+    ingredients:['鸡胸肉 200g','番茄 2个','杂粮米 1杯','蒜 2瓣','生抽 1勺','蚝油 1勺','黑胡椒适量','橄榄油少许'],
+    steps:['鸡胸肉切小丁，加生抽+蚝油+黑胡椒腌10分钟','番茄切块，蒜切末；杂粮米洗净放入电饭煲','加正常煮饭水量，铺上番茄块和腌好的鸡胸肉','淋少许橄榄油，按煮饭键，跳闸后拌匀即可'],
+    tags:['高蛋白','低脂','番茄']
+  },
+  {
+    id:'r2', name:'香菇滑鸡腿饭', time:'35分钟', kcal:'450', protein:'32g',
+    ingredients:['鸡腿 2只（去骨）','干香菇 6朵','大米 1.5杯','姜 3片','生抽 2勺','料酒 1勺','蚝油 1勺','淀粉少许','葱花适量'],
+    steps:['干香菇温水泡发切片，泡菇水留用','鸡腿去骨切块，加生抽+料酒+蚝油+淀粉腌15分钟','大米洗净入锅，用泡菇水代替部分清水','铺上香菇片、姜片、腌好的鸡腿肉','按煮饭键，跳闸后撒葱花拌匀即可'],
+    tags:['高蛋白','鲜美','滋补']
+  },
+  {
+    id:'r3', name:'虾仁西兰花蒸饭', time:'25分钟', kcal:'380', protein:'30g',
+    ingredients:['虾仁 200g','西兰花 1小颗','鸡蛋 2个','大米 1.5杯','盐适量','白胡椒粉少许','香油几滴'],
+    steps:['虾仁加盐+白胡椒粉腌5分钟；西兰花掰小朵焯水30秒','大米洗净入电饭煲，加正常水量','虾仁和西兰花铺在米上，中间打两个鸡蛋','按煮饭键，跳闸后淋几滴香油，拌匀即可'],
+    tags:['高蛋白','低脂','快手']
+  },
+  {
+    id:'r4', name:'南瓜鸡胸燕麦粥', time:'30分钟', kcal:'350', protein:'28g',
+    ingredients:['鸡胸肉 150g','南瓜 200g','燕麦片 80g','大米 半杯','姜丝少许','盐适量','白胡椒粉少许','葱花适量'],
+    steps:['南瓜去皮切小块，鸡胸肉切小丁加盐+胡椒粉腌5分钟','大米和燕麦洗净入电饭煲，加约4倍水量（粥模式）','放入南瓜块和姜丝，启动煮粥功能','剩10分钟时加入鸡胸肉丁，跳闸后撒葱花即可'],
+    tags:['低脂','高纤','暖胃']
+  },
+  {
+    id:'r5', name:'牛肉金针菇焖饭', time:'35分钟', kcal:'480', protein:'38g',
+    ingredients:['牛肉片 200g','金针菇 1把','大米 1.5杯','洋葱 半个','生抽 2勺','蚝油 1勺','黑胡椒适量','蒜末适量'],
+    steps:['牛肉片加生抽+蚝油+黑胡椒+蒜末腌15分钟','洋葱切丝，金针菇去根洗净','大米洗净入锅，加正常水量，铺上洋葱丝','再铺金针菇和腌好的牛肉片','按煮饭键，跳闸后拌匀即可'],
+    tags:['高蛋白','补铁','增肌']
+  },
+  {
+    id:'r6', name:'三文鱼杂蔬饭', time:'30分钟', kcal:'460', protein:'34g',
+    ingredients:['三文鱼 200g','胡萝卜 半根','玉米粒 50g','豌豆 50g','糙米+大米 各半杯','盐适量','黑胡椒适量','柠檬汁少许'],
+    steps:['三文鱼切块，加盐+黑胡椒+柠檬汁腌10分钟','胡萝卜切小丁，糙米+大米混合洗净','米入锅加水，铺上胡萝卜丁、玉米粒、豌豆','再铺上三文鱼块','按煮饭键，跳闸后拌匀即可'],
+    tags:['高蛋白','Omega-3','营养均衡']
+  },
+  {
+    id:'r7', name:'咖喱鸡胸土豆饭', time:'35分钟', kcal:'440', protein:'30g',
+    ingredients:['鸡胸肉 200g','土豆 1个','胡萝卜 半根','洋葱 半个','大米 1.5杯','咖喱块 2小块','盐少许','油少许'],
+    steps:['鸡胸肉、土豆、胡萝卜、洋葱全部切小丁','鸡胸肉加少许盐腌5分钟','大米洗净入锅，水比正常少1/5（因为蔬菜会出水）','铺上所有蔬菜丁和鸡胸肉，放上咖喱块','按煮饭键，跳闸后拌匀即可'],
+    tags:['快手','饱腹','咖喱风味']
+  },
+  {
+    id:'r8', name:'番茄龙利鱼焖饭', time:'25分钟', kcal:'360', protein:'28g',
+    ingredients:['龙利鱼柳 200g','番茄 2个','玉米粒 50g','大米 1.5杯','姜 2片','盐适量','白胡椒粉少许','葱花适量'],
+    steps:['龙利鱼切块，加盐+白胡椒粉+姜丝腌10分钟','番茄切块，大米洗净入锅','水比正常少1/6（番茄水分多），铺上番茄和玉米粒','再铺龙利鱼块','按煮饭键，跳闸后撒葱花拌匀即可'],
+    tags:['低脂','高蛋白','酸甜']
+  },
+  {
+    id:'r9', name:'豆腐虾仁蒸蛋饭', time:'25分钟', kcal:'380', protein:'32g',
+    ingredients:['嫩豆腐 1盒','虾仁 150g','鸡蛋 2个','大米 1.5杯','生抽 1勺','香油少许','葱花适量'],
+    steps:['豆腐切小块，虾仁加少许盐腌5分钟','大米洗净入锅加水，放蒸架','碗中打鸡蛋+等量温水+生抽打散，放入豆腐和虾仁','蒸碗放蒸架上，按煮饭键','跳闸后取出淋香油+葱花，搭配米饭食用'],
+    tags:['高蛋白','清淡','滑嫩']
+  },
+  {
+    id:'r10', name:'秋葵鸡胸蒸饭', time:'25分钟', kcal:'370', protein:'32g',
+    ingredients:['鸡胸肉 200g','秋葵 8根','大米 1.5杯','蒜 3瓣','生抽 1勺','蚝油 1勺','黑胡椒适量','芝麻少许'],
+    steps:['鸡胸肉切薄片，加生抽+蚝油+黑胡椒腌10分钟','秋葵斜切段，蒜切末','大米洗净入锅加水，铺上鸡胸肉片和秋葵','撒上蒜末，按煮饭键','跳闸后撒白芝麻即可'],
+    tags:['高蛋白','高纤','快手']
+  },
+  {
+    id:'r11', name:'紫薯燕麦鸡胸粥', time:'30分钟', kcal:'340', protein:'26g',
+    ingredients:['鸡胸肉 150g','紫薯 1个','燕麦片 60g','大米 半杯','姜丝少许','盐适量','枸杞少许'],
+    steps:['紫薯去皮切小丁，鸡胸肉切小丁加盐腌5分钟','大米和燕麦洗净入电饭煲，加约4倍水量','放入紫薯丁和姜丝，启动煮粥模式','剩10分钟时加入鸡胸肉丁和枸杞','跳闸后调味即可'],
+    tags:['低脂','花青素','抗氧化']
+  },
+  {
+    id:'r12', name:'黑椒牛排菇饭', time:'30分钟', kcal:'460', protein:'36g',
+    ingredients:['牛排 200g','牛排菇/杏鲍菇 2个','大米 1.5杯','洋葱 半个','黑胡椒酱 2勺','黄油 5g','盐少许'],
+    steps:['牛排切条，加盐+黑胡椒酱腌15分钟','菇切片，洋葱切丝','大米洗净入锅加水，铺上洋葱和菇片','铺上牛排条，放一小块黄油','按煮饭键，跳闸后拌匀即可'],
+    tags:['高蛋白','增肌','黑椒']
+  },
+  {
+    id:'r13', name:'蒜蓉粉丝虾蒸饭', time:'25分钟', kcal:'400', protein:'28g',
+    ingredients:['虾 200g','龙口粉丝 1小把','蒜 5瓣','大米 1.5杯','小米辣 1个（可选）','生抽 2勺','蚝油 1勺','油少许'],
+    steps:['虾开背去虾线，加少许盐腌5分钟','粉丝温水泡软，蒜切末，小米辣切圈','大米洗净入锅加水，放蒸架','盘中铺粉丝+虾+蒜末+小米辣+生抽+蚝油','蒸盘放蒸架上，按煮饭键，跳闸后拌匀即可'],
+    tags:['高蛋白','鲜美','蒜香']
+  },
+  {
+    id:'r14', name:'泡菜鸡胸糙米饭', time:'25分钟', kcal:'390', protein:'32g',
+    ingredients:['鸡胸肉 200g','韩式泡菜 100g','糙米+大米 各半杯','鸡蛋 1个（可选）','生抽 1勺','芝麻油少许','海苔碎适量'],
+    steps:['鸡胸肉切丁，加生抽腌10分钟','糙米+大米混合洗净入锅，加正常水量','铺上泡菜和鸡胸肉丁','按煮饭键，跳闸后打入生鸡蛋焖3分钟','淋芝麻油，撒海苔碎，拌匀即可'],
+    tags:['高蛋白','低脂','韩式风味']
+  },
+  {
+    id:'r15', name:'菌菇什锦素焖饭', time:'30分钟', kcal:'320', protein:'15g',
+    ingredients:['杏鲍菇 1个','鲜香菇 4朵','胡萝卜 半根','毛豆 50g','玉米粒 50g','大米 1.5杯','生抽 1勺','蚝油 1勺','香油少许'],
+    steps:['杏鲍菇和香菇切丁，胡萝卜切小丁','大米洗净入锅，加水（比正常少1/6）','所有蔬菜丁铺在米上，淋生抽+蚝油','按煮饭键，跳闸后淋少许香油','拌匀即可，可搭配煎蛋食用'],
+    tags:['素食','高纤','轻食']
+  }
+];
+let recipes = [];
+try { recipes = JSON.parse(localStorage.getItem('mlb-recipes')||'null'); } catch(e) { recipes = null; }
+if(!recipes || !Array.isArray(recipes) || recipes.length===0) {
+  recipes = JSON.parse(JSON.stringify(DIET_RECIPES_DEFAULT));
+  localStorage.setItem('mlb-recipes', JSON.stringify(recipes));
+}
+function persistRecipes() { localStorage.setItem('mlb-recipes', JSON.stringify(recipes)); }
+
+function makeRecipeCard(r) {
+  const div = document.createElement('div');
+  div.className = 'recipe-card';
+  const ings = r.ingredients.map(i => `<li>${escHtml(i)}</li>`).join('');
+  const stps = r.steps.map((s,i) => `<li>${escHtml(s)}</li>`).join('');
+  const tgs = (r.tags||[]).map(t => `<span class="recipe-tag">${escHtml(t)}</span>`).join('');
+  div.innerHTML = `
+    <div class="recipe-card-header">
+      <div class="recipe-name">${escHtml(r.name)}</div>
+      <div class="recipe-badges">
+        <span class="recipe-badge">⏱ ${escHtml(r.time)}</span>
+        <span class="recipe-badge">🔥 ${escHtml(r.kcal)}千卡</span>
+        <span class="recipe-badge">💪 ${escHtml(r.protein)}蛋白</span>
+      </div>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-col">
+        <h4>食材</h4>
+        <ul class="recipe-ingredients">${ings}</ul>
+      </div>
+      <div class="recipe-col">
+        <h4>步骤</h4>
+        <ol class="recipe-steps">${stps}</ol>
+      </div>
+    </div>
+    <div class="recipe-tags">${tgs}</div>
+    <div class="recipe-actions">
+      <button class="recipe-action-btn" onclick="event.stopPropagation();editRecipe('${r.id}')">✎ 编辑</button>
+      <button class="recipe-action-btn del" onclick="event.stopPropagation();delRecipe('${r.id}')">✕ 删除</button>
+    </div>
+  `;
+  return div;
+}
+
+function addRecipe() {
+  _showPrompt('添加新食谱', '', '如：土豆牛肉焖饭', function(name) {
+    if(!name) return;
+    const id = 'r_' + Date.now().toString(36);
+    recipes.unshift({
+      id, name, time:'30分钟', kcal:'400', protein:'30g',
+      ingredients:['食材1','食材2'], steps:['步骤1','步骤2'], tags:['新食谱']
+    });
+    persistRecipes();
+    renderContent();
+    toast('已添加「' + name + '」，点击编辑完善内容');
+  });
+}
+
+function editRecipe(id) {
+  const r = recipes.find(x => x.id === id);
+  if(!r) return;
+  // Build edit form using custom modal
+  const existing = document.getElementById('recipe-edit-overlay');
+  if(existing) existing.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'recipe-edit-overlay';
+  overlay.className = 'prompt-overlay';
+  const ings = r.ingredients.join('\n');
+  const stps = r.steps.join('\n');
+  const tgs = (r.tags||[]).join('，');
+  overlay.innerHTML = `<div class="prompt-dialog" style="max-width:520px;max-height:85vh;overflow-y:auto">
+    <h3>编辑食谱</h3>
+    <label style="font-size:12px;color:var(--c-ink3);display:block;margin:8px 0 4px">食谱名称</label>
+    <input type="text" id="re-name" value="${escHtml(r.name)}" maxlength="40" style="width:100%;padding:8px 12px;border:1px solid var(--c-line);border-radius:8px;font-size:13px;"/>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px">
+      <div><label style="font-size:12px;color:var(--c-ink3)">耗时</label><input type="text" id="re-time" value="${escHtml(r.time)}" style="width:100%;padding:6px 10px;border:1px solid var(--c-line);border-radius:6px;font-size:12px;"/></div>
+      <div><label style="font-size:12px;color:var(--c-ink3)">热量</label><input type="text" id="re-kcal" value="${escHtml(r.kcal)}" style="width:100%;padding:6px 10px;border:1px solid var(--c-line);border-radius:6px;font-size:12px;"/></div>
+      <div><label style="font-size:12px;color:var(--c-ink3)">蛋白质</label><input type="text" id="re-protein" value="${escHtml(r.protein)}" style="width:100%;padding:6px 10px;border:1px solid var(--c-line);border-radius:6px;font-size:12px;"/></div>
+    </div>
+    <label style="font-size:12px;color:var(--c-ink3);display:block;margin:10px 0 4px">食材（每行一个）</label>
+    <textarea id="re-ingredients" rows="6" style="width:100%;padding:8px 12px;border:1px solid var(--c-line);border-radius:8px;font-size:12px;resize:vertical">${escHtml(ings)}</textarea>
+    <label style="font-size:12px;color:var(--c-ink3);display:block;margin:10px 0 4px">步骤（每行一步）</label>
+    <textarea id="re-steps" rows="6" style="width:100%;padding:8px 12px;border:1px solid var(--c-line);border-radius:8px;font-size:12px;resize:vertical">${escHtml(stps)}</textarea>
+    <label style="font-size:12px;color:var(--c-ink3);display:block;margin:10px 0 4px">标签（逗号分隔）</label>
+    <input type="text" id="re-tags" value="${escHtml(tgs)}" style="width:100%;padding:8px 12px;border:1px solid var(--c-line);border-radius:8px;font-size:13px;"/>
+    <div class="prompt-btns" style="margin-top:16px">
+      <button class="prompt-btn-cancel" id="re-cancel">取消</button>
+      <button class="prompt-btn-ok" id="re-save">保存</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+  const close = () => overlay.remove();
+  const save = () => {
+    r.name = document.getElementById('re-name').value.trim() || r.name;
+    r.time = document.getElementById('re-time').value.trim() || r.time;
+    r.kcal = document.getElementById('re-kcal').value.trim() || r.kcal;
+    r.protein = document.getElementById('re-protein').value.trim() || r.protein;
+    r.ingredients = document.getElementById('re-ingredients').value.split('\n').map(s=>s.trim()).filter(Boolean);
+    r.steps = document.getElementById('re-steps').value.split('\n').map(s=>s.trim()).filter(Boolean);
+    r.tags = document.getElementById('re-tags').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+    persistRecipes();
+    close();
+    renderContent();
+    toast('食谱已更新');
+  };
+  document.getElementById('re-save').onclick = save;
+  document.getElementById('re-cancel').onclick = close;
+  overlay.onclick = function(e) { if(e.target === overlay) close(); };
+}
+
+function delRecipe(id) {
+  const r = recipes.find(x => x.id === id);
+  if(!r) return;
+  _showConfirm('确定删除食谱「' + escHtml(r.name) + '」？', function(ok) {
+    if(!ok) return;
+    recipes = recipes.filter(x => x.id !== id);
+    persistRecipes();
+    renderContent();
+    toast('已删除「' + r.name + '」');
+  });
+}
+
 // ============ HERO EDIT (unified hero) ============
 const HERO_DEFAULTS = {
   eyebrow: 'PERSONAL ARCHIVE',
@@ -3279,6 +3764,7 @@ const LIFE_CAT_SPLASH_TEXT = {
   'money':  { text:'用心耕耘，静待花开',       gold:[0,1], sub:'挣钱 · 副业主业' },
   'love':   { text:'最浪漫的事，是与你共度时光', gold:[0,1,2,3], sub:'爱情 · 记录美好' },
   'social': { text:'知己二三，胜过万千繁华',   gold:[0,1], sub:'人际 · 友情关系' },
+  'diet':   { text:'一饭一蔬，都是给自己的温柔', gold:[0,1,2], sub:'饮食 · 电饭煲健身餐' },
 };
 
 function setWorkCat(cat, btn) {
@@ -3298,7 +3784,7 @@ function setWorkCat(cat, btn) {
   const txtWrap = document.getElementById('splash-txt');
   const subEl = document.getElementById('splash-sub');
 
-  const illustIds = ['splash-illust-work','splash-illust-life','splash-illust-wechat','splash-illust-baidu','splash-illust-video','splash-illust-admin','splash-illust-doc'];
+  const illustIds = ['splash-illust-work','splash-illust-life','splash-illust-wechat','splash-illust-baidu','splash-illust-video','splash-illust-admin','splash-illust-doc','splash-illust-star'];
   const targetIllust = 'splash-illust-' + (cat || 'work');
   illustIds.forEach(id => {
     const el = document.getElementById(id);
@@ -3346,7 +3832,7 @@ function setLifeCat(cat, btn) {
   const subEl = document.getElementById('splash-sub');
 
   // Show life illustration for all life categories
-  const illustIds = ['splash-illust-work','splash-illust-life','splash-illust-wechat','splash-illust-baidu','splash-illust-video','splash-illust-admin','splash-illust-doc'];
+  const illustIds = ['splash-illust-work','splash-illust-life','splash-illust-wechat','splash-illust-baidu','splash-illust-video','splash-illust-admin','splash-illust-doc','splash-illust-star'];
   illustIds.forEach(id => {
     const el = document.getElementById(id);
     if(el) el.classList.toggle('active', id === 'splash-illust-life');
@@ -3533,6 +4019,33 @@ function renderLife(wrap) {
       addDiv.className = 'video-subcat-add-wrap';
       addDiv.innerHTML = `<button onclick="addSportSubCat()">+ 添加分类</button>`;
       wrap.appendChild(addDiv);
+    } else if(currentLifeCat === 'diet') {
+      // 饮食：食谱卡片
+      const dietSec = document.createElement('div');
+      dietSec.className = 'cat-section';
+      const header = document.createElement('div');
+      header.className = 'cat-label';
+      header.innerHTML = `
+        <div class="cat-label-dot" style="background:#E8A090"></div>
+        <span class="cat-label-name" style="color:#E8A090">2L电饭煲 · 两人健身餐</span>
+        <span class="cat-label-count">${recipes.length} 道食谱</span>
+        <button class="cat-add-small" onclick="addRecipe()">+ 添加食谱</button>
+      `;
+      dietSec.appendChild(header);
+      const grid = document.createElement('div');
+      grid.className = 'recipe-grid';
+      if(recipes.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><div style="font-size:28px;opacity:0.15">🍳</div><p>还没有食谱，点击「+ 添加食谱」开始</p></div>';
+      } else {
+        recipes.forEach(r => grid.appendChild(makeRecipeCard(r)));
+      }
+      dietSec.appendChild(grid);
+      wrap.appendChild(dietSec);
+      // 饮食相关的普通条目
+      const dietEntries = db.filter(e => e.sec==='life' && (e.year===activeYear || !e.year) && e.cat==='diet');
+      if(dietEntries.length > 0) {
+        wrap.appendChild(makeCatSection({ key:'diet', label:'饮食记录', dot:'#E8A090', accentLight:'rgba(232,160,144,0.06)' }, dietEntries, 'life'));
+      }
     } else {
       const catsToShow = LIFE_CATS.filter(c => c.key === currentLifeCat);
       catsToShow.forEach(cat => {
@@ -3547,7 +4060,9 @@ function renderLife(wrap) {
   const allLifeEntries = db.filter(e => e.sec==='life' && (e.year===activeYear || !e.year));
   document.getElementById('lsn-all').textContent = allLifeEntries.length;
   LIFE_CATS.forEach(c => {
-    const cnt = allLifeEntries.filter(e => e.cat === c.key).length;
+    let cnt = allLifeEntries.filter(e => e.cat === c.key).length;
+    // Diet badge shows recipe count
+    if(c.key === 'diet' && typeof recipes !== 'undefined') cnt = recipes.length;
     const el = document.getElementById('lsn-' + c.key);
     if(el) el.textContent = cnt;
   });
@@ -3619,8 +4134,8 @@ function quickAddSport(subcat) {
 }
 
 // ============ LIFE TREE ============
-const LIFE_TREE_ICONS = { sport:'♠', money:'◆', love:'♥', social:'●' };
-const LIFE_TREE_HINT = { sport:'点击查看', money:'点击查看', love:'点击查看', social:'点击查看' };
+const LIFE_TREE_ICONS = { sport:'♠', money:'◆', love:'♥', social:'●', diet:'♨' };
+const LIFE_TREE_HINT = { sport:'点击查看', money:'点击查看', love:'点击查看', social:'点击查看', diet:'点击查看' };
 
 function renderLifeTree(wrap) {
   const allLifeEntries = db.filter(e => e.sec==='life' && (e.year===activeYear || !e.year));
@@ -3943,6 +4458,7 @@ function getArtColors(cat, sec) {
     money:  ['rgba(200,187,218,0.06)','rgba(200,187,218,0.1)','rgba(200,187,218,0.16)'],
     love:   ['rgba(210,196,224,0.06)','rgba(210,196,224,0.1)','rgba(210,196,224,0.16)'],
     social: ['rgba(181,164,203,0.06)','rgba(181,164,203,0.1)','rgba(181,164,203,0.16)'],
+    diet:   ['rgba(232,160,144,0.06)','rgba(232,160,144,0.1)','rgba(232,160,144,0.16)'],
   };
   return map[cat] || ['rgba(0,0,0,0.03)','rgba(0,0,0,0.04)','rgba(0,0,0,0.06)'];
 }
@@ -4386,8 +4902,8 @@ function migrateWechatArticles() {
 }
 
 // ============ THEME MANAGEMENT ============
-const THEME_ORDER = ['pink','purple','blue','warm','green'];
-const THEME_NAMES = { pink:'春莓序曲', purple:'紫薯奶方', blue:'鲸落于海', warm:'海岛暖风', green:'森语原色' };
+const THEME_ORDER = ['pink','purple','blue','warm','green','star'];
+const THEME_NAMES = { pink:'春莓序曲', purple:'紫薯奶方', blue:'鲸落于海', warm:'海岛暖风', green:'森语原色', star:'星梦派对' };
 
 function getThemeOverride() { return localStorage.getItem('lb_theme')||''; }
 function setThemeOverride(t) { localStorage.setItem('lb_theme',t||''); }
@@ -4430,7 +4946,7 @@ function autoSetTheme(theme) {
   else { document.body.dataset.theme = 'pink'; }
   updateThemeDot();
 })();
-document.getElementById('splash-illust-work').classList.add('active');
+document.getElementById(getThemeOverride()==='star' ? 'splash-illust-star' : 'splash-illust-work').classList.add('active');
 onSecChange();
 seed();
 migrateWechatArticles();
